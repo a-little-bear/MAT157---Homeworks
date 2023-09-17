@@ -1,0 +1,167 @@
+\documentclass{homework}
+\author{Joseph Siu}
+\class{MAT157: Analysis I}
+\date{\today}
+\title{Homework 1}
+%\address{Joseph Siu}
+
+\usepackage{color}
+
+\begin{document} \maketitle
+\theoremstyle{remark}
+\newtheorem*{claim}{Claim}
+
+
+\question A tautology is αmathematical statement that is always true. A contradiction is a mathematical statement that is always false.\\\\Let $P$ be a any mathematical statement. Determine if each of the following statements is a tautology, or a contradiction, or neither.\\
+
+\begin{claim}
+(a)   $P\wedge\neg P$ is a contradiction.
+\end{claim}
+
+\begin{center}
+    \begin{tabular}{@{ }c | c@{ }@{ }c@{ }@{ }c@{ }@{ }c@{ }@{ }c@{ }@{ }c}
+P &  & P & $\land$ & $\lnot$ & P & \\
+\hline 
+T &  & T & \textcolor{red}{F} & F & T & \\
+F &  & F & \textcolor{red}{F} & T & F & \\
+\end{tabular}
+\end{center}
+\begin{proof}
+    There are 2 cases for this statement. First case when $P$ is true, this implies $\neg P$ is false, and so $P\land\neg P$ must also be false since $\neg P$ is false. Second case when $P$ is false, this immediately shows $P\land\neg P$ is false as $P$ is false. Therefore, the statement $P\land\neg P$ is false in all cases (always false), by the definition, this is a contradiction.
+\end{proof}
+
+
+\begin{claim}
+(b) $P\lor\lnot P$ is a tautology.
+\end{claim}
+
+\begin{center}
+    %NOTE: requires \usepackage{color}
+\begin{tabular}{@{ }c | c@{ }@{ }c@{ }@{ }c@{ }@{ }c@{ }@{ }c@{ }@{ }c}
+P &  & P & $\lor$ & $\lnot$ & P & \\
+\hline 
+T &  & T & \textcolor{red}{T} & F & T & \\
+F &  & F & \textcolor{red}{T} & T & F & \\
+\end{tabular}
+\end{center}
+\begin{proof}
+    There are 2 cases for this question. First case when $P$ is true, this immediately shows $P\lor\neg P$ is true as $P$ is true. Second case when $P$ is false, this implies $\neg P$ is true, and for this case $P\lor\neg P$ is also true as $\neg P$ is true. Therefore, the statement $P\lor\neg P$ is true in all cases (always true), by the definition, this is a tautology. 
+\end{proof}
+
+\begin{claim}
+    (c) $\begin{aligned}P\Rightarrow\neg P\end{aligned}$ is neither a tautology nor contradiction. 
+\end{claim}
+
+\begin{center}
+    %NOTE: requires \usepackage{color}
+\begin{tabular}{@{ }c | c@{ }@{ }c@{ }@{ }c@{ }@{ }c@{ }@{ }c@{ }@{ }c}
+P &  & P & $\rightarrow$ & $\lnot$ & P & \\
+\hline 
+T &  & T & \textcolor{red}{F} & F & T & \\
+F &  & F & \textcolor{red}{T} & T & F & \\
+\end{tabular}
+\end{center}
+\begin{proof}
+    There are 2 cases for this question.  First case when $P$ is true, we know $\neg P$ is false, and so the implication $P\implies\neg P$ is false. Second case when $P$ is false the implication $P\implies\neg P$ is immediately true (by the definition of implication). Therefore, as the statement is neither always true nor always false, this is also neither a tautology nor contradiction.
+\end{proof}
+
+\newpage
+
+\question Suppose we have a group of 10 people and the friendship is mutual (i.e., if A considers B as a friend if and only if B considers A as a friend).
+Show that there exist two people who have the same number of friends.
+
+\begin{claim}
+    If there is a group of 10 people and the friendship is mutual, then there exist two people who have the same number of friends. 
+\end{claim}
+
+\begin{proof}
+    Suppose we have a group of 10 people, denote the number of friends of a person by $n$, which $n\in[0,9]\cap\mathbb{Z}$. We notice that $n$ only has 10 possibilities: $n=0,1,\cdots,8,9$. 
+
+    Here is the proof of the non-existence of 10 people having 10 distinct number of friends ($n)$:
+
+    Let 10 people be in order from 1 to 10. The total number of friends of all 10 people can be expressed as $\Sigma_{i=1}^{10}n_i$ which $n_i$ is the number of friends of the $i$th person. We know that if 2 persons becomes friends, then the total number of friends adds 2, and their $n$ values add 1 respectively. Therefore, the total number of friends must be an even number as there cannot be a relation which one person is another person's friend but not the other way around (always in 2 directions). But in this situation, when 10 people have distinct $n$ values, which are $\{0,1,2,3,4,5,6,7,8,9\}$, the value $\Sigma_{i=1}^{10}n_i=0+1+2+\ldots+8+9=45$ is not an even number, contradicting the fact of the total number of friends being even. So, this case does not exist. 
+
+    We have proven that there can never be a situation which 10 people (within the group) all have distinct $n$, then there can at most only occur 9 distinct $n$ values among the 10 people, by the Pigeonhole principle, define 10 groups (with 10 distinct $n$ values) which are classified based on the person's $n$ value, divide 10 people into 9 groups (there must exists an empty group otherwise contradicting the fact that the 10 people cannot have 10 distinct $n$ values, and so we eliminate the empty group), there is at least one group consists of no less than $\frac{10}9$ people, because we define the number of humans in non-negative number, and so this is equivalent to there must exists at least 2 persons such that they have the same number of friends, this completes our proof. 
+\end{proof}
+
+\newpage
+
+\question Four professional heroes, Saitama, Genos, Flash, and King have participated in a tournament, following a single round-robin schedule(i.e., each participant plays every other participant once). It is known that
+
+(a) Saitama, Genos, and Flash have won the same number of games.
+
+(b) Saitama has beaten King.
+
+\begin{claim}
+    King has not won any game (has won 0 game). 
+\end{claim}
+
+\begin{proof}
+    We know that each participant plays every other participant once, so the total number of games is 3+2+1=6. We also know that Saitama, Genos, and Flash have the same number of games won, denote the number as $n$ which $n\in\mathbb{N}\cup\{0\}$. Since Saitama has beaten King, this implies $n\geq1$. Denote the number of games King won as $k$ which $k\in\mathbb{N}\cup\{0\}$, the total number of games (won) is equal to the sum of all players' number of games won, $6=n+n+n+k=3n+k$. Because $n$ and $k$ are both non-negative integers, so $3n+k=6 \iff k=6-3n$, only $n=0,1,2$ imply $k$ is non-negative, but also $n\geq1$, the only possible values of $n$ are 1 and 2. 
+
+    Consider the case when $n = 1$, $k=6-3n=6-3(1)=3$, this implies King has own all of his/her games (every player only has 3 games), contradicting the given fact that Saitama has beaten King (King must has won at most 2 times ). Thus, this case is impossible to occur.
+
+    Therefore, it is only possible that $n = 2$, the equivalent meaning is, Saitama, Genos, and Flash have all won 2 games, King has not won any game ($k=6-3(2)=0$).  In other words, King has won 0 game.
+\end{proof}
+
+\newpage
+\question (skipping this question) Read the following two proofs and determine which part goes wrong:\\
+
+(a) "1 is the greatest natural number."
+
+\begin{proof}
+    By contradiction Suppose otherwise that some $a\in\mathbb{N}$ , rather than 1, is the greatest natural number. Then $a> $1. It follows that $a^2=a\cdot a>1\cdot a=a$. However, $a^2>a$, contradiction. We conclude that l is the greatest natural number.
+\end{proof}
+The problem in this proof is, $a^2=a\cdot a > 1\cdot a = a$, is not contradicting $a^2>a$. We start by $a>1,$ multiplying both sides by $a$ ($a$ is a natural number), we get $a\cdot a>1\cdot a$, which is equivalent to $a^2>a$, following the fact that $a^2>a$, not a contradiction. The writer probably interpreted the statement wrong, they grouped $a^2=(a\cdot a > 1\cdot a) = a$. 
+
+(b) "..."
+
+
+
+\newpage
+\question \textbf{Definition 2} (Divisibility). \textit{Given two integers $p,q\in\mathbb{Z},q\neq 0,$ we say that $q$ \textbf{divides} $p$ (or equivalently that $p$ is divisible by $q$), denoted by $q\mid p$, if there exists $k\in\mathbb{Z}$ such that $p=kq.$ We call $q$ a divisor of $p$, and $p$ a multiple of q.}
+
+Determine if each of the following statement is correct or not, by proving it or giving a counter example. 
+
+\begin{claim}
+    (a) $\begin{aligned}\forall x\in\mathbb{Z},\exists y\in\mathbb{Z}\end{aligned}$ s.t. $(3|x+y)\lor(5|x+y)$ is a true (correct) statement. 
+\end{claim}
+
+\begin{proof}
+    For any $x\in\mathbb{Z},$ pick $y=14x\in\mathbb{Z},$ then $x+y=15x \iff x+y=3\cdot5\cdot x.$ That is, since $x+y=3(5x)$ implies $3\mid x+y$ and $x+y=5(3x)$ implies $5\mid x+y.$ We can conclude $\begin{aligned}\forall x\in\mathbb{Z},\exists y\in\mathbb{Z}\end{aligned}$ s.t. $(3|x+y)\lor(5|x+y)$ is always correct. 
+\end{proof}
+
+\begin{claim}
+    (b) $\exists y\in\mathbb{Z}$ s.t. $\forall x \in \mathbb{Z},(3|x+y)\lor(5|x+y)$ is a false (incorrect) statement. 
+\end{claim}
+
+\begin{proof}
+    We show this statement is false by showing the negation of it is true, i.e., we prove that $\forall y \in\mathbb{Z}$ s.t. $\exists x\in\mathbb{Z}, (3\nmid x+y)\land(5\nmid x+y)$.
+
+    We let $x=7-y,$ i.e., $x+y=7-y+y=7,$ and we know that $3\nmid7\land5\nmid7$ is true since 3 and 7 are co-prime, and 5 and 7 are co-prime, this means 7 cannot be expressed as a multiple of 3 and 5 respectively. 
+    
+    Therefore, we have shown that the negation of the statement  $\forall y \in\mathbb{Z}$ s.t. $\exists x\in\mathbb{Z}, (3\nmid x+y)\land(5\nmid x+y)$ is true, implying the statement $\exists y\in\mathbb{Z}$ s.t. $\forall x \in \mathbb{Z},(3|x+y)\lor(5|x+y)$ is false, completing our proof.  
+\end{proof}
+
+
+Here is a longer approach. 
+
+\begin{proof}
+    We prove this statement is false by showing the negation of it is true, i.e., we prove that $\forall y \in\mathbb{Z}$ s.t. $\exists x\in\mathbb{Z}, (3\nmid x+y)\land(5\nmid x+y)$
+    
+    We split the cases of $y$
+    
+    Case 1, when $3\mid y \land 5\mid y$. we let $x$ be a number that is not divisible by both 3 and 5, $x=2$. Then $3\mid y\implies \exists a\in\mathbb{Z},y=3a$ and $5\mid y\implies \exists b\in\mathbb{Z},y=5b.$ This shows $x+y=3a+2=5b+2$. We notice $3\nmid 3a+2$ and $5\nmid 5b+2$ since we cannot express the number 2 in terms of 3 or 5. Thus, we have shown that the negation of the statement is true for this case
+    
+    Case 2. If  $3\mid y\land 5\nmid y$, We make $y$ becomes divisible by 5 by assigning $x=4y+2$, which then $x+y=5y+2,$ and we know $3\mid y\implies \exists a\in\mathbb{Z},y=3a,$ so $x+y=5\cdot3\cdot a+2$. Showing both $3\nmid 3(5a)+2$ and $5\nmid 5(3a)+2$, this case is verified as true
+    
+    Case 3. If $3\nmid y \land 5\mid y.$ We follow the similar steps, let $x=2y+2$ so that $x+y=3y+2$. Because $5\mid y\implies \exists b\in\mathbb{Z},y=5b,$ so $x+y=3\cdot5\cdot b+2$. Similarly we have shown the negation of the statement statement holds true for this case
+    
+    Case 4. If $3\nmid y \land 5\nmid y$. We set $x=0$ and the proof is immediately completed as $x+y=0+y=y$ and we already know $3\nmid y \land 5\nmid y$.
+    
+    For all cases of $y$ we can always find a $x$ value such that the negation of the statement holds true, this implies the original statement $\exists y\in\mathbb{Z}$ s.t. $\forall x ∈ Z,(3|x+y)\lor(5|x+y)$ is false, completing our proof.
+ \end{proof}
+
+
+
+\end{document}
