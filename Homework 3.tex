@@ -1,0 +1,280 @@
+\documentclass{homework}
+\author{Joseph Siu}
+\class{MAT157: Analysis I}
+\date{\today}
+\title{Homework 3}
+
+
+\newcommand{\Set}[1]{\{#1\}}
+\newcommand{\T}[1]{\text{#1}}
+\newcommand{\Al}[3]{#1 &=#2 &\text{#3}&&\\}
+
+% Symbols
+\newcommand*{\eg}{\leavevmode\unskip , e. g., \ignorespaces} % for example
+\newcommand*{\ie}{\leavevmode\unskip, i. e., \ignorespaces} % that is
+\newcommand{\nil}{\varnothing}
+\AtBeginDocument{\def\O{\cal{O}}} % Big Oh
+\AtBeginDocument{\def\C{\bb{C}}} % Complex
+\newcommand{\R}{\bb{R}} % Reals
+\newcommand{\Q}{\bb{Q}} % Rationals
+\newcommand{\Z}{\bb{Z}} % Integers
+\newcommand{\N}{\bb{N}} % Naturals
+\renewcommand{\P}{\bb{P}} % Primes
+\newcommand{\Pset}[1]{\mathcal{P}(#1)} %power set
+\newcommand{\Relate}[2]{#1\mathcal{R}#2} %relation
+\newcommand{\relate}{\mathcal{R}}
+\newcommand{\F}{\bb{F}} 
+\newcommand{\GF}[1][2]{\bb{F}_{#1}} 
+\newcommand{\modulo}[1][n]{\Z/#1\Z} 
+\newcommand{\ra}{\rightarrow}
+\newcommand{\Ra}{\Rightarrow}
+\newcommand{\?}{\stackrel{?}{=}}
+\newcommand{\is}{\equiv}
+\newcommand{\al}{\alpha}
+\newcommand{\ep}{\varepsilon}
+\renewcommand{\phi}{\varphi}
+\newcommand{\p}{\partial}
+\newcommand{\injective}{\hookrightarrow}
+\newcommand{\surjective}{\twoheadrightarrow}
+\newcommand{\bijective}{\hookrightarrow\mathrel{\mspace{-15mu}}\rightarrow}
+\newcommand{\derivative}[2][x]{\frac{\D #2}{\D #1}}
+\newcommand{\ceil}[1]{\left\lceil#1\right\rceil}
+\newcommand{\floor}[1]{\left\lfloor#1\right\rfloor}
+\newcommand{\near}[1]{\left\lfloor#1\right\rceil}
+\newcommand{\arr}[1]{\left\langle#1\right\rangle}
+\newcommand{\paren}[1]{\left(#1\right)} %pair / ()
+\newcommand{\brk}[1]{\left[#1\right]} %[]
+\newcommand{\abs}[1]{\left|#1\right|}
+\newcommand{\curl}[1]{\left\{#1\right\}} %set {}
+\newcommand{\func}[3]{#1: #2 \rightarrow #3}
+
+
+\theoremstyle{remark}
+\newtheorem*{claim}{Claim}
+\newtheorem*{definition}{Definition}
+\newtheorem*{theorem}{Theorem}
+
+\begin{document} \maketitle
+
+\begin{definition}
+    Cardinality Given two sets $A$ and $B$, we say that
+    \begin{itemize}
+        \item $A$ and $B$ have the same cardinality, denoted by $|A|=|B|$, if there is a bijection $f:A\rightarrow B$.
+        \item $A$ has cardinality less than or equal to that of $B$, denoted by $|A|\leq|B|$, if there is an injection from $A$ to $B$ (or equivalently, if there is a surjection from $B$ to $A$ (to be proved in Exercise 3 Q2)).
+    \end{itemize}
+\end{definition}
+\section*{Exercise 1}
+
+\question Show that for any given set $A$, $|A|=|A|$.
+\begin{claim}
+    For any given set $A, |A|=|A|$.
+\end{claim}
+\begin{proof}
+    We simply construct a bijection function $f: A\ra A, f(x)=x$. We check if $f$ is bijective or not, \ie, we first check $f$ is surjective, then injective. 
+
+    Surjective: we want to show $\forall y\in A$, $\exists x\in A$ s.t. $f(x)=y$. We pick $x=y$, \ie, $f(x)=f(y)=y$, showing the surjective of the function $f$.
+
+    Injective: we want to show $\forall x,x_1\in A, f(x)=f(x_1)\implies x=x_1$. \ie, $x=f(x)=f(x_1)=x_1$, showing $x=x_1$, as required. 
+
+    Therefore, as $f$ is both surjective and injective, by definition we can say that $f$ is bijective, so, the existence of the bijective function $f:A\ra A$ shows $|A|=|A|$, completing our proof. 
+\end{proof}
+
+\question Let $A,B$ be two non-empty sets and $f:A\rightarrow B$ be a bijective function. Show that there is a bijective function $g:B\rightarrow A$. Based on that, show that if $|A|=|B|$, then $|B|=|A|$. 
+\begin{claim}
+    Let $A,B$ be two non-empty sets and $f:A\rightarrow B$ be a bijective function. There is a bijective function $g:B\rightarrow A$. Moreover if $|A|=|B|$, then $|B|=|A|$. 
+\end{claim}
+\begin{proof}
+    We want to show three things first, the existence of function $g$, and $g$ is surjective and injective.
+
+    First \underline{the existence of g}: We define $g: B\ra A, g(y)=x, x\in A $ s.t. $f(x)=y$. Since $f$ is surjective, thus $\forall y\in B, \exists x\in A$ s.t. $f(x)=y$, $g$ is defined for all $y\in B$. Moreover, $f(x)=f(x_1)=y\implies x=x_1$ since $f$ is injective, showing the unique output value of the function $g$. So, the function $g$ is well defined.
+
+    Second \underline{the surjective of g}: We want to show that $\forall x\in A, \exists y\in B$ s.t. $g(y)=x$. Fix $x\in A$, let $y=f(x)$, by definition of $g$, $g(y)=g(f(x))=x$, showing $\forall x\in A$, the $x$ can be reached by $g$, thus it is surjective.
+
+    Third \underline{the injective of g}: We want to show $\forall y,y_1\in B$, $g(y)=g(y_1)\implies y=y_1$, i.e., let $y=f(x)$ (since $f$ is surjective thus $\forall y\in B, \exists f(x)\in B$ s.t. $y=f(x)$), again by the definition of $g$: $x=g(f(x))=g(f(x_1))=x_1$, $x=x_1\implies y=f(x)=f(x_1)=y_1$, showing $g$ is also injective.
+
+    Therefore, as $g$ is a well-defined function which is both surjective and injective, by definition $g$ is bijective. 
+
+    Moreover, we have shown that the existence of bijective function $f:A\ra B$ implies the existence of bijective function $g: B\ra A$. By the definition of cardinality, this is equivalent to $|A|=|B|\implies|B|=|A|$, as required. 
+\end{proof}
+
+
+\question Let $A,B,C$ be three non-empty sets and $f:A\rightarrow B$ and $g: B\rightarrow C$ be two bijective functions. Prove that $g\circ f:A\rightarrow C$ is also a bijective function. Based on that, show that if $|A|=|B|$ and $|B|=|C|$, then $|A|=|C|$.  
+\begin{claim}
+    Let $A,B,C$ be three non-empty sets and $f:A\rightarrow B$ and $g: B\rightarrow C$ be two bijective functions. This implies $g\circ f:A\rightarrow C$ is also a bijective function. Moreover, if $|A|=|B|$ and $|B|=|C|$, then $|A|=|C|$.  
+\end{claim}
+\begin{proof}
+    We show the injectivity and surjectivity of $g\circ f$ first. 
+
+    \underline{$g\circ f$ is injective}: We aim to show that $\forall x,x_1\in A, g(f(x))=g(f(x_1))\implies x=x_1$. Since $g$ is bijective, this implies $g$ is injective, \ie, $g(f(x))=g(f(x_1))\implies f(x)=f(x_1)$, also, since $f$ is also bijective which implies $f$ is injective, we know $f(x)=f(x_1)\implies x=x_1$, showing $g(f(x))=g(f(x_1))\implies x=x_1$ as required.
+
+    \underline{$g\circ f$ is surjective}: We aim to show that $\forall z\in C, \exists x\in A$ s.t. $g(f(x))=z$. Because we know $g$ is surjective (bijective) implies $\forall z\in C, \exists y\in B$ s.t. $g(y)=z$, also $f$ is surjective (bijective), by definition $\forall y\in B, \exists x\in A$ s.t. $f(x)=y$. We fix $y$ such that $g(y)=z$, because all $y$ exists a $f(x),x\in A$ s.t. $y=f(x)$, so we let $y=f(x)$ for some $x\in A$. Now, $g(y)=g(f(x))=z$, we have shown that $\forall z\in C, \exists x\in A$ s.t. $g\circ f(x)=z$, showing $g\circ f$ is surjective as required. 
+
+    Therefore, since $g\circ f$ is both surjective and injective, we conclude $g\circ f$ is bijective. Equivalently, we have shown that $f$ is bijection and $g$ is bijection implies $f\circ g$ is bijection, namely (by the definition), $|A|=|B|\land |B|=|C|\implies |A|=|C|$. 
+\end{proof}
+
+\question Based on the above sub-questions, if we define the relation $\mathcal{R}\subseteq\mathcal{P}(\R)\times\mathcal{P}(\R)$ as: $$A\mathcal{R}B \T{ if } |A|=|B|.$$ Is $\mathcal{R}$ an equivalence relation? Explain your claim. 
+\begin{claim}
+    $\mathcal{R}$ is an equivalence relation.
+\end{claim}
+\begin{proof}
+    To show $\mathcal{R}$ is an equivalence relation, we need to show the relation satisfy all two properties: Reflexivity, Symmetry, and Transitivity.
+
+    \underline{Reflexivity}: For any set $A\subseteq\mathcal{P}(\R)$, we have shown $|A|=|A|$, that is, $A\mathcal{R}A$, showing it is reflexive. 
+
+    \underline{Symmetry}: For any non-empty sets $A, B\subseteq\mathcal{P}(\R)$, we have shown that $A\mathcal{R}B\iff |A|=|B|  \implies |B|=|A|\iff B\mathcal{R}A$, thus it is symmetric (empty sets are vacuously true).
+
+    \underline{Transitivity}: For any non-empty sets $A,B,C\subseteq\mathcal{P}(\R)$, we have shown that $\Relate{A}{B}\land\Relate{B}{C}\iff(|A|=|B|)\land (|B|=|C|)\implies |A|=|C|\iff\Relate{A}{C}$, thus it is transitive (empty sets are vacuously true).
+
+    Therefore, since the relation satisfy the three properties, we can say it is an equivalence relation. 
+\end{proof}
+
+\newpage
+\section*{Exercise 2}
+\question[1] Let $A,B,C$ be three non-empty sets and $f:A\rightarrow B$ and $g: B\rightarrow C$ be two injective functions. Prove that $g\circ f:A\rightarrow C$ is also injective. Based on that, show that if $|A|\leq|B|$ and $|B|\leq|C|$, then $|A|\leq|C|$.  
+\begin{claim}
+    Let $A,B,C$ be three non-empty sets and $f:A\rightarrow B$ and $g: B\rightarrow C$ be two injective functions. Then $g\circ f:A\rightarrow C$ is also injective. Based on that, if $|A|\leq|B|$ and $|B|\leq|C|$, then $|A|\leq|C|$.  
+\end{claim}
+\begin{proof}
+    To show $g\circ f$ is also injective, \ie, we want to show that $\forall a,a_1\in A, g(f(a))=g(f(a_1))\implies a=a_1$. Since $g$ is injective, by definition $g(f(a))=g(f(a_1))\implies f(a)=f(a_1)$, moreover $f$ is also injective gives $f(a)=f(a_1)\implies a=a_1$, these two add up show that $g(f(a))=g(f(a_1))\implies f(a)=f(a_1)\implies a=a_1$ for all $a,a_1\in A$.  We have shown that $f$ is injective and $g$ is injective implies $g\circ f$ is also injective, by the definition ($A$ has cardinality less than or equal to that of $B$, denoted by $|A|\leq|B|$, if there is an injection from $A$ to $B$), we can say this as $|A|\leq|B|\land|B|\leq|C|\implies|A|\leq|C|$, as required. 
+\end{proof}
+
+\question[2] Based on the above sub-question, if we define the relation $\mathcal{R}\subseteq\Pset{\R}\times\Pset{\R}$ as: $$\Relate{A}{B}\T{ if }|A|\leq|B|.$$ Is $\relate$ a partial ordering? Explain your claim. 
+\begin{claim}
+    if we define the relation $\mathcal{R}\subseteq\Pset{\R}\times\Pset{\R}$ as: $$\Relate{A}{B}\T{ if }|A|\leq|B|.$$ Then $\relate$ is not a partial ordering.
+\end{claim}
+\begin{proof}
+To show $\relate$ is not a partial ordering, we must show it does not satisfy at least one of the 3 definitions: Reflexivity, Anti-Symmetry, and Transitivity.
+
+%\underline{Reflexivity}: We want to show $\forall A\in\Pset{\R}, \Relate{A}{A}$. That is, we want to show $|A|\leq|A|$. Since we have constructed a bijective function $f$ showing $|A|=|A|$ from Q1, by definition $f$ is also injective, the existence of injective function $f:A\ra A$ gives $|A|\leq|A|$ by definition, which further shows $\Relate{A}{A}$ as required.
+
+\underline{Anti-Symmetry}: Anti-Symmetry is defined as $(\Relate{A}{B}\land\Relate{A}{B})\implies A=B$. That is, $(|A|\leq|B|\land|B|\leq|A|)\implies A=B$. However, here is one counter-example: $A=\{1,2,3\}, B=\{4,5,6\}$. Indeed, if we construct two functions $f: A\ra B, f(x)=x+3$ and $g:B\ra A, g(x)=x-3$, as these are are injective functions ($f(x)=f(x_1)\iff x+3=x_1+3 \iff x=x_1$ and $g(x)=g(x_1)\iff x-3=x_1-3\iff x=x_1$), by definition $|A|\leq|B|\land|B|\leq|A|$, however, $A\neq B$ as $A\not\subseteq B$ and $B\not\subseteq A$, showing Anti-Symmetry does not hold for this relation, thus not a partial ordering. 
+\end{proof}
+
+
+\newpage
+\section*{Exercise 3}
+Recall the famous Schröder-Bernstein-Cantor theorem:
+\begin{theorem}
+    (Schröder-Bernstein-Cantor). Let $A$ and $B$ be two sets, if there is an injective function $f: A\rightarrow B$ and an injective function $\func{g}{B}{A},$ then $|A|=|B|$.
+\end{theorem}
+\question[1] Using the Schröder-Bernstein-Cantor theorem, prove that $|(0,1)|=|[0,1]|$.
+\begin{claim}
+    $|(0,1)|=|[0,1]|$
+\end{claim}
+\begin{proof}
+    By the SBC theorem, the existence of two injective functions from $(0,1)$ to $[0,1]$ and from $[0,1]$ to $(0,1)$  implies $|(0,1)|=|[0,1]|$ which is what we want to show. 
+
+    First we define $f:(0,1)\ra[0,1], f(x)=x$, as $\forall x,x_1\in(0,1), f(x)=f(x_1)\iff x=x_1$, we know that $f$ is injective. 
+
+    Second we define $g:[0,1]\ra(0,1),g(x)=\frac12x+\frac14$, as $\forall x,x_1\in[0,1], g(x)=g(x_1)\iff \frac12x+\frac14=\frac12x_1+\frac14\iff x=x_1$, we know that $g$ is injective. 
+
+    Since we have found an injective function $f:(0,1)\ra[0,1]$ and an injective function $\func{g}{B}{A}$, then by the SBC theorem $|(0,1)|=|[0,1]|$ as required. 
+\end{proof}
+
+\question[2] Let $A,B$ be two non-empty sets and $\func{f}{A}{B}$ be injective. Show that there exists a surjective function $\func{g}{B}{A}$.
+\begin{claim}
+    Let $A,B$ be two non-empty sets and $\func{f}{A}{B}$ be injective. There exists a surjective function $\func{g}{B}{A}$.
+\end{claim}
+\begin{proof}
+    We construct $g$ using piece-wise function: $$g: B\ra A, g(y)=\left\{\begin{array}{cc}
+        x, & \text{if $\exists x\in A$ s.t. y=f(x)} \\
+        x_0, & \text{otherwise} 
+    \end{array}\right.$$ which $x_0$ is an arbitrary element in $A$. Since $f$ is injective, that is, $\forall x,x_1\in A, y=f(x)=f(x_1)\implies x=x_1$, showing there is no ambiguity in the definition of $g$ since $x$ is unique. To show $g$ is surjective, we need to show $\forall x\in A,\exists y\in B$ s.t. $g(y)=x$. Pick an arbitrary $x\in A$, we know $\exists y\in B$ s.t. $f(x)=y\in B$, that is, pick $y=f(x)$, then $g(y)=x$, showing $g$ is surjective, as needed. 
+\end{proof}
+
+\question[3] Let $A,B$ be two non-empty sets and $\func{f}{A}{B}$ be surjective. Show that there exists a injective function $\func{g}{B}{A}$.
+\begin{claim}
+    Let $A,B$ be two non-empty sets and $\func{f}{A}{B}$ be surjective. There exists a injective function $\func{g}{B}{A}$.
+\end{claim}
+\begin{proof}
+    We construct $g$, which is the right inverse of $f: A\ra B$: Because $f$ is surjective, \ie, $\forall y\in B, \exists x\in A$ s.t. $f(x)=y$. For each $y$ we pick such $x$ and define the function $g:B\ra A, g(y)=x$. That is, $g(y)=x\implies f(g(y))=f(x)=y$. We now prove that $g$ is injective. $\forall y,y_1\in B$, let $y=f(x), y_1=f(x_1)$ where $x,x_1\in A$, then $x=g(y)=g(y_1)=x_1$, since $y=f(x)$ and $y_1=f(x_1)$, these 2 give $x=x_1\implies y=f(x)=f(x_1)=y_1$ showing the injectivity. 
+\end{proof}
+
+\question[4] Let $A,B$ be two non-empty sets. Prove that if there are two surjective functions $\func{f}{A}{B}$ and $\func{g}{B}{A}$, then $|A|=|B|$. 
+
+\begin{claim}
+    Let $A,B$ be two non-empty sets. If there are two surjective functions $\func{f}{A}{B}$ and $\func{g}{B}{A}$, then $|A|=|B|$. 
+\end{claim}
+\begin{proof}
+    As we have proven previously, $f:A\ra B$ is surjective means there exist $h:B\ra A$ s.t. $h$ is injective. Also, $g:B\ra A$ is surjective means there exist $j: A\ra B$ s.t. $j$ is injective. Because of the existence of injective functions $h: B\ra A$ and $j: A\ra B$, by the SBC theorem, $|A|=|B|$ as required. 
+\end{proof}
+
+\newpage
+\section*{Exercise 4}
+
+\begin{definition}
+    (Countable Set). We say that a set $A$ is \textbf{countable}, if $|A|=|\N|$.
+\end{definition}
+
+\question[1] Prove that both the set of odd numbers $\N_{\T{odd}}$ and the set of even numbers $\N_{\T{even}}$ are countable.
+\begin{claim}
+    Both the set of odd numbers $\N_{\T{odd}}$ and the set of even numbers $\N_{\T{even}}$ are countable.
+\end{claim}
+\begin{proof}
+    We want to show that $|\N|=|\N_{\T{odd}}|$ and $|\N|=|\N_{\T{even}}|$, by the SBC theorem this is equivalent to show that there are injective functions $f:\N\ra\N_{\T{odd}}$, $g:\N_{\T{odd}}\ra\N$, $h:\N\ra\N_{\T{even}}$, and $j:\N_{\T{even}}\ra\N$. 
+
+    $f:\N\ra\N_{\T{odd}}, f(n)=2n-1$. $\forall n,n_1\in\N, f(n)=f(n_1)\implies 2n-1=2n_1-1\implies n=n_1$ shows the injectivity. 
+
+    $g:\N_{\T{odd}}\ra\N, g(n)=\frac{n+1}{2}$.$\forall n,n_1\in\N_{\T{odd}}, g(n)=g(n_1)\implies \frac{n+1}{2}=\frac{n_1+1}{2}\implies n=n_1$ shows the injectivity. 
+
+    $h:\N\ra\N_{\T{even}}, h(n)=2n$.$\forall n,n_1\in\N, h(n)=h(n_1)\implies 2n=2n_1\implies n=n_1$ shows the injectivity. 
+
+    $j:\N_{\T{even}}\ra\N, j(n)=\frac{n}{2}$.$\forall n,n_1\in\N_{\T{even}}, j(n)=j(n_1)\implies \frac{n}{2}=\frac{n_1}{2}\implies n=n_1$ shows the injectivity. 
+
+    The existence of four injective functions $f,g,h,j$ show that $|\N|=|\N_{\T{odd}}|$ and $|\N|=|\N_{\T{even}}|$ as required. 
+\end{proof}
+
+\question[2] Prove that the union $A\cup B$ of a finite set $A$ and a countable set $B$, is countable.
+\begin{claim}
+    The union $A\cup B$ of a finite set $A$ and a countable set $B$, is countable.
+\end{claim}
+\begin{proof}
+    To show $|A\cup B|=|\N|$, we need to show two injective functions $f: \N\ra A\cup B$ and $g: A\cup B\ra \N$. 
+
+    $B$ is countable implies there are two injective functions $h: B\ra\N$ and $j:\N\ra B$ (By definition there is a bijective function from $B$ to $\N$, however we showed that if there is a surjective function from $B$ to $\N$, then there must exist an injective function from $\N$ to $B$). We define $f:\N\ra A\cup B, f(x)=j(x)$, this shows $f$ is injective as $\forall x,x_1\in \N, f(x)=f(x_1)\implies j(x)=j(x_1)\implies x=x_1$. 
+
+    w.l.o.g. we define the subscript: $b\in B, b_n:=b$ s.t. $n=h(b)$ since $h$ is injective. 
+
+    Since $A$ is a finite set, we denote the number of elements of $A$ as $N$ and define a bijective function $k: A\ra \{1,2,\ldots,N\}, k(a_n)=n$ where $a_n\in A=\{a_1,a_2,\ldots,a_n\}$ (we fix such order, and it is indeed bijective since $k(a_n) = k(a_{n_1})\implies n=n_1$ and $\forall n\in\{1,2,\ldots,N\}, k(a_n)=n$ showing it is both injective and surjective), we define $$g: A\cup B\ra \N, g(x_n)=\left\{\begin{array}{cc}
+       k(x_n)  & \T{if $x_n\in A$} \\
+       h(x_n)+(N+1)  & \T{if $x_n\notin A$}
+    \end{array}}\right.$$
+
+    To verify $g$ is injective: $\forall x_n,x_{n_1}\in A,$ $g(x_n)=g(x_{n_1})\implies k(x_n)=k(x_{n_1})\implies n=n_1\implies x_n=x_{n_1}$;  $\forall x_n,x_{n_1}\in B\setminus A$ $g(x_n)=g(x_{n_1})\implies h(x_n)+(N+1)=h(x_{n_1})+(N+1)\implies h(x_n)=h(x_{n_1}),$ since $h$ is injective, this implies $x_n=x_{n_1}$. Note that when only one of $x_n$ and $x_{n_1}$ is in $A$, w.l.o.g. we pick $\forall x_n\in A, \forall x_{n_1}\in B\setminus A$,  $g(x_n)\neq g(x_{n_1})$ since $g(x_n)=k(x_n)\leq N$, and $g(x_{n_1})=h(x_{n_1})+(N+1)>N+1>N$.  
+
+    Therefore, as we have shown the existence of $f$ and $g$, by SBC theorem $|A\cup B|=|\N|$ as required. 
+\end{proof}
+
+
+\question[3] Prove that the union $\displaystyle\bigcup_{i\in\N}A_i$ of a countably many countable set $A_i$ is countable. Based on that, show that $\N \times \N$ is countable.
+\begin{claim}
+    The union $\displaystyle\bigcup_{i\in\N}A_i$ of a countably many countable set $A_i$ is countable. Based on that,  $\N \times \N$ is countable.
+\end{claim}
+\begin{proof}
+    We want to construct 2 injective functions $f:\N\ra \displaystyle\bigcup_{i\in\N}A_i$ and $g: \displaystyle\bigcup_{i\in\N}A_i\ra\N$.
+
+    Because $A_1$ is countable so there exist a bijective function from $\N$ to $A_1$, thus, define $f:\N\ra A_1, f(n)=a_{1,n}$ to be the bijection function where $a_{1,n}\in A_1=\{a_{1,1},a_{1,2},\ldots,a_{1,n},\ldots\}$ (We fix such order, the subscript is defined as $a_1\in A_1, a_{1,n}:=a_1$ s.t. $n=z(a_1)$ where $z$ is the bijective function from $A_1$ to $\N$, the existence of $z$ is confirmed by the definition of equal cardinality). Since $A_1\subseteq \displaystyle\bigcup_{i\in\N}A_i$, so we have found the correct $f$ (which is also injective as $\forall n,n_1\in\N, n\neq n_1\implies a_{1,n}\neq a_{1,n_1}$ is true as all elements within $A_1$ are unique). 
+
+    Now, we are willing to construct a function $g: \displaystyle\bigcup_{i\in\N}A_i\ra\N$. To construct $g$, we first construct two injective functions $h: \displaystyle\bigcup_{i\in\N}A_i\ra\N\times\N$ and  $j: \N\times\N\ra\N$. As proven, $h$ and $j$ are injective implies $h\circ j$ is also injective, let $g=h\circ j$, showing there exist an injective function from  $ \displaystyle\bigcup_{i\in\N}A_i$  to $\N$.  
+
+    So, define $h(a_{i,n})=(i,n)$. Which $a_{i,n}\in A_i=\{a_{i,1},a_{i,2},\ldots,a_{i,n},\ldots\}$ (the order is fixed).  Now, define $j(i,n)=2^i3^n$, since by the fundamental theorem of arithmetic we know that any integer greater than 1 can be represented uniquely as a product of prime numbers, and so, $j(i,n)=j(i_1,n_1)\iff 2^i3^n=2^{i_{1}}3^{n_{1}}\implies (i=i_1)\land(n=n_1)$, showing $j$ is injective. Therefore, as both $h$ and $j$ are injective as shown, and as proven in the previous question, we know that $g(a_{i,n})=h\circ j(a_{i,n})=2^i3^n$ is injective, as required. Therefore, as we have shown the existence of $f$ and $g$, by definition $|\displaystyle\bigcup_{i\in\N}A_i|=|\N|$, as required. 
+
+    Also, two injective functions $f:\N\ra \displaystyle\bigcup_{i\in\N}A_i$ and $h: \displaystyle\bigcup_{i\in\N}A_i\ra\N\times\N$ implies the existence of an injective function from $\N$ to $\N\times\N$, along with the existence of an injective function from $\N\times\N$ to $\N$ which is $j$, by SBC theorem these show that $|N|=|\N\times\N|$, gives $\N\times\N$ is countable, as needed. 
+    \end{proof}
+
+\question[4] Suppose that $\relate\subseteq\N\times\N$ is an equivalence relation. Prove that $\relate$ is countable. 
+\begin{claim}
+     Suppose that $\relate\subseteq\N\times\N$ is an equivalence relation. Then $\relate$ is countable. 
+\end{claim}
+\begin{proof}
+    We show $\relate$ is countable by showing two injective functions $f:\N\ra\relate$ and $g:\relate\ra\N$. 
+    
+    Since $\relate\subseteq\N\times\N$, and equivalence relation must satisfy Reflexivity which means $\forall x\in \N, (x,x)\in\relate$, so, we construct $f$ to be $f:\N\ra\relate, f(x)=(x,x)$ (which clearly $x\neq x_1\implies (x,x)\neq(x_1,x_1)\iff f(x)\neq f(x_1)$). 
+    
+    Now we construct a function $h:\relate\ra\N\times\N, h((x,y))=(x,y)$, since we have proven that $|\N\times\N|=|\N|$, this implies the existence of a bijective (injective) function $j: \N\times\N\ra\N$. As proven the existence of injective functions $h:\relate\ra\N\times\N$ and $j:\N\times\N\ra\N$ show the existence of the injective function $g: \relate\ra\N$. 
+    
+    Since we have founded the injective functions $f$ and $g$, by SBC theorem this shows $|\relate|=|\N|$, which means $\relate$ is countable, as required. 
+    
+\end{proof}
+
+\end{document}

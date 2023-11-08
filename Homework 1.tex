@@ -6,10 +6,45 @@
 %\address{Joseph Siu}
 
 \usepackage{color}
-
-\begin{document} \maketitle
 \theoremstyle{remark}
 \newtheorem*{claim}{Claim}
+
+% Symbols
+\newcommand*{\eg}{\leavevmode\unskip , e. g., \ignorespaces}
+\newcommand*{\ie}{\leavevmode\unskip, i. e., \ignorespaces}
+\newcommand{\nil}{\varnothing}
+\AtBeginDocument{\def\O{\cal{O}}} % Big Oh
+\AtBeginDocument{\def\C{\bb{C}}} % Complex
+\newcommand{\R}{\bb{R}} % Reals
+\newcommand{\Q}{\bb{Q}} % Rationals
+\newcommand{\Z}{\bb{Z}} % Integers
+\newcommand{\N}{\bb{N}} % Naturals
+\renewcommand{\P}{\bb{P}} % Primes
+\newcommand{\F}{\bb{F}} % Field
+\newcommand{\GF}[1][2]{\bb{F}_{#1}} % Galois Field
+\newcommand{\modulo}[1][n]{\Z/#1\Z} % Modulo class n
+\newcommand{\ra}{\rightarrow}
+\newcommand{\Ra}{\Rightarrow}
+\newcommand{\?}{\stackrel{?}{=}}
+\newcommand{\is}{\equiv}
+\newcommand{\al}{\alpha}
+\newcommand{\ep}{\varepsilon}
+\renewcommand{\phi}{\varphi}
+\newcommand{\p}{\partial}
+\newcommand{\injective}{\hookrightarrow}
+\newcommand{\surjective}{\twoheadrightarrow}
+\newcommand{\bijective}{\hookrightarrow\mathrel{\mspace{-15mu}}\rightarrow}
+\newcommand{\derivative}[2][x]{\frac{\D #2}{\D #1}}
+\newcommand{\ceil}[1]{\left\lceil#1\right\rceil}
+\newcommand{\floor}[1]{\left\lfloor#1\right\rfloor}
+\newcommand{\near}[1]{\left\lfloor#1\right\rceil}
+\newcommand{\arr}[1]{\left\langle#1\right\rangle}
+\newcommand{\paren}[1]{\left(#1\right)}
+\newcommand{\brk}[1]{\left[#1\right]}
+\newcommand{\abs}[1]{\left|#1\right|}
+\newcommand{\curl}[1]{\left\{#1\right\}}
+
+\begin{document} \maketitle
 
 
 \question A tautology is αmathematical statement that is always true. A contradiction is a mathematical statement that is always false.\\\\Let $P$ be a any mathematical statement. Determine if each of the following statements is a tautology, or a contradiction, or neither.\\

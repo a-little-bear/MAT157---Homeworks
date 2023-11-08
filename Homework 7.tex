@@ -1,0 +1,211 @@
+\documentclass{homework}
+\author{Joseph Siu}
+\class{MAT157: Analysis I}
+\date{\today}
+\title{Homework 7}
+
+\newcommand{\Set}[1]{\{#1\}}
+\newcommand{\T}[1]{\text{#1}}
+\newcommand{\Al}[3]{#1 &=#2 &\text{#3}&&\\}
+
+% Symbols
+\newcommand*{\eg}{\leavevmode\unskip , e. g., \ignorespaces} % for example
+\newcommand*{\ie}{\leavevmode\unskip, i. e., \ignorespaces} % that is
+\newcommand{\nil}{\varnothing}
+\AtBeginDocument{\def\O{\cal{O}}} % Big Oh
+\AtBeginDocument{\def\C{\bb{C}}} % Complex
+\newcommand{\R}{\bb{R}} % Reals
+\newcommand{\Q}{\bb{Q}} % Rationals
+\newcommand{\Z}{\bb{Z}} % Integers
+\newcommand{\N}{\bb{N}} % Naturals
+\renewcommand{\P}{\bb{P}} % Primes
+\newcommand{\Pset}[1]{\mathcal{P}(#1)} %power set
+\newcommand{\Relate}[2]{#1\mathcal{R}#2} %relation
+\newcommand{\relate}{\mathcal{R}}
+\newcommand{\F}{\bb{F}} 
+\newcommand{\GF}[1][2]{\bb{F}_{#1}} 
+\newcommand{\modulo}[1][n]{\Z/#1\Z} 
+\newcommand{\ra}{\rightarrow}
+\newcommand{\Ra}{\Rightarrow}
+\newcommand{\?}{\stackrel{?}{=}}
+\newcommand{\is}{\equiv}
+\newcommand{\al}{\alpha}
+\newcommand{\ep}{\varepsilon}
+\renewcommand{\phi}{\varphi}
+\newcommand{\p}{\partial}
+\newcommand{\injective}{\hookrightarrow}
+\newcommand{\surjective}{\twoheadrightarrow}
+\newcommand{\bijective}{\hookrightarrow\mathrel{\mspace{-15mu}}\rightarrow}
+\newcommand{\derivative}[2][x]{\frac{\D #2}{\D #1}}
+\newcommand{\ceil}[1]{\left\lceil#1\right\rceil}
+\newcommand{\floor}[1]{\left\lfloor#1\right\rfloor}
+\newcommand{\near}[1]{\left\lfloor#1\right\rceil}
+\newcommand{\arr}[1]{\left\langle#1\right\rangle}
+\newcommand{\paren}[1]{\left(#1\right)} %pair / ()
+\newcommand{\brk}[1]{\left[#1\right]} %[]
+\newcommand{\abs}[1]{\left|#1\right|}
+\newcommand{\curl}[1]{\left\{#1\right\}} %set {}
+\newcommand{\func}[3]{#1: #2 \rightarrow #3}
+
+
+\theoremstyle{definition}
+\newtheorem*{claim}{Claim}
+\newtheorem*{definition}{Definition}
+\newtheorem*{theorem}{Theorem}
+\newtheorem*{lemma}{Lemma}
+
+
+\begin{document} \maketitle
+
+
+Throughout this exercise, we assume that $\{a_n\}_{n\in\N}$ is a bounded sequence.
+
+\section*{Exercise 1}
+Let $\{a_n\}_{n\in\N}$ be a bounded sequence. Define \[i_k=\inf_{n\geq k}a_n, \quad s_k=\sup_{n\geq k}a_n\]
+
+\question[1] Prove that $\lim_{k\ra\infty}i_k$ and $\lim_{k\ra\infty}s_k$ exist (as finite real numbers). Moreover, if we denote them by \[\lim_{k\ra\infty}i_k=a_*, \quad \lim_{k\ra\infty}s_k=a^*,\] then \[a_*\leq a^*\]
+\begin{theorem}
+    [Monotone Convergence Theorem] Suppose $\{a_n\}_{n\in\N}$ is monotone. Then $\{a_n\}_{n\in\N}$ converges if and only if it is bounded. Moreover,
+    \begin{itemize}
+        \item If $\{a_n\}_{n\in\N}$ is increasing, then either $\{a_n\}_{n\in\N}$ diverges to $\infty$ or \[\lim_{n\ra\infty}a_n=\sup(\{a_n:n\in\N\}).\]
+        \item If $\{a_n\}_{n\in\N}$ is decreasing, then either $\{a_n\}_{n\in\N}$ diverges to $-\infty$ or \[\lim_{n\ra\infty}a_n=\inf(\{a_n:n\in\N\}).\]
+    \end{itemize}
+\begin{proof}
+    In lecture we have shown monotone+converges implies bounded.  
+    
+    Now we show that if a sequence is bounded and monotonic, then it also converges: Assume for the sake of contradiction that the sequence $\{a_n\}_{n\in\N}$ is bounded below by $C$ and above by $D$, and monotonic decreasing, and does not converge. That is, because it is monotonic decreasing, it is only possible that the sequence diverges to $-\infty$, by definition $\forall M<0, \exists N\in\N$ s.t. $\forall n>N, a_n<M$, however $\forall n\in\N, a_n\geq C$ contradicting the case when $M=\min(C,-C,-1)<0$, it must be True that a sequence is bounded and monotonic implies it is also convergent.
+
+    Now we show the limit is the supremum or the infimum. Assume $\{a_n\}_{n\in\N}$ is increasing, $\alpha = \sup(\{a_n : n\in\N\})$ and we want to show $\alpha = \lim_{n\ra\infty}a_n$. That is, we want to show for any $\ep>0$, there exists some $N$ such that $\forall n\in\N, n>N, |a_n-\alpha|<\ep$. Fix $\ep>0$, since $\alpha=\sup(\{a_n:n\in\N\})$, by tutorial (suprema analytically theorem) there exists some $a_N>\alpha-\ep$, and since $\{a_n\}_{n\in\N}$ is monotonically increasing we see that for any $n>N$ we have $a_n\geq a_N>\alpha-\ep$, and $a_n\leq\alpha$ due to $\alpha$ being the supremum. Thus, we have found such N, for any $\ep>0,$ for all $n>N$, we have $\alpha-\ep<a_n\leq\alpha<\alpha+\ep$ and hence $|a_n-\alpha|<\ep$ as required. 
+
+    Similarly for the other case. Assume $\{a_n\}_{n\in\N}$ is decreasing, $\beta = \inf(\{a_n : n\in\N\})$ and we want to show $\beta = \lim_{n\ra\infty}a_n$. That is, we want to show for any $\ep>0$, there exists some $N$ such that $\forall n\in\N, n>N, |a_n-\beta|<\ep$. Fix $\ep>0$, since $\beta=\inf(\{a_n:n\in\N\})$, by tutorial (suprema analytically theorem) there exists some $a_N<\beta+\ep$, and since $\{a_n\}_{n\in\N}$ is monotonically decreasing we see that for any $n>N$ we have $a_n\leq a_N<\beta+\ep$, and $a_n\geq\beta$ due to $\beta$ being the infimum. Thus, we have found such N, for any $\ep>0,$ for all $n>N$, we have $\beta+\ep>a_n\geq\beta>\beta-\ep$ and hence $|a_n-\beta|<\ep$ as required. 
+\end{proof}
+\end{theorem}
+
+\begin{proof}
+    First we want to show both $\{i_k\}_{k\in\N}$ and $\{s_k\}_{k\in\N}$ are convergent. By the Least Upper Bound / Greatest Lower Bound Theorem, since $\{a_n\}_{n\in\N}$ is bounded, this implies the existence of the infimum and supremum, denote them as $\sup\{a_n\}_{n\in\N}, \inf\{a_n\}_{n\in\N}$. That is, $\forall n\in\N, \inf\{a_n\}_{n\in\N} \leq a_n \leq \sup\{a_n\}_{n\in\N}$, this implies $\forall k\in\N, \inf\{a_n\}_{n\in\N}\leq \inf_{n\geq k}a_n\leq \sup_{n\geq k}a_n\leq\sup\{a_n\}_{n\in\N}$, showing both sequences $\{i_k\}_{k\in\N},\{s_k\}_{k\in\N}$ are bounded. 
+    
+    Now we show that the sequence $\{i_k\}_{k\in\N}$ monotonically increases and $\{s_k\}_{k\in\N}$ monotonically decreases. It is obvious that $\inf_{n\geq k}a_n \leq \inf_{n\geq k+1}a_n$ since $\{a_n\}_{n\geq k} = \{a_k\}\cup\{a_{n}\}_{n\geq k+1}$, we have $\inf_{n\geq k}a_n = \min(a_k, \inf\{a_n\}_{n\geq k+1})$. Similarly we can see $\sup_{n\geq k}a_n \geq \sup_{n\geq k+1}a_n$ as $\{a_n\}_{n\geq k} = \{a_k\}\cup\{a_n\}_{n\geq k+1}$ and $\sup_{n\geq k}a_n = \max(a_k, \sup\{a_n\}_{n\geq k+1})$. 
+    
+    Thus, by Monotone Convergence Theorem (MCT) two sequences $\{i_k\}_{k\in\N}$ and $\{s_k\}_{k\in\N}$ must converge to some finite real number respectively, as denoted above, \[\lim_{k\ra\infty}i_k=a_*, \quad \lim_{k\ra\infty}s_k=a^*.\]
+    Moreover, we have $a_* = \sup(\{i_k\}_{k\in\N})$ and $a^*=\inf(\{s_k\}_{k\in\N})$, we want to show $a_*\leq a^*$. Assume for contradiction $a_*>a^*$, pick $\ep_1=a_*-a^*>0$, consider the open neighborhood $(2a^*-a_*, a_*)$, since the sequence $\{s_k\}_{k\in\N}$ converges to $a^*$, there must be infinite elements of the sequence within the open neighborhood of $a^*$: $(2a^*-a_*,a_*)$. Then, there are some $K\in\N$ s.t. $\forall n\geq K, 2a^*-a_*< s_n< a_*$ (since it is monotone).  
+    
+    However,  fix $\ep_2=\ep_1=a_*-a^*>0$, the open neighborhood $(a^*, 2a_*-a^*)$ also contains infinite elements of $\{i_k\}_{k\in\N}$, this gives $\exists N\in\N, i_N>a_*$, but $\{i_k\}_{k\in\N}$ monotonically increases, giving $\forall k\geq N, i_k>a_*$, we pick $M:=\max(K, N)$, then showing $\forall m\geq M, \sup_{n\geq m}a_n=s_m<a_*<i_m=\inf_{n\geq m}a_n$, this is contradicting $\inf_{n\geq m}a_n < \sup_{n\geq m}a_n$, therefore it must be true that $a_*\leq a^*$ as required. 
+\end{proof}
+
+
+Remark. We say that $a_*$ is the limit inferior of the sequence, and $a^*$ is the limit superior of the sequence. From now on, we denote them by \[\liminf_{k\ra\infty} a_k := a_*,\]
+\[\limsup_{k\ra\infty}a_k:=a^*,\]
+respectively. 
+
+\question[2] Compute the $\liminf_{k\ra\infty}a_k$ and $\limsup_{k\ra\infty}a_k$ for the following sequences: 
+\begin{enumerate}
+    \item $a_k=(-1)^k.$
+    \item $b_k=\frac{(-1)^k}{k}$.
+\end{enumerate}
+\begin{claim}
+    \begin{align*}
+        \liminf_{k\ra\infty}a_k &= -1,\\
+        \limsup_{k\ra\infty}a_k &= 1,\\
+        \liminf_{k\ra\infty}b_k &= 0,\\
+        \limsup_{k\ra\infty}b_k &= 0.
+    \end{align*}
+\end{claim}
+\begin{proof}
+    \begin{enumerate}
+        \item  Since it is clear that when $k$ is odd $a_k=-1$, when $k$ is even $a_k=1$, thus for any $N\in\N$, for all $n>N$, $n$ is either odd (showing $a_n=-1$) or even (showing $a_n=1$), giving the infimum is always $-1$, and the supremum is always $1$, thus the limit of the constant sequences are the constants themselves, giving $\liminf_{k\ra\infty}a_k = -1$ and $\limsup_{k\ra\infty}a_k = 1$.
+
+        \item We want to show that $\forall \ep >0, \exists N\in\N$ s.t. $|b_n| < 0 + \ep, \forall n\geq N$. That is, when the sequence converges to 0, the limit superior and limit inferior also converge to 0. First the sequence is converging to 0 as $\forall \ep > 0, \exists M\in\N \text{ s.t. } M>\frac{1}{\ep}, \forall m> M, |b_m-0|=\frac{|(-1)^m|}{m}=\frac{1}{|m|}=\frac{1}{m}<\frac{1}{M}<\ep$. 
+
+Now, we want to show the sequence converges to 0 implies the limit superior and limit inferior also converge to 0. First from E1Q1 we can see the supremum sequence $\{\sup_{n\geq k} b_n\}_{k\in\N}$ and the infimum sequence $\{\inf_{n\geq k} b_n\}_{k\in\N}$ both converges (It must be true that $b_*\leq0\leq b^*$ otherwise contradicting $(b_k)$ converges to 0). That is, assume for the sake of contradiction that $b_*<b^*$ (they are not equal), choose $\ep=b^*-b_*>0$, because we know the sequence converges to 0, choose $\ep_1=\min(|\frac{b_*}{2}|, |\frac{b^*}{2}|)$ where $\ep_1 < -b_*$ ($b_* $ is at most 0), then $\exists M\in\N$ s.t. $\forall m>M, |b_m|<\ep_1$, however this shows $\forall m>M, b_*<-\ep_1\leq\inf_{n\geq m}b_n $ (greatest lower bound), thus contradicting the fact that the limit inferior sequence monotonically increases and is bounded above by $b_*$ (from E1Q1), therefore we conclude that $b_*=b^*=0$ as required. 
+
+
+% We want to show $\forall\ep_1>0, \exists N\in\N, \forall n>N, |(\inf b_n)|<\ep_1$ and $\forall\ep_2>0, \exists M\in\N, \forall m>M, |(\sup b_n)|<\ep_2$. We split the sequence into 2 sub-sequences $b_{2k}=\frac{1}{k}$ and $b_{2k-1}=-\frac{1}{k}$. All terms of $b_{2k}$ are positive and all terms of $b_{2k+1}$ are negative, and joining these 2 sub-sequences we get the entire $\{b_k\}_{k\in\N}$, so, the supremum of the sequence is equivalent to the supremum of $b_{2k}$, and the infimum of the sequence is equivalent to the infimum of $b_{2k-1}$. 
+     \end{enumerate}
+
+% Fix $\ep_1>0$, choose $N>\frac{1}{2\ep_1}$, then $\forall n>N, |b_{2n}-0|=\frac{1}{2n}<\frac{1}{2N}<\ep_1$, showing the sequence $\{b_{2n}\}_{n\in\N}$ converges to 0, and because $b_{2n}$ monotonically decreases ($\frac{1}{k}>\frac{1}{k+1}$) and is bounded (by MCT), by E1Q1's Monotone Convergence Theorem (MCT) we have $0=\inf b_{2n}=\inf{} b_n$.  
+
+\end{proof}
+
+
+\question[3] Prove that for a bounded sequence $\{a_n\}_{n\in\N},$ the sequence is convergent if and only if \[\liminf_{k\ra\infty}a_k=\limsup_{k\ra\infty}a_k.\]
+
+\begin{proof}
+    From E1Q2 we have shown that the sequence $\{a_n\}_{n\in\N}$ converges implies $\liminf_{k\ra\infty}a_k=\limsup_{k\ra\infty}a_k$. Now we just need to show $\liminf_{k\ra\infty}a_k=\limsup_{k\ra\infty}a_k=a$ implies $\{a_n\}_{n\in\N}$ converges. 
+
+    By definition the equality gives $\forall \ep > 0, \exists N,M\in\N, a-\ep<\inf_{k\geq N}a_k<a+\ep, a-\ep<\sup_{k\geq M}a_k<a+\ep$, thus we pick $K:=\max(N,M)$, showing \[
+    \forall n>K, a-\ep<\inf_{k\geq K}a_k \leq a_n \leq \sup_{k\geq K}a_k < a+\ep
+    \]
+    Thus it also converges. Therefore, the equivalency holds, completing our proof.
+\end{proof}
+
+
+\question[4] Using the consequence of the previous sub-question, discuss the convergence of $\{a_n\}_{n\in\N}$ where 
+\begin{enumerate}
+    \item $a_k=(-1)^k$.
+    \item $b_k=\frac{(-1)^k}{k}$.
+\end{enumerate}
+
+\begin{claim}
+    \[\lim_{k\ra\infty}a_k=\lim_{k\ra\infty}(-1)^k=\text{ D.N.E. (diverges)},\]
+    \[\lim_{k\ra\infty}b_k=\lim_{k\ra\infty}\frac{(-1)^k}{k}=0.\]
+\end{claim}
+\begin{proof}
+    From E1Q2 we have shown $a_*=-1$ and $a^*=1$, by E1Q3 and E1Q2 these mean the sequence does not converge, that is, diverges. 
+\end{proof}
+\begin{proof}
+    From E1Q2 we have already shown that $(b_k)$ converges to 0. 
+\end{proof}
+
+
+
+
+\newpage
+\section*{Exercise 2}
+This exercise is the continuation of the previous exercise.
+\question[1] Let $\{a_n\}_{n\in\N}$ be a bounded sequence. For any convergent sub-sequence $\{a_{k_n}\}_{n\in\N}$ of the sequence $\{a_n\}_{n\in\N}$ (whose existence is ensured by the Bolzano-Weierstrass theorem). Assume that $$\lim_{n\ra\infty}a_{k_n}=c.$$ Prove that $$\liminf_{k\ra\infty}a_k\leq c\leq \limsup_{k\ra\infty}a_k.$$
+\begin{proof}
+    % We first show that $a_*$ is a lower bound of the sequence, then show $a^*$ is a upper bound of the sequence. After that, we will show $c$ cannot be less than the greatest lower bound and more than the least upper bound.
+
+    % First, since $\{\inf_{n\geq k}a_n\}_{k\in\N}$ is monotonically increasing and is bounded from E1Q2, this gives $a_*=\sup(\{\inf_{n\geq k}a_n\}_{k\in\N})$. Assume for contradiction that $a_*$ is not a lower bound of $(a_n)$, then there exist $a_m<a_*=\sup(\{\inf_{n\geq k}a_n\}_{k\in\N})$, however we also have $a_m\geq \inf_{n\geq m}a_n$, 
+    
+     Assume for the sake of contradiction that $c<a_*\lor c>a^*$, we want to show both inequality lead to contradiction.
+
+     Assume $c<a_*$, that is, $\lim_{n\ra\infty}a_{k_n}=c<a_*=\sup(\{\inf_{n\geq k}a_n\}_{k\in\N})$ by E1 and MCT. This implies $\exists k\in\N$ s.t. $c<\inf_{n\geq k}a_n$ by suprema analytically, however, consider $\ep=\frac{\inf_{n\geq k}a_n-c}{2}>0$, then $\exists M\in\N,\forall m\geq M, a_{k_m}\in(c-\ep, c+\ep)$ by definition of $c$. We choose $N=\max(k,M)$, then showing $a_{k_N}<\inf_{n\geq N}a_n$, thus contradicting the definition of a greatest lower bound, thus, giving $c\geq a_*$ as required.
+
+     Assume $c>a^*$, that is, $\lim_{n\ra\infty}a_{k_n}=c>a^*=\inf(\{\sup_{n\geq k}a_n\}_{k\in\N})$ by E1 and MCT. This implies $\exists k\in\N$ s.t. $c>\sup_{n\geq k}a_n$ by suprema analytically, however, consider $\ep=\frac{c-\sup_{n\geq k}a_n}{2}>0$, then $\exists M\in\N,\forall m\geq M, a_{k_m}\in(c-\ep, c+\ep)$ by definition of $c$. We choose $N=\max(k,M)$, then showing $a_{k_N}>\sup_{n\geq N}a_n$, thus contradicting the definition of a least upper bound, thus, giving $c\leq a^*$ as required.
+
+     Therefore, we conclude that $a_*\leq c\leq a^*$ as required. 
+\end{proof}
+
+
+\question[2] Using the consequence of the previous sub-question (E2Q1) as well as (E1Q3), give another proof that any sub-sequence of a convergent sequence is also converging to the same limit.
+
+\begin{proof}
+    By E1Q3 when a sequence $(a_n)$ is converging, we have $\limsup_{k\ra\infty}a_k=\liminf_{k\ra\infty}a_k$, by E2Q1 and Squeeze Theorem we have $\limsup_{k\ra\infty}a_k=c=\liminf_{k\ra\infty}a_k$ where $c$ is the limit of any sub-sequence, therefore showing all sub-sequences are converging to a single point, including the original sequence $(a_n)$. 
+\end{proof}
+
+
+\newpage
+\section*{Exercise 3}
+
+This exercise is the continuation of the previous exercises.
+
+\question[1] Let $b^*$ be a real number. Prove that $b^*=\limsup_{k\ra\infty}a_k$ if and only if the following two conditions are satisfied at the same time:
+\begin{enumerate}
+    \item There exists a subsequence $\{a_{k_n}\}_{n\in\N}$ that converges to $b^*$, and 
+    \item For any $\ep>0, \exists M\in\N$ s.t. $\forall k>M, a_k<b^*+\ep$. 
+\end{enumerate}
+\begin{proof}
+    The forward direction is trivial as by definition (2) is satisfied, and from E2Q1 we get (1) as a consequence. Consider the backward implication, since $a_k$ converges, and one of the subsequence converges to $b^*$, by E2Q1 this gives the entire sequence is also converging to $b^*$. 
+\end{proof}
+
+
+Remark. E2Q1 tells us that any convergent sub-sequence of $\{a_n\}_{n\in\N}$ has a limit inferior than $\limsup_{k\ra\infty}a_k$. However it is not clear whether there is a sub-sequence of $\{a_n\}_{n\in\N}$ that indeed converges to $\limsup_{k\ra\infty}a_k$. This is now confirmed by E3Q1.
+
+\question[2] Now let $b_*$ be a real number. State the necessary and sufficient condition for $b_*=\liminf_{k\ra\infty}a_k$, by using an analogue of E3Q1 (no proof is needed.)
+
+Remark. In our discussion in lecture, we have already mentioned how sub-sequences can given useful information about the convergence of the original sequence. However, a sequence has infinitely many sub-sequences, it might not be clear which sub-sequence is the correct candidate to investigate. These exercises indicate that \[\liminf_{k\ra\infty}a_k, \quad \limsup_{k\ra\infty}a_k\] as well as the sub-sequences achieving them (convinced by E3Q1) might be the extremely useful. 
+
+
+
+\end{document}

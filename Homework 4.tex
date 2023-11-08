@@ -1,0 +1,283 @@
+\documentclass{homework}
+\author{Joseph Siu}
+\class{MAT157: Analysis I}
+\date{\today}
+\title{Homework 4}
+
+\newcommand{\Set}[1]{\{#1\}}
+\newcommand{\T}[1]{\text{#1}}
+\newcommand{\Al}[3]{#1 &=#2 &\text{#3}&&\\}
+
+% Symbols
+\newcommand*{\eg}{\leavevmode\unskip , e. g., \ignorespaces} % for example
+\newcommand*{\ie}{\leavevmode\unskip, i. e., \ignorespaces} % that is
+\newcommand{\nil}{\varnothing}
+\AtBeginDocument{\def\O{\cal{O}}} % Big Oh
+\AtBeginDocument{\def\C{\bb{C}}} % Complex
+\newcommand{\R}{\bb{R}} % Reals
+\newcommand{\Q}{\bb{Q}} % Rationals
+\newcommand{\Z}{\bb{Z}} % Integers
+\newcommand{\N}{\bb{N}} % Naturals
+\renewcommand{\P}{\bb{P}} % Primes
+\newcommand{\Pset}[1]{\mathcal{P}(#1)} %power set
+\newcommand{\Relate}[2]{#1\mathcal{R}#2} %relation
+\newcommand{\relate}{\mathcal{R}}
+\newcommand{\F}{\bb{F}} 
+\newcommand{\GF}[1][2]{\bb{F}_{#1}} 
+\newcommand{\modulo}[1][n]{\Z/#1\Z} 
+\newcommand{\ra}{\rightarrow}
+\newcommand{\Ra}{\Rightarrow}
+\newcommand{\?}{\stackrel{?}{=}}
+\newcommand{\is}{\equiv}
+\newcommand{\al}{\alpha}
+\newcommand{\ep}{\varepsilon}
+\renewcommand{\phi}{\varphi}
+\newcommand{\p}{\partial}
+\newcommand{\injective}{\hookrightarrow}
+\newcommand{\surjective}{\twoheadrightarrow}
+\newcommand{\bijective}{\hookrightarrow\mathrel{\mspace{-15mu}}\rightarrow}
+\newcommand{\derivative}[2][x]{\frac{\D #2}{\D #1}}
+\newcommand{\ceil}[1]{\left\lceil#1\right\rceil}
+\newcommand{\floor}[1]{\left\lfloor#1\right\rfloor}
+\newcommand{\near}[1]{\left\lfloor#1\right\rceil}
+\newcommand{\arr}[1]{\left\langle#1\right\rangle}
+\newcommand{\paren}[1]{\left(#1\right)} %pair / ()
+\newcommand{\brk}[1]{\left[#1\right]} %[]
+\newcommand{\abs}[1]{\left|#1\right|}
+\newcommand{\curl}[1]{\left\{#1\right\}} %set {}
+\newcommand{\func}[3]{#1: #2 \rightarrow #3}
+
+
+\theoremstyle{definition}
+\newtheorem*{claim}{Claim}
+\newtheorem{definition}{Definition}
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}{Lemma}
+
+\begin{document} \maketitle
+
+
+\section*{Exercise 1}
+\question Find the Dedekind cut $A\mid A'$ that will be identified with the number $2^{\sqrt{2}}$. 
+
+\begin{claim}
+    The Dedekind cut $A\mid A'$ that will be identified with the number $2^{\sqrt{2}}$ is \begin{alignat*}{1}
+        A'&=\left\{x\in\Q\mid (x>0)\land\left((\exists p, q\in \N)(((\gcd(p,q)=1)\land\frac{p^2}{q^2}\leq2)\implies x^p\geq4^q)\right)\right\}\\
+        A&=\left\{x\in\Q\mid (x\leq0)\lor\left((\forall p, q\in \N)((\gcd(p,q)=1)\land\frac{p^2}{q^2}\leq2\land x^p<4^q)\right)\right\}=\Q\setminus A'
+    \end{alignat*}
+    
+\end{claim}
+\begin{proof}
+    We want to show:
+    \begin{enumerate}
+        \item \underline{$\nil\neq A$, $\nil\neq A'$, $A\cap A'=\nil$, $A\cup A'=\Q$}. 
+        
+        
+% When $x\in\Q,x\leq0\implies x\in A\land x\notin A'$ by conditions of $A$ and $A'$.  When $x\in\Q, x>0$, $A'$ is equivalent to $\{x\in\Q\mid(\forall p, q\in \N)((\gcd(p,q)=1\land\frac{p^2}{q^2}\leq2)\lor x^p\geq4^q)\}$, whereas $A$ is equivalent to $\{x\in\Q\mid (\exists p,q\in\N)((\gcd(p,q)=1)\land \frac{p^2}{q^2}\leq2\land x^p<4^q)\}$. Fix $x\in\Q$ and $x>0$, we consider all cases: 
+
+% 1. $\frac{p^2}{q^2}>2\land x^p\geq 4^q\implies x\in A'\land x\notin A$; 
+
+% 2.  $\frac{p^2}{q^2}>2\land x^p<4^q\implies x\notin A'\land x\in A$; 
+
+% 3. \(\frac{p^2}{q^2}\leq2\land x^p\geq 4^q\implies x\in A'\land x\notin A\); 
+
+% 4. \(\frac{p^2}{q^2}\leq2\land x^p< 4^q\implies x\notin A'\land x\in A\).
+
+% So, there is no such x in both $A$ and $A'$, showing $A\cap A'=\nil$.
+
+Because $A$ is constructed as $\Q\setminus A'$, this gives $A\cap A'=\nil$ and $A\cup A'=\Q$. 
+
+% When $x\in\Q$, $x\leq0\implies x\in A$ by condition of $A$, so we focus on $x>0$. $x\notin A'$ when  $\exists p, q\in \N,\gcd(p,q)=1,\frac{p^2}{q^2}\leq2\land x^p<4^q$. However this shows $x\in A$ as the implication of $A$ is vacuously true. $x\notin A$ when $\exists p, q\in \N,\gcd(p,q)=1,\frac{p^2}{q^2}>2\land x^p\geq4^q$, and this also shows $x\in A'$ as the implication of $A'$ is vacuously true. This gives $A\cup A'=\Q$. 
+
+$0\in A\land 0\notin A'$ showing $A\neq\nil$. $x=4, p=1, q=1$ showing $(((\gcd(p,q)=1)\land\frac{p^2}{q^2}\leq2)\implies x^p\geq4^q)$, $4\in A'$, both $A$ and $A'$ are not empty.  
+
+        \item  \underline{$\forall a\in A, \forall b\in\Q,b<a\implies b\in A$}. When $b\leq0$ this immediately gives $b\in A$. When $0<b<a$, This follows $\forall p,q\in\N, b^p<a^p<4^q,  \gcd(p,q)=1, \frac{p^2}{q^2}\leq2$, by the condition of $A$ this implies $b\in A$ as required. 
+
+        \item \underline{$A$ has no maximum}. Assume $x$ is the maximum of $A$ and we want to show that $x+\ep\in A, \ep\in\Q\cap(0,1)$. By Archimedean property we are able to fix $\ep=\frac{1}{n},n\in\N$ s.t. $\ep<\frac{4^q-x^p}{\sum_{k=1}^p\binom{p}{k}x^{p-k}}$ (Here $4^q-x^p>0$ by the condition of $A$). Then, \begin{align*}
+            (x+\ep)^p&=x^p+\sum_{k=1}^p\binom{p}{k}x^{p-k}\ep^{k}\\
+            &<x^p+\sum_{k=1}^p\binom{p}{k}x^{p-k}\ep\\
+            &<x^p+4^q-x^p\\
+            &=4^q
+        \end{align*}  
+Showing $x+\ep\in A$ as required. 
+    \end{enumerate}
+\end{proof}
+
+\question Does $A'$ have a minimum? Justify your answer. 
+\begin{claim}
+    $A'$ does not have a minimum.
+\end{claim}
+\begin{proof}
+     % To show $A'$ has no minimum, we want to show two things:
+     \begin{enumerate}
+%         \item \underline{$\forall x\in A', \forall p,q\in\N, gcd(p,q)=1,\frac{p^2}{q^2}\leq2\implies x^p\neq4^q$}. Assume for the sake of contradiction, $\exists x\in A', \exists p,q\in\N$ s.t. $\gcd(p,q)=1,\frac{p^2}{q^2}\leq2\land x^p=4^q$. \begin{align*}
+%             x^p&=4^q\\
+%             x^p&=2^{2q} & &\implies &     x&=2^n, n\in\N\\
+%             2^{np}&=2^{2q} & &\implies & np&=2q\\
+%         \end{align*}
+%         $2q=np\implies 2\mid np\implies 2\mid n\lor 2\mid p$. 
+    
+% By the fundamental theorem of arithmetic, $x^p=2^{2q}\implies x=2^n, n\in\N$ otherwise contradicting the fact that all positive integers have unique prime factorization. 
+
+% We consider 2 cases:
+
+%         Case 1: $2\mid n$. This implies $n=2m,m\in\Z$. Then $np=2q\iff 2mp=2q\iff mp=q$, since we assumed $\gcd(p,q)=1$ so $m=1,p=1,q=1$ is the only possibility. Showing $x=2^2=4$, but when $x=4$, $\frac{1^2}{2^2}\leq2\not\Ra 4^1\geq4^2$, showing $x\notin A'$, contradicting our assumption, thus this case is not possible to occur.
+
+%         Case 2: $2\mid p$. This implies $p=2m,m\in\Z$. Then $np=2nm=2q\iff nm=q$, again $\gcd(p,q)=\gcd(2m,q)=1\implies \gcd(m,q)=1$ (there is no common prime factor between the prime factorization of $2m$ and $q$, this follows there is also no common prime factor between $m$ and $g$ otherwise contradiction) gives $n=1,m=q=1,p=2$, however contradicting our assumption which $\frac{p^2}{q^2}=\frac{4}{1}\leq 2$, thus this case is not possible. 
+
+%         As all cases end with contradiction, we conclude that $\forall x\in A', \forall p,q\in\N, gcd(p,q)=1,\frac{p^2}{q^2}\leq2\implies x^p\neq4^q$. 
+    \underline{For any $x\in A'$, there is always a $x_1\in A'$ s.t. $x_1<x$}. Fix $x,p,q$ where $x^p\geq 4^q, p,q\in\N,x\in A'$ (exists by the definition of set $A'$). Pick any $\ep\in\Q, $ s.t. $\ep=\frac1n,n\in\N$, $0<\ep<\frac{4^q}{(x+1)^p}$ (exists by the Archimedean principle, we express $\ep$ as $\frac{1}{n},n\in\N$, then $0<\frac{1}{n}<\frac{4^q}{(x+1)^p}\iff 0>-\ep(x+1)^p>4^q$ ). Then, $-\ep(x+1)^p>4^q$, \begin{align*}
+            -\ep(x+1)^p&=-\ep\sum_{k=0}^{p}\binom{p}{k}x^{p-k}\\
+&=-\sum_{k=0}^{p}\binom{p}{k}x^{p-k}\ep\\
+&<-\sum_{k=0}^{p}\binom{p}{k}x^{p-k}\ep^k\\
+&<\sum_{k=0}^{p}\binom{p}{k}x^{p-k}(-\ep)^k\\
+&=(x-\ep)^p\\
+        \end{align*}
+Showing $(x-\ep)^p>-\ep(x+1)^p>4^q$, implies when $x_1=x-\ep$, it satisfies both $x_1<x$ and $x_1\in A'$, thus no minimum value.
+
+% \item Because of the previous point, it is not possible that $x^p=4^q$ otherwise contradicting the proven fact that all $x\in A'$ have a smaller value which is also in $A'$. 
+
+    \end{enumerate}
+\end{proof}
+
+
+\newpage
+\section*{Exercise 2}
+$\forall n\in \N$, define the set $$A_n=\left\{x\in\Q, x<1+\frac1{1!}+\frac1{2!}+\frac1{3!}+\ldots+\frac1{n!}\right\}.$$ Moreover, let $$A=\bigcup_{n\in\N}A_n,\quad A'=\Q\setminus A.$$
+\question[1] Show that $A\mid A'$ is indeed a Dedekind cut.
+\begin{claim}
+    $A\mid A'$ is a Dedekind cut.
+\end{claim}
+\begin{proof} 
+
+    % Since the actual proof is beyond the scope of the material covered, thus we use the assistance from Google to help solving this Dedekind cut. Since $e$ can be calculated as the sum of the infinite series: $$e=\sum_{n=0}^\infty\frac{1}{n!}=1+\frac11+\frac1{1\cdot2}+\frac{1}{1\cdot2\cdot3}+\cdots.$$ And we know $A$ is defined as $$A=\bigcup_{n\in\N}\{x\in\Q, x<1+\frac{1}{1!}+\frac{1}{2!}+\frac{1}{3!}+\cdots+\frac{1}{n!}\},$$ this is equivalent to \[A=\{x\in\Q, x<\max(\{n\in\N, \sum_{n=0}^n\frac{1}{n!}\})\}.\] Since the summation of $\frac{1}{n!}$ monotonically increases as $n$ increases, we may rewrite the set $A$ as $$A=\{x\in\Q, x<\sum_{n=0}^\infty\frac{1}{n!}\}.$$ Which is precisely the infinite series of $e$: $$A=\{x\in\Q, x<e\}.$$ Then $A'=\Q\setminus A=\{x\in\Q, x\geq e\}$. Since $0\in A, 100\in A', e\notin\Q,$ we know that $A,A'\neq\nil$. Moreover by the construction of $A'$ this gives $A\cup A'=\Q, A\cap A'=\nil$. 
+
+    % $\forall a\in A,\forall q\in\Q, q<a\implies q<a<e\implies q\in A$ as showing $A$ is closed downward. 
+
+    % Lastly, there is no maximum of $A$, consider $x\in A, \ep\in\Q$. We pick $\ep<e-x$, showing $x+\ep < x+e-x = e$ where $\ep$ exists by the Archimedean property ($x\in A\implies e-x>0$, denote $\ep=\frac{1}{n}, n\in\N$, n exists imply $\ep$ exists).  
+
+
+
+To show $A$ is bounded above (the sequence converges) is by induction. 
+
+We want to show $$\forall n\in\N, \sum_{k=0}^n\frac1{k!}<5-\frac1n.$$ For the base case consider $n=1, $ this gives $2<5-1=4$ which holds. For the induction hypothesis assume this inequality holds for some $n\in\N$, and we want to show that $n+1$ also holds. 
+
+\begin{align*}
+    \sum_{k=0}^{n+1}\frac{1}{k!}=\sum_{k=0}^n\frac{1}{k!}+\frac{1}{(n+1)!}&<5-\frac{1}{n}+\frac{1}{(n+1)!}\\
+    &<5-\frac1n+\frac{1}{(n+1)n}\\
+    &=5-\frac{n+1-1}{(n+1)n}\\
+    &=5-\frac1{n+1}
+\end{align*}
+Thus our induction hypothesis holds for all $n\in\N$. And as \(0<\frac1n\leq1,n\in\N\), this shows that the sequence converges (Is bounded above by 5), Showing $A'$ is not empty.  
+
+Moreover, since all terms are positive (summation value increases as $n$ increases) $0<2\implies0\in A$, showing $A$ is not empty. $A'=\Q\setminus A\implies A\cap A'=\nil\land A\cup A'=\Q$. 
+
+Also,  $\forall a\in A,\forall q\in\Q, q<a\implies \exists n\in\N, q<a<1+\frac1{1!}+\cdots+\frac1{n!}\implies q\in A_n\subset A$ which $A$ is closed downward. 
+
+Fix any $a\in A$ where $a\in A_x, x\in\N$, consider $a+\frac1n, n\in\N,$ we pick $n=(x+1)!$, then $$a+\frac1n<1+\frac1{1!}+\frac1{2!}+\cdots+\frac{1}{x!}+\frac{1}{(x+1)!},$$ this shows $a+\frac1n\in A_{x+1}\subset A$, showing no maximum. 
+\end{proof}
+
+\question[2] Does $A'$ have a minimum? Justify your answer.
+\begin{lemma}
+    (proved in tutorial)
+    $$ \forall a'\in A', \forall n\in\N, S_n=\sum\limits_{k=1}^n\frac{1}{k!}, 0\leq a'-S_n\leq\frac{1}{(n+1)!}\left(\frac{n+2}{n+1}\right).$$
+    % \begin{proof}
+    %     Pick any $a'\in A'$, since $A'=\Q\setminus A$, this implies $\forall n\in\N, a'\geq 1+S_n\implies a'-S_n\geq1>0$. 
+
+    %     $b\in B = \Q\setminus A=\Q\setminus\bigcup_{n\in\N}A_n=\bigcap_{n\in\N}(\Q\setminus A_n)\implies b\in\Q\setminus A_{n+1}$. Since $A_{n+1}=\{x\in\Q\mid x<S_{n+1}\}$, this implies $b\geq S_{n+1}>S_n$ ($S_{n+1}=S_n+\frac{1}{(n+1)!}$). 
+
+    %     We first prove that $\forall\delta\in\Q$ s.t. $\delta>0, a'-S_n\leq\frac{1}{(n+1)!}\left(\frac{n+2}{n+1}\right)+\delta$ (due to Archimedean property of $\Q$)
+
+    %     Fix $\delta\in\Q,\delta>0. a'-\delta<a'\implies a'-\delta\notin A'\implies a'-\delta\in A$. 
+        
+    %     For some $n\in\N$, $a'-\delta\in A_m\implies a'-\delta<S_m<S_{n+N}$ where $N=m+2023$. \begin{align*}
+    %         a'-\delta &< S_{n+N}\\
+    %         &= S_n+\frac{1}{(n+1)!}+\cdots+\frac{1}{(n+N)!}\\
+    %         &= S_n+\frac{1}{(n+1)!}+\frac{1}{(n+1)!}(\frac{1}{(n+2)}+\cdots+\frac{1}{(n+2)\cdots(n+M)})\\
+    %         &\leq S_n+\frac{1}{(n+1)!}+\frac{1}{(n+1)!}(\frac{1}{(n+2)}+\frac{1}{(n+2)^2}+\cdots+\frac{1}{(n+2)^{N-1}})\\
+    %         \T{Denote }X&=\sum_{k=1}^{N-1}(n+2)^{-k}\\
+    %         \frac{X}{n+2}&=\sum_{k=2}^{N}(n+2)^{-k}\\
+    %         \frac{1}{n+2}+\frac{X}{n+2}&=\sum_{k=1}^{N}(n+2)^{-k}\\
+    %         \frac{1}{n+2}+\frac{X}{n+2}=X+(n+2)^{-N}&=\sum_{k=1}^{N}(n+2)^{-k}\\
+    %         X&=\frac{1}{n+1}-\frac{(n+2)^{-N}}{n+1}\\
+    %         \T{Then }S_n+\frac{1}{(n+1)!}+\frac{1}{(n+1)!}(X)&=S_n+\frac{1}{(n+1)!}+\frac{1}{(n+1)!}(\frac{1}{n+1}-\frac{(n+2)^{-N}}{n+1})\\
+    %         &\leq S_n+\frac{1}{(n+1)!}+\frac{1}{(n+1)!}\left(\frac{1}{n+1}\right)\\
+    %         &= S_n+\frac{1}{(n+1)!}(\frac{n+2}{n+1})
+    %     \end{align*}
+    %     Showing $0\leq a'-\delta<S_n+\frac{1}{(n+1)!}\left(\frac{n+2}{n+1}\right), n\in\N$. 
+    % \end{proof}
+\end{lemma}
+\begin{lemma}
+ (proved in tutorial)
+ 
+$$\forall a'\in A', \forall n\in\N, 0<a'-S_n<\frac{1}{n!n}.$$
+
+% \begin{proof}
+%     We show this lemma 2 is true by showing lemma 1 implies lemma 2 which we knows lemma 1 is true as proven.
+
+% \begin{multline*}
+%     \frac{n+2}{n+1}=\frac{(n+2)n}{(n+1)n}=\frac{n^2+2n}{(n+1)n}<\frac{n^2+2n+1}{(n+1)n} = \frac{(n+1)^2}{(n+1)n} < \frac{n+1}{n}
+% \end{multline*}
+%     Showing
+%     \[
+%     0<1\leq b-S_n\leq\frac{1}{(n+1)!}\left(\frac{n+2}{n+1}\right)<\frac{1}{(n+1)!}\left(\frac{n+1}{n}\right)=\frac{1}{n!n}
+%     \] as required.
+% \end{proof}
+\end{lemma}
+
+
+
+\begin{claim}
+    $A'$ does not have a minimum.
+\end{claim}
+\begin{proof}{[By Contradiction]. }
+     Suppose that $a'\in A'$ is the minimum of $A'$. $0\in A\implies a'>0, a'\in\Q\implies a'=\frac{p}q, p,q\in\N$. 
+
+     By Lemma 2, $0 < a' - S_q < \frac{1}{q!q}$, multiply by $q!$, $0<q!a'-q!S_q<\frac{1}{q}, q\geq1$. However $q!a'=q!\frac{p}{q}=p(q-1)!\implies q!a'\in\N$, and $q!S_q=q!+q!+\frac{q!}{2!}+\cdots+\frac{q!}{q!}\implies q!S_q\in\N$, showing $q!a'-q!S_q\in\Z$ but $\not\exists z\in\Z$ s.t. \(0<z<\frac{1}{q}\leq1\), therefore contradiction, $A'$ must has no minimum. 
+
+     In addition, by google we know that the equivalent infinite series converges to $e$, because we know that $e$ is irrational, therefore it is impossible to have a rational number s.t. it is same as $e$. 
+\end{proof}
+
+
+\newpage
+\section*{Exercise 3}
+Define \begin{alignat*}{1}
+    A'&=\left\{x\in\Q,(x>0)\land\left(\forall n\in\N, x^2>\sum_{k=1}^n\frac{6}{k^2}\right)\right\}.\\
+    A&=\Q\setminus A
+\end{alignat*} 
+\question[1] Show that $A\mid A'$ is indeed a Dedekind cut.
+\question[2] Does $A'$ have a minimum? Justify your answer.
+
+
+
+
+\newpage
+\section*{Exercise 4}
+Let $A\mid A'$ be a Dedekind cut.
+\question[1] Prove that it is not possible for $A$ to have a maximum and $A'$ to have a minimum at the same time.
+\begin{claim}
+    It is not possible for $A$ to have a maximum and $A'$ to have a minimum at the same time.
+\end{claim}
+\begin{proof}
+    Assume for the sake of contradiction that, $A$ has a maximum and $A'$ has a minimum. We denote $a$ to be the maximum of $A$ and $a'$ to be the minimum of $A'$ where $a,a'\in\Q$. We know that $a<a'$ by definition of Dedekind cut. So, $\frac{a+a'}{2}<\frac{a'+a'}{2}\iff \frac{a+a'}{2}<a'$, and $\frac{a+a}{2}<\frac{a'+a}{2}\iff a<\frac{a+a'}{2}$, showing $a<\frac{a+a'}{2}<a'$ where $\frac{a+a'}{2}\in\Q$, by definition $(A,A')$ partitions $\Q$, however $\frac{a+a'}{2}\in\Q$, $\frac{a+a'}{2}\notin A$ and $\frac{a+a'}{2}\notin A'$ by definition of maximum and minimum value, contradiction occurs, therefore $A$ has no maximum or $A'$ has no minimum, as required.  
+\end{proof}
+
+\question[2] Suppose that $A\mid A'$ is a Dedekind cut such that $A$ has a maximum $a^*$ but $A'$ does not have a minimum. Then define $$B=A\setminus\{a^*\},\quad B'=A'\cup\{a^*\}$$ Prove that $B\mid B'$ is also a Dedekind cut, in which $B'$ achieves a minimum where $B$ does not have a maximum. 
+\begin{claim}
+    $B\mid B'$ is also a Dedekind cut, in which $B'$ achieves a minimum where $B$ does not have a maximum.
+\end{claim}
+\begin{proof}
+    To show $B\mid B'$ is a Dedekind cut, we need to show:
+    \begin{enumerate}
+        \item $(B,B')$ partitions $\Q$ ($B\cap B'=\varnothing\land B\cup B'=\Q$).
+Because $(A,A')$ partitions $\Q$, this follows $B\cap B'=A\setminus\{a^*\}\cap (A'\cup\{a^*\})=\varnothing$ and $B\cup B'=A\setminus\{a^*\}\cup(A\cup\{a^*\})=A\cup A'=\Q$, showing $(B,B')$ partitions $\Q$ as required.   
+        \item $B$ is closed downward. 
+We know that $B\subsetneq A$, and $\forall a\in A, q<a\implies q\in A$, this implies $\exists a\in A$ s.t. $a\neq a^*$ and $B\neq\varnothing$. Showing $\forall b\in B\subsetneq A, q<b\implies q\in A\implies q\in A\setminus\{a^*\}=B$, we know $q<b\implies q\neq a^*$, so this is why $q\in A\implies q\in A\setminus\{a^*\}$ holds. 
+        \item $B$ and $B'$ are not empty.
+$B$ is not empty as shown above, also at least $a^*\in B'$ showing $B'$ is also not empty.
+        \item $B$ has no maximum or $B'$ has no minimum.
+First it is clear that $B'$ has minimum as $\forall a'\in A', a^*<a', a^*\in A$ by definition, so $a^*$ is the minimum of $B'$. So, we need to show that $B$ has no maximum. Assume for the sake of contradiction that $b$ is the maximum of $B$, then $b\in A\land b\neq a^*$, showing $b<a^*$ by definition of the maximum of $A$. That is, this gives $b=\frac{b+b}{2}<\frac{b+a^*}{2}<\frac{a^*+a^*}{2}=a^*$, and because $\frac{b+a^*}{2}<a^*\implies \frac{b+a^*}{2}\in A$, and $\frac{b+a^*}{2}\neq a^*\implies \frac{b+a^*}{2}\in A\setminus\{a^*\}=B$, showing there is always a greater element than an arbitrary $b\in B$, thus no maximum.  
+    \end{enumerate}
+\end{proof}
+
+\end{document}

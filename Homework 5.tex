@@ -1,0 +1,241 @@
+\documentclass{homework}
+\author{Joseph Siu}
+\class{MAT157: Analysis I}
+\date{\today}
+\title{Homework 5}
+
+\newcommand{\Set}[1]{\{#1\}}
+\newcommand{\T}[1]{\text{#1}}
+\newcommand{\Al}[3]{#1 &=#2 &\text{#3}&&\\}
+
+% Symbols
+\newcommand*{\eg}{\leavevmode\unskip , e. g., \ignorespaces} % for example
+\newcommand*{\ie}{\leavevmode\unskip, i. e., \ignorespaces} % that is
+\newcommand{\nil}{\varnothing}
+\AtBeginDocument{\def\O{\cal{O}}} % Big Oh
+\AtBeginDocument{\def\C{\bb{C}}} % Complex
+\newcommand{\R}{\bb{R}} % Reals
+\newcommand{\Q}{\bb{Q}} % Rationals
+\newcommand{\Z}{\bb{Z}} % Integers
+\newcommand{\N}{\bb{N}} % Naturals
+\renewcommand{\P}{\bb{P}} % Primes
+\newcommand{\Pset}[1]{\mathcal{P}(#1)} %power set
+\newcommand{\Relate}[2]{#1\mathcal{R}#2} %relation
+\newcommand{\relate}{\mathcal{R}}
+\newcommand{\F}{\bb{F}} 
+\newcommand{\GF}[1][2]{\bb{F}_{#1}} 
+\newcommand{\modulo}[1][n]{\Z/#1\Z} 
+\newcommand{\ra}{\rightarrow}
+\newcommand{\Ra}{\Rightarrow}
+\newcommand{\?}{\stackrel{?}{=}}
+\newcommand{\is}{\equiv}
+\newcommand{\al}{\alpha}
+\newcommand{\ep}{\varepsilon}
+\renewcommand{\phi}{\varphi}
+\newcommand{\p}{\partial}
+\newcommand{\injective}{\hookrightarrow}
+\newcommand{\surjective}{\twoheadrightarrow}
+\newcommand{\bijective}{\hookrightarrow\mathrel{\mspace{-15mu}}\rightarrow}
+\newcommand{\derivative}[2][x]{\frac{\D #2}{\D #1}}
+\newcommand{\ceil}[1]{\left\lceil#1\right\rceil}
+\newcommand{\floor}[1]{\left\lfloor#1\right\rfloor}
+\newcommand{\near}[1]{\left\lfloor#1\right\rceil}
+\newcommand{\arr}[1]{\left\langle#1\right\rangle}
+\newcommand{\paren}[1]{\left(#1\right)} %pair / ()
+\newcommand{\brk}[1]{\left[#1\right]} %[]
+\newcommand{\abs}[1]{\left|#1\right|}
+\newcommand{\curl}[1]{\left\{#1\right\}} %set {}
+\newcommand{\func}[3]{#1: #2 \rightarrow #3}
+
+
+\theoremstyle{definition}
+\newtheorem*{claim}{Claim}
+\newtheorem*{definition}{Definition}
+\newtheorem*{theorem}{Theorem}
+\newtheorem*{lemma}{Lemma}
+
+
+\begin{document} \maketitle
+
+\section*{Exercise 1}
+
+\question[1] Prove the Archimedean property for real numbers: $$\forall \alpha\in\R,\exists n\in\N, \T{ s.t. } n>\alpha.$$
+\begin{proof}
+    Assume for the sake of contradiction that $\exists \alpha\in\R, \forall n\in\N, n\leq \alpha$. This implies that the $\N$ is bounded above, as lecture discussed, we are able to choose the supremum of $\N$ since it is bounded. Denote $\beta := sup\N$, then because $\beta-1$ is not an upper bound of $\N$ (otherwise contradicting $\beta$ being the least upper bound) we can choose $x\in\N$ s.t. $\beta-1<n$, however if we add 1 to both sides $\beta<n+1$, where $n+1\in\N$, showing there must be a natural number s.t. it is larger than the least upper bound of $\N$ i.e. $\beta$. Therefore, contradiction occurs, we conclude the negation of our assumption is true: $\forall \alpha\in\R,\exists n\in\N, \T{ s.t. } n>\alpha.$
+\end{proof}
+
+\question[2] Prove that $$\forall \alpha, \beta, \gamma\in\R, \alpha\leq\beta\implies\alpha+\gamma\leq\beta+\gamma.$$
+\begin{proof}
+    Since real numbers are formed using Dedekind cuts, denote $\alpha=A\mid A'$, $\beta=B\mid B'$, and $\gamma= Y\mid Y'$. By definition we want to show that $A+Y\subseteq B+Y$ where $A+Y:=\{a+y:a\in A, y\in Y\}$ and $B+Y := \{b+y:b\in B, y\in Y\}$. Fix $x\in A+Y$, by construction this means there exist $a\in A$ and $y\in Y$ s.t. $x=a+y$, because $\alpha\leq\beta\implies A\subseteq B$, this means $a\in B$, showing there exist $a\in B$ and $y\in Y$ s.t. $x=a+y$, which means $x\in B+Y$ as required. 
+\end{proof}
+
+
+\question[3] Prove that $$\forall\alpha,\beta,\gamma\in\R,(\alpha\leq\beta)\land\gamma\geq0\implies\alpha\cdot\gamma\leq\beta\cdot\gamma.$$
+
+\begin{lemma}
+     \underline{$\alpha<0\iff -\alpha>0$}. Forward implication: by exercise 1 question 2, we set $\gamma=-\alpha$ (the additive inverse of $\alpha$), then $\alpha<0\implies \alpha+(-\alpha)<0+(-\alpha)\iff 0<(-\alpha)+0\iff -\alpha>0$. Backward implication: set $\gamma=\alpha$, then $-\alpha>0\implies \alpha+(-\alpha)>\alpha+0\iff 0>\alpha$. 
+ \end{lemma}
+
+
+\begin{proof}
+    Denote $\alpha=A\mid A', \beta= B\mid B', \gamma= Y\mid Y'$.  Consider 4 cases (using "times" as the placeholder):
+
+    Case 1: $\alpha\geq0\land\beta\geq0$. We denote $\alpha\cdot \gamma:=\lambda=\alpha\times \gamma=L\mid L'$ where $L:=\{x=ay:a\in A\cap\Q_{\geq0},y\in Y\cap\Q_{\geq0}\}\cup\Q_{<0}$ and $\beta\cdot\gamma:=\mu=\beta\times\gamma=U\mid U'$ where $U:=\{x=by:b\in B\cap\Q_{\geq0},y\in Y\cap\Q_{\geq0}\}\cup\Q_{<0}$, pick $x\in L$, if $x\in\Q_{<0}$ then this immediately implies $x\in U$, if $x\notin\Q_{<0}$, this implies there exist $a\in A\cap\Q_{\geq0}, y\in Y\cap\Q_{\geq0}$ s.t. $x=ay$, because we know $\alpha\leq\beta\implies A\subseteq B$, this gives $A\cap\Q_{\geq0}\subseteq B\cap\Q_{\geq0}\implies a\in B\cap\Q_{\geq0}$ showing $x\in U$. Thus by definition $L\subseteq U$ which gives $\alpha\cdot\gamma\leq\beta\cdot\gamma$. 
+
+    Case 2: $\alpha<0\land\beta\geq0$. Denote $-\alpha:=\{a:-a\in A'\}\mid \{a:-a\in A\}=O\mid O'$ (which can be proven as a valid Dedekind cut), then $\alpha\cdot\gamma:=\lambda=-((-\alpha)\times\gamma):=-\varphi, \varphi=P\mid P', \lambda=L\mid L'$ where $P:=\{x=ay:-a\in A'\cap\Q_{\geq0}, y\in Y\cap\Q_{\geq0}\}\cup \Q_{<0}$, and $L:=\{p:-p\in P'\}, L':=\{p:-p\in P\}$. Let $\beta\cdot\gamma:=\mu=\beta\times\gamma=U\mid U'$ where $U:=\{x=by:b\in B\cap\Q_{\geq0},y\in Y\cap\Q_{\geq0}\}\cup\Q_{<0}$, we want to show that $L\subseteq U$. 
+
+    Pick $x\in L$, this means $-x\in P'$, showing $-x\notin P\implies -x\geq0\land -x\neq ay, \forall -a\in A'\cap\Q_{\geq0}, \forall y\in Y\cap\Q_{\geq0}$, because $B'$ is a subset of $A'$ and $\beta\geq0$, this means that $-x\neq by,\forall -b\in B'\cap\Q_{\geq0}, \forall y\in Y\cap\Q_{\geq0}$. This must give $x\in U$, showing $L\subseteq U$. 
+
+    Case 3: $\alpha<0\land \beta<0$. Denote $-\alpha:=\{a:-a\in A'\}\mid \{a:-a\in A\}=O\mid O'$ (which can be proven as a valid Dedekind cut), then $\alpha\cdot\gamma:=\lambda=-((-\alpha)\times\gamma):=-\varphi, \varphi=P\mid P', \lambda=L\mid L'$ where $P:=\{x=ay:-a\in A'\cap\Q_{\geq0}, y\in Y\cap\Q_{\geq0}\}\cup \Q_{<0},$ and $L:=\{p:-p\in P'\}, L':=\{p:-p\in P\}$. We want to show $L\subseteq U$ where $\beta\cdot\gamma:=\mu=-((-\beta)\times\gamma):=-\varsigma, \varsigma=S\mid S', \mu=U\mid U'$ s.t.  $S:=\{x=by:-b\in B'\cap\Q_{\geq0}, y\in Y\cap\Q_{\geq0}\}\cup \Q_{<0}$ and $U:=\{s:-s\in S'\}, U':=\{s:-s\in S\}$. We want to show that $L\subseteq U$.
+
+    Pick $x\in L$, this means $-x\in P'$, showing $-x\notin P\implies -x\geq0\land -x\neq ay, \forall -a\in A'\cap\Q_{\geq0}, \forall y\in Y\cap\Q_{\geq0}$, because $B'$ is a subset of $A'$, this means $-x\neq by,\forall -b\in B'\land\Q_{\geq0}, \forall y\in Y\cap\Q_{\geq0}\implies-x\notin S\implies -x\in S'\implies x\in U$, giving $L\subseteq U$ as required. 
+    
+    Therefore for all cases we have shown that $L\subseteq U$ which by definition $\alpha\cdot\gamma\leq\beta\cdot\gamma$ as needed. 
+\end{proof}
+
+ \question[4] Prove that $$\forall\alpha\in\R,\alpha\cdot0=0.$$
+ % \begin{lemma}
+%     \underline{$(-\alpha)\cdot\beta=-(\alpha\cdot\beta), \alpha,\beta\in\R\cap[0,\infty)$}. When  
+% \end{lemma}
+\begin{proof}
+    Since $0$ is always greater or equal to $0$ itself, thus we consider 2 cases: 
+
+    Case 1: $\alpha\geq0$. Denote $\alpha=A\mid A', 0=O\mid O'$ where $O=\{x\in\Q:x<0_\Q\}$, by definition $\alpha\cdot0=\gamma$ where $\gamma=Y\mid Y'$, since $Y=\Q_{<0}\cup\{x=ao:a\in A\cap\Q_{\geq0}, o\in O\cap\Q_{\geq0}\}$, we know that $O\cap\Q_{\geq0}=\varnothing$, this is equivalent to $Y=\Q_{<0}$ which is precisely the lower set of $0_\R$, showing $\alpha\cdot0=\gamma=0$ (both directions hold). 
+
+    Case 2: $\alpha<0$. By tutorial and lemma 1 $-\alpha>0, \alpha\cdot0=(-(-\alpha))\cdot0=-((-\alpha)\cdot0)=-(0)=0$ (from case 1, we set the $\alpha$ in case 1 to be $-\alpha$ in case 2).  
+\end{proof}
+
+
+\newpage
+\section*{Exercise 2}
+
+Consider real numbers $\R$. Since we have shown that $\leq$ is a total order on $\R$, it also makes sense to discuss the Dedekind cut performed on \textbf{real numbers}. To this end, consider the following sets \textbf{$A$} and \textbf{$A'$} s.t.
+\begin{itemize}
+    \item $A\neq\emptyset, A'\neq\emptyset, A\cap A'=\emptyset, A\cup A'=\R$. 
+    \item  $\forall \alpha\in A,\beta\in A', \alpha<\beta$. 
+\end{itemize}
+Recall that we can identify a rational number $x\in\Q$ to the Dedekind cut that defines $x$. In this exercise, following the steps below, we show the following fundamental theorem due to Dedekind:
+\begin{theorem}
+    (Of Dedekind) Either $A$ achieves a maximum in $\R$, or $A'$ achieves a minimum in $\R$.
+\end{theorem}
+
+\question[1] Let $\Tilde{A}=\{x\in\Q\mid x\in A\}$ and $\Tilde{A}'=\{x\in\Q\mid x\in A'\}$. Prove that $\Tilde{A}\mid\Tilde{A}'$ is a Dedekind cut for rational numbers. 
+
+Since $\Tilde{A}\mid\Tilde{A}'$ is a Dedekind cut, it defines a real number $a^*=\Tilde{A}\mid\Tilde{A}'$.
+
+\begin{proof}
+    To avoid the ambiguity of the question, we define a injective function $\varphi:\Q\ra\R, \varphi(q)=\{x\in\Q:x<q\}\mid\{x\in\Q:x\geq q\}=q_\R$. Then we want to show that $\Tilde{A}=\{x\in\Q\mid \varphi(x)\in A\}=\varphi^{-1}(A)$ (by definition of preimage) and $\Tilde{A}'=\{x\in\Q\mid \varphi(x)\in A'\}=\varphi^{-1}(A')$ form a Dedekind cut for rational number. 
+
+    \underline{$\Tilde{A}\cap\Tilde{A}'=\varnothing$}. $x\in\Tilde{A}\implies\varphi(x)\in A\implies \varphi(x)\notin A'\implies x\notin \Tilde{A}'$. 
+
+    \underline{$\Tilde{A}\cup\Tilde{A}'=\Q$}. Left hand side is equivalent to $\varphi^{-1}(A)\cup \varphi^{-1}(A)\iff \varphi^{-1}(A\cup A')\iff \varphi^{-1}(\R)\iff\Q$. 
+
+    $\Tilde{A}$ and $\Tilde{A'}$ are both not empty as $A$ and $A'$ both contain infinite elements where we also know that $\Q$ is dense in $\R$, i.e., there is always a rational number between 2 real numbers in the set $A$ also the set $A'$ (By corollary in lecture notes). 
+
+    Assume for the sake of contradiction that there exists $x\in\Tilde{A}'$ s.t. $x\leq a$ for some $a\in\Tilde{A}$, however we know that clearly $n\leq m\implies\varphi(n)\leq \varphi(m)$, but in this case $x\leq a\implies\varphi(x)\leq \varphi(a)$ which contradicting the fact that $\varphi(x)\in A'\land\varphi(a)\in A\implies \varphi(a)<\varphi(x)$, contradiction occurs, showing $\forall a\in\Tilde{A}, \forall b\in\Tilde{A}', a< b$.
+
+    Therefore, we have shown that $\Tilde{A}\mid\Tilde{A}'$ is indeed a Dedekind cut, denote $a^*=\Tilde{A}\mid\Tilde{A}'$. 
+\end{proof}
+
+\question[2] Prove that if $a^*\in A, $ then $a^*$ is the maximum of $A$.
+\begin{proof}
+    Assume for the sake of contradiction that $b^*\in A$ is the maximum of $A$ where $b^*\neq a^*$, then we know that $\forall \varphi(q)\in A, q\in\Q, \varphi(q)\leq b^*$, and because $b^*\in A$, this implies $\forall\varphi(q)\in A', q\in\Q, b^*<\varphi(q)$, define the Dedekind cut $\{x\in\Q\mid \varphi(x)\in A\}\mid\{x\in\Q\mid \varphi(x)\in A'\}$, this is precisely the cut of $b^*$ and $a^*$, showing $b^*=a^*$, thus contradiction, showing $a^*$ must be the maximum of $A$. 
+\end{proof}
+
+\question[3] Prove that if $a^*\in A',$ then $a^*$ is the minimum of $A'$.
+\begin{proof}
+    Assume for the sake of contradiction that $b^*\in A'$ is the minimum of $A'$ where $b^*\neq a^*$, then we know that $\forall \varphi(q)\in A, q\in\Q, \varphi(q) < b^*$ since  $b^*\in A'$, also  $\forall\varphi(q)\in A', q\in\Q, b^*\leq\varphi(q)$ as it is the minimum of $A'$, define the Dedekind cut $\{x\in\Q\mid \varphi(x)\in A\}\mid\{x\in\Q\mid \varphi(x)\in A'\}$, this is precisely the cut of $b^*$ and $a^*$, showing $b^*=a^*$, thus contradiction, showing $a^*$ must be the minimum of $A'$. 
+\end{proof}
+
+As a result, we have proved the theorem of Dedekind.
+
+\question[4] Show that it is impossible that $A$ achieves a maximum and $A'$ achieves a minimum. 
+\begin{proof}
+    Assume for the sake of contradiction that both $A$ achieves a maximum and $A'$ achieves a minimum, denote $a^*$ to be the maximum of $A$ and $b^*$ to be the minimum of $A'$, by corollary we know that there exist a rational number $q$ s.t. $a^*<q<b^*$ since $a^*\in A\land b^*\in A'\implies a^*<b^*$. Then consider $\varphi(q)\in\R,$ by the definition of maximum and minimum it is not in either of the set $A$ or $A'$, showing $A\cup A'\neq\R,$ thus contradiction, it must be $A$ not achieves a maximum or $A'$ not achieves a minimum.
+\end{proof}
+
+
+\newpage
+\section*{Exercise 3}
+
+As we have discussed before, one of the simple motivation for construction of real number $\R$ is due to the fact that $x^2=2$ does not have solution in $\Q$. In this exercise, we show that after extending the number considered from $\Q$ to $\R$ by the Dedekind cuts, such a defect is fixed.
+
+\begin{definition}
+    Let $n\in\N$ and $\alpha\in\R, a>0$. We say that $x\in\R$ is a $n^{th}$ root of $\alpha$, if $$x^n :=\underbrace{x\cdot x\cdot x \cdots x}_{n\mathrm{~times}} =\alpha.$$
+\end{definition}
+Prove that $$\forall \alpha\in\R, \exists !x\in\R, (x>0)\land(x^n=\alpha).$$
+The symbol $\exists !$ means "exists uniquely", thus you should not only prove the existence of such $x$, but also its uniqueness. As a consequence of this exercise, one sees that now the $\sqrt[n]{\alpha}$ is well-defined for any $\alpha\in\R,\alpha>0$. 
+
+\begin{lemma}
+    \underline{$0\leq x<1\implies x^n\leq x$}. We prove this using induction. The base case holds as $x^1=x\leq x$. Assume the implication holds for some $n\in\N$, and we want to show $n+1$ also holds. $x^{n+1}=x^n\cdot x\leq x\cdot x < x\cdot 1<x$ showing $x^{n+1}\leq x$ as required, thus by induction this statement holds for all $n\in\N$. 
+\end{lemma}
+
+\begin{lemma}
+    \underline{$x\geq1\implies x\leq x^n$}. $x\leq x^1$ showing the base case holds. Assume the implication holds for some $n\in\N$, and we want to show $n+1$ also holds. $x^{n+1}=x^n\cdot x\geq x\cdot x\geq x\cdot 1 = x$ showing $x\leq x^{n+1}$ as required, by induction this statement holds for all $n\in\N$. 
+\end{lemma}
+
+\begin{lemma}
+    \underline{$y_1<y_2\implies y_1^n<y_2^n$}. $y_1<y_2\implies y_1^1<y_2^1$ which shows the base case holds. Assume the implication holds for some $n\in\N$, we want to show $n+1$ also holds. Consider $y_2^{n+1}=y_2^n\cdot y_2>y_1^n\cdot y_2> y_1^n\cdot y_1 = y_1^{n+1}$, showing it is also true that $y_1<y_2\implies y_1^{n+1}<y_2^{n+1}$, thus by induction this statement holds for all $n\in\N$. 
+\end{lemma}
+
+\begin{proof}
+    First the uniqueness is shown in Lemma as $y_1<y_2\implies y_1^n<y_2^n$ ($a,b,\in\R, a^n=\alpha=b^n$, this implies $a=b$ otherwise contradiction). Consider the set $A\subseteq\R, A:=\{x\in\R:x\geq0,x^n<\alpha\}$, $0\in A$ shows $A\neq\varnothing$.
+
+    We claim that the set $A$ is bounded by $max(\alpha, 1)$. If $0\leq x<1, $ then $x^n\leq x<1$, showing 1 is the upper bound for this case; if $x\geq1,$ then $x\leq x^n<\alpha$ showing $\alpha$ is the upper bound of the set $A$. Thus we conclude that $A$ is bounded above. 
+
+    Since $A$ is bounded above this implies the existence of a least upper bound, i.e., we denote $\beta:=\sup A$, to prove that $\beta^n=\alpha$ we will show both $\beta^n<\alpha$ and $\beta^n>\alpha$ lead to contradiction, thus it must be true that $\beta^n=\alpha$. 
+
+    First we show that $\beta\neq0$. Assume for contradiction that $\beta=0$, consider $\ep:=\min(\frac12,\frac{\alpha}2)$, since $\ep\geq0, \ep<=\frac12\implies\ep^n\leq\ep<\alpha$, that is, showing $\ep\in A$, contradicting $\beta$ to be the least upper bound of $A$. So $\beta>0$. 
+
+    Assume for the sake of contradiction $\beta^n<\alpha$, we pick $\ep\in(0,1], \ep=\frac1n$ for some $n\in\N$. The Archimedean property shows the existence of $\ep$ where $\ep<\frac{\alpha-\beta^n}{\sum_{k=1}^n\binom{n}{k}\beta^{n-k}}$ since $\alpha>\beta^n$ and $\sum_{k=1}^n\binom{n}{k}\beta^{n-k}>0$ (proven that $\beta>0$). Then \begin{align*}
+        (\beta+\ep)^n &= \beta^n + \sum_{k=1}^n\binom{n}{k}\beta^{n-k}\ep^k\\
+        &<\beta^n + \sum_{k=1}^n\binom{n}{k}\beta^{n-k}\ep\\
+        &<\beta^n + \alpha - \beta^n\\
+        &= \alpha
+    \end{align*} 
+    Showing $(\beta+\ep)^n<\alpha\implies\beta+\ep\in A$ and $\beta+\ep>\beta$, which contradicts the fact that $\beta$ is the least upper bound of set $A$. Thus $\beta^n\not<\alpha$. 
+
+    Assume for the sake of contradiction that $\beta^n>\alpha$, fix $\ep\in(0,1],\ep=\frac1n$ for some $n\in\N$. By Archimedean property we know the existence of $\ep$ s.t. $-\ep>-\frac{\beta^n-\alpha}{\sum_{k=1}^n\binom{n}{k}\beta^{n-k}}$ since $\beta^n>\alpha$ and $\sum_{k=1}^n\binom{n}{k}\beta^{n-k}>0$,
+
+    \begin{align*}
+        (\beta-\ep)^n &= \beta^n + \sum_{k=1}^n\binom{n}{k}\beta^{n-k}(-\ep)^k\\
+        &> \beta^n - \sum_{k=1}^n\binom{n}{k}\beta^{n-k}\ep^k\\
+        &> \beta^n - \sum_{k=1}^n\binom{n}{k}\beta^{n-k}\ep\\
+        &> \beta^n -  (\beta^n - \alpha)\\
+        &=\alpha
+    \end{align*}
+    showing $\beta-\ep<\beta$ and $\beta-\ep\in A'$, contradicting the fact that $\beta$ is the least upper bound of set $A$. 
+
+    Therefore, we have shown it is only possible that $\beta^n=\alpha$, we have shown the existence and the uniqueness of the statement: $\forall \alpha\in\R, \exists !x\in\R, (x>0)\land(x^n=\alpha)$, completing our proof. 
+\end{proof}
+
+
+\newpage
+\section*{Exercise 4}
+
+Read the following discussion by G. H. Hardy in his old (but excellent) textbook in analysis, regarding the definition of $\alpha+\beta$ for Dedekind cuts $\alpha= A|A^{\prime}$ and $\beta= B|B^{\prime}.$ In this exercise, we will fill in the details following his road map, and show that $A+B|A^{\prime}+B^{\prime}$ is NOT a Dedekind cut in general.
+
+“In order to define the sum of two real numbers $\alpha= A|A^{\prime}$ and $\beta= B|B^{\prime}, $ consider $C= A+ B$ and $C^{\prime}= A^{\prime}+ B^{\prime}.$ Plainly \textbf{$\forall x\in C$ and $\forall y\in C^{\prime},\:x<y$ }....Now \textbf{there cannot be more than one rational numbers which does not belongs to $C\cup C^{\prime}$ }" ... If each rational number belongs to $C\cup C^{\prime},$ we got a Dedekind cut. Otherwise, \textbf{if there is a unique rational number which does not belong to $C\cup C^{\prime}$}, we add this number to $C'$. We have now the Dedekind cut for $\gamma=\alpha+\beta...."$
+
+$- $G.H.Hardy, $\textit{A course in pure mathematics.}$
+
+\question[1] Prove that $\forall x\in C$ and $\forall y\in C', x<y$. 
+
+\begin{proof}
+    By construction, $x=a+b$ for some $a\in A, b\in B$, and $y=a'+b'$ for some $a'\in A', b'\in B'$. Then, since $A\mid A'$ and $B\mid B'$ are Dedekind cuts, these imply $a<a'$ and $b<b'$, showing $x=a+b<a'+b'=y$ for any $x\in C, y\in C'$, completing the proof. 
+\end{proof}
+
+\question[2] Prove that $\Q\setminus(C\cup C')$ cannot have more than one elements. 
+\begin{proof}
+    Assume for the sake of contradiction that $\Q\setminus(C\cup C')$ contains at least 2 elements, pick any 2 of them as $x,y\in\Q$. It must be true that $\forall a\in A, \forall b\in B, \forall a'\in A',\forall b'\in B', a+b\leq x\leq a'+b'\land a+b\leq y\leq a'+b'$, subtracting the second part of the statement from the first part which gives $0\leq x-y\leq 0$, showing $x-y=0\iff x=y$, thus contradiction, there cannot be more than 1 element that is in the set $\Q\setminus(C\cup C')$. 
+\end{proof}
+
+\question[3] Prove that if either $\alpha$ or $\beta$ is a rational number, then $C\cup C'=\Q$. 
+
+\question[4] Give a (counter-) example where $C\cup C'\neq \Q$. 
+
+\begin{proof}
+    Consider $\alpha=\sqrt2,\beta=-\sqrt2$, where the Dedekind cuts for $\alpha$ and $\beta$ are $\alpha=A\mid A', A=\{x\in\Q: x<0\lor x^2<2\}$ and $\beta= B\mid B', B=\{x\in\Q:x<0\land x^2>2\}$. Then, it is clear that $\gamma=\alpha+\beta=C\mid C', C=\{x\in\Q:x<0\}$
+\end{proof}
+
+\end{document}

@@ -1,0 +1,222 @@
+\documentclass{homework}
+\author{Joseph Siu}
+\class{MAT157: Analysis I}
+\date{\today}
+\title{Homework 6}
+
+\usepackage{enumitem}
+
+\newcommand{\Set}[1]{\{#1\}}
+\newcommand{\T}[1]{\text{#1}}
+\newcommand{\Al}[3]{#1 &=#2 &\text{#3}&&\\}
+
+% Symbols
+\newcommand*{\eg}{\leavevmode\unskip , e. g., \ignorespaces} % for example
+\newcommand*{\ie}{\leavevmode\unskip, i. e., \ignorespaces} % that is
+\newcommand{\nil}{\varnothing}
+\AtBeginDocument{\def\O{\cal{O}}} % Big Oh
+\AtBeginDocument{\def\C{\bb{C}}} % Complex
+\newcommand{\R}{\bb{R}} % Reals
+\newcommand{\Q}{\bb{Q}} % Rationals
+\newcommand{\Z}{\bb{Z}} % Integers
+\newcommand{\N}{\bb{N}} % Naturals
+\renewcommand{\P}{\bb{P}} % Primes
+\newcommand{\Pset}[1]{\mathcal{P}(#1)} %power set
+\newcommand{\Relate}[2]{#1\mathcal{R}#2} %relation
+\newcommand{\relate}{\mathcal{R}}
+\newcommand{\F}{\bb{F}} 
+\newcommand{\GF}[1][2]{\bb{F}_{#1}} 
+\newcommand{\modulo}[1][n]{\Z/#1\Z} 
+\newcommand{\ra}{\rightarrow}
+\newcommand{\Ra}{\Rightarrow}
+\newcommand{\?}{\stackrel{?}{=}}
+\newcommand{\is}{\equiv}
+\newcommand{\al}{\alpha}
+\newcommand{\ep}{\varepsilon}
+\renewcommand{\phi}{\varphi}
+\newcommand{\p}{\partial}
+\newcommand{\injective}{\hookrightarrow}
+\newcommand{\surjective}{\twoheadrightarrow}
+\newcommand{\bijective}{\hookrightarrow\mathrel{\mspace{-15mu}}\rightarrow}
+\newcommand{\derivative}[2][x]{\frac{\D #2}{\D #1}}
+\newcommand{\ceil}[1]{\left\lceil#1\right\rceil}
+\newcommand{\floor}[1]{\left\lfloor#1\right\rfloor}
+\newcommand{\near}[1]{\left\lfloor#1\right\rceil}
+\newcommand{\arr}[1]{\left\langle#1\right\rangle}
+\newcommand{\paren}[1]{\left(#1\right)} %pair / ()
+\newcommand{\brk}[1]{\left[#1\right]} %[]
+\newcommand{\abs}[1]{\left|#1\right|}
+\newcommand{\curl}[1]{\left\{#1\right\}} %set {}
+\newcommand{\func}[3]{#1: #2 \rightarrow #3}
+
+
+\theoremstyle{definition}
+\newtheorem*{claim}{Claim}
+\newtheorem*{definition}{Definition}
+\newtheorem*{theorem}{Theorem}
+\newtheorem*{lemma}{Lemma}
+
+
+\begin{document} \maketitle
+\section*{Exercise 1}
+
+Recall that we have explained in the lecture the following 6 theorems:
+\begin{enumerate}[label=(\alph*)]
+\item Dedekind completeness theorem
+\item Sup/Inf theorem
+\item Cauchy-Cantor theorem (Nested closed intervals)
+\item Borel-Lebesgue theorem (Open cover)
+\item Bolzano-Weierstrass theorem (Limit point)
+\item Cauchy completeness theorem. 
+\end{enumerate}
+$$A\implies B\implies C\implies D\implies E\implies F.$$
+The mission of this exercise is to show that $F\implies A$, thus to close the circle. From now on, let's assume that the Cauchy completeness theorem is true. We would like to prove the Dedekind completeness theorem:
+\begin{theorem}
+    Let $A,B\subseteq \R,$ with $A,B\neq\varnothing.$ If $$\forall a\in A,\forall b\in B, a\leq b,$$ Then there exists $c\in\R$ s.t., $$\forall a\in A,\forall b\in B, a\leq c\leq b.$$ To this end, for any $n\in \N$, consider the set $$A_n=\{a=\frac{k}{2^n},k\in\Z\mid\forall x\in A, a\geq x\}.$$
+\end{theorem}
+
+\question[1] Prove that $\forall n\in\N, A_n$ is not empty. 
+
+\begin{proof}
+    Since $B$ is non-empty, we pick an arbitrary element $b\in B\subseteq\R$, by Archimedean property (Homework 5 Exercise 1 Question 1) we know that there exist some $k>2^nb$ where $2^nb\in\R, k\in\N\subseteq\Z, n\in\N$. Divide both sides by $2^n, 2^n>0$, we get $\frac{k}{2^n}>b\geq x, \forall x\in A$, showing $\frac{k}{2^n}\in A_n$ and $A_n$ is not empty for all $n\in\N$. 
+\end{proof}
+
+\question[2] Prove that $\forall n\in\N, A_n$ achieves a minimum.
+
+\begin{proof}
+    Pick any $n\in\N$, to show $A_n$ achieves a minimum, we want to first show $C_n:=\{k\in\Z\mid \frac{k}{2^n}\in A_n\}$ is not empty and achieves a minimum. 
+
+    Since $A_n$ is not empty (Q1), this means there exists $a\in A_n$ s.t. $a=\frac{c}{2^n}$ for some $c\in\Z$, this shows $c\in C_n$ as $c\in\Z, \frac{c}{2^n}=a\in A_n$, showing $C_n$ is also non-empty.
+
+    Assume for the sake of contradiction that $C_n$ does not achieve a minimum. Define the set $D_n :=\{|c|: c\in C_n\}$, we show that $D_n$ does not achieves a maximum: if there is a maximum $d\in D_n$ then by construction $d=|c|$ for some $c\in C_n$. If $c<0$ then since there exist $c_1\in C_n$ s.t. $c_1<c$ (otherwise $c$ is the minimum), this shows $|c_1|>|c|$ contradicting $d$ to be the maximum of $D_n$; If $c\geq0$, this means there exists some $k\in\Z$ s.t. $\frac{c}{2^n}=\frac{k}{2^n}\geq x, \forall x\in A$, however consider $c+1$, this gives $\frac{c+1}{2^n}=\frac{k+1}{2^n}=\frac{k}{2^n}+\frac1{2^n}>\frac{k}{2^n}\geq x, \forall x\in A$ where $k+1\in\Z$, showing $\frac{c+1}{2^n}\in A_n$ and $c+1\in C_n$, giving $|c+1|\in D_n$ and $|c+1|>|c|$, contradicting the fact that $d=|c|$ is the maximum. Therefore we have shown that there is no maximum for $D_n$. 
+
+    Now use induction to show that the set $D_n$ leads to a contradiction:
+    
+    \underline{If $E\subseteq\N\cup\{0\}, E\neq\emptyset$, then $E$ has a maximum.} Consider the number of elements of the set $E$, when there is only 1 element in the set $E$ then it must be the maximum (by definition of maximum), when there are 2 elements in $E$, then because all natural numbers can be compared and all elements need to be distinct, denote those 2 by $x,y\in E$, either $x<y$ or $y<x$, showing one of them must be the maximum of $E$. Now assume for inductive hypothesis that the statement holds true for some $k\in\N\setminus\{1\}$ (to avoid empty set) where $k$ is the number of elements. Consider a set with $k+1$ elements, separate any one of the elements $x$ from the set, there are $k$ elements remaining, by our inductive hypothesis this shows that this set with $k$ elements has a maximum, denote it by $y$. Again, as all natural numbers can be compared, either $x<y$ or $y<x$, showing the maximum of the entire set $E$ must be either $x$ or $y$, thus by the principle of mathematical induction we have shown that all non-empty natural number subset have maximum.
+
+    Thus, since $D_n$ is a non-empty subset (since $C_n$ is non-empty implies $D_n$ is non-empty too) of natural numbers, this contradicts our assumption which $D_n$ does not have its maximum. Therefore, it must be true that $C_n$ achieves a minimum. This implies $A_n$ also achieves a minimum where $\min A_n = \frac{\min C_n}{2^n}$ ($\forall k_1,k_2\in C_n, k_1<k_2\implies \frac{k_1}{2^n}<\frac{k_2}{2^n}, 2^n>0$), completing our proof.  
+\end{proof}
+
+\question[3] Let $z_n=\min A_n.$ Prove that the sequence $\{z_n\}_{n\in\N}$ is a Cauchy sequence. 
+
+\begin{proof}
+    We want to show $\forall \ep > 0, \exists M\in\N$ s.t. $\forall p,q>M, p,q\in\N, |z_p-z_q|<\ep$. Fix $\ep, p, q$, this is equivalent to show that $|\min A_p - \min A_q|<\ep$. 
+
+    We first show that the sequence monotonically decreases to get some inequality: 
+    
+    That is, we want to show that $y>x\implies\min A_y<\min A_x, x,y\in\N$. $x<y\implies y=x+n,n\in\N$, the existence of minimum is proven from Q2, this mean there exist $k_x, k_y\in\Z$ s.t. $\min A_x=\frac{k_x}{2^x}, \min A_y=\frac{k_y}{2^y}$. Then, $\forall a\in A, k_x\geq 2^xa\implies 2^nk_x\geq2^ya$, however $k_y\geq 2^ya$ and $k_y$ is the minimum from Q2, showing $k_y\leq 2^nk_x$. Thus, $\min A_y=\frac{k_y}{2^{x+n}}=\frac1{2^n}\frac{k_y}{2^x}\leq\frac1{2^n}\frac{2^nk_x}{2^x}=\frac{k_x}{2^x}=\min A_x$, showing $\min A_y\leq \min A_x$ as required. Now we have the inequality $k_y\leq 2^nk_x$ when $y>x$. 
+
+Now we show that if a sequence is bounded and monotonic, then it also converges: Assume for the sake of contradiction that the sequence $\{z_n\}_{n\in\N}$ is bounded and monotonic decreasing, and does not converge. That is, because it is monotonic decreasing, it is only possible that the sequence diverges to $-\infty$, by definition $\forall M<0, \exists N\in\N$ s.t. $\forall n>N, z_n<M$, however by construction $\forall a\in A, z_n=\min A_n\geq a$, pick any $a\in A$, we choose $M =\min (a, -a, -1)<0$, we can see that $\forall n\in\N, z_n\geq M$ showing contradiction, it must be True that a sequence is bounded and monotonic implies it is also convergent.
+
+And so, the only thing left is to show all convergent sequences are also Cauchy sequences. Since the sequence $\{z_n\}_{n\in\Z}$ converges, by definition $\exists z^*\in\R, \forall \frac{\ep}{2}>0, \exists N\in\N, \forall n>N, |z_n-z^*|<\frac{\ep}{2}$. Then, for any $m,n>N$, \begin{align*}
+    |z_n-z_m| &= |z_n-z^*+z^*-z_m|\\
+    &\leq |z_n-z^*|+|-(z_m-z^*)|\\
+    &<\frac{\ep}{2} + \frac{\ep}{2}\\
+    &=\ep
+\end{align*}
+Showing $\forall\frac{\ep}{2}>0, \exists N\in\N,\forall m,n>N, |z_n-z_m|<\ep$, thus we have shown that all convergent sequences are also Cauchy, completing our proof. 
+\end{proof}
+
+\question[4] Now using the Cauchy completeness theorem, one sees that the sequence has a limit $$c=\lim_{n\ra\infty}z_n.$$ Prove that $$\forall a\in A, b\in B, a\leq c\leq b.$$
+\begin{proof}
+    We want to show both $\forall a\in A, a\leq c$ and $\forall b\in B, c\leq b$. 
+
+    First by construction $\forall n\in\N, z_n=\min A_n\geq a, \forall a\in A$. Assume for the sake of contradiction that $a>c$ for some $a\in A$, then this implies for all open neighbourhoods of $c$, there exist some $n\in\N$ s.t. $z_n$ is in the neighbourhood, that is, consider $(2c-a,a)$, $\exists n\in \N, z_n\in(2c-a,a),a>z_n=\min A_n$, however this is a contradiction, showing $a\leq c, \forall a\in A$.  
+
+    Second assume for the sake of contradiction that $\exists b\in B, c>b$, consider the open neighbourhood $(b, 2c-b)$, then by definition $\exists n\in\N$ s.t. $z_n\in(b,2c-b)\implies z_n<2c-b$, however we know that $z_n>c$ since it is monotonic decreasing, then we get $c<z_n<2c-b$, showing $0<c-b\iff b<c$, this is a contradiction, therefore it must be true that $\forall b\in B, c\leq b$. 
+
+      Therefore we have shown that $\forall a\in A, \forall b\in B, a\leq c\leq b$, as needed. 
+\end{proof}
+
+\question[5] Now we have finished the journey on the completeness of real numbers. Tell us, is there a smile on your face now?
+
+\begin{claim}
+    For all MAT157 students, showing all 30 directions of completeness implications implies the non-existence of smiley faces.
+\end{claim}
+\begin{proof}
+    Trivial :(
+\end{proof}
+
+
+ 
+\newpage
+\section*{Exercise 2}
+
+In this exercise, consider each of the sequence below and determine if the limit $\lim_{n\ra\infty}x_n$ exists. In case the limit exists, find it. 
+
+\question[1] \[
+\begin{cases}
+    x_1=a,x_2=b, &a<b\\
+    x_n=\frac{x_{n-1}+x_{n-2}}{2}, &n\geq3
+\end{cases}.
+\]
+\begin{claim}
+    The closed-form formula for the sequence is $$x_n=\frac{x_{n-1}+x_{n-2}}{2}=a+(b-a)\left(\frac{(-1)^n}{3\cdot2^{n-2}} + \frac23\right), n\geq3.$$ So, \[\lim_{n\ra\infty}x_n=a+(b-a)\frac23=\frac23b+\frac13a.\]
+\end{claim}
+\begin{proof}
+    We first use strong induction to prove the closed-form formula for the sequence. The base case $n=3, x_3=a+(b-a)(\frac{-1}{6}+\frac23)=\frac12b+\frac12a=\frac{b+a}{2}$ which holds true as $\frac{b+a}{2}=\frac{x_{3-1}+x_{3-2}}{2}=x_3$. The base case $n=4, x_4=a+(b-a)(\frac1{12}+\frac23)=\frac34b+\frac14a=\frac{\frac{a+b}{2}+b}{2}=\frac{x_{4-1}+x_{4-2}}{2}$ which also holds true. 
+
+    Now assume for inductive hypothesis that $x_n=\frac{x_{n-1}+x_{n-2}}{2}=a+(b-a)\left(\frac{(-1)^n}{3\cdot 2^{n-2}}+\frac23\right)$ holds for $n=3,4,\cdots,n$ for some $n\geq4$, and we want to show that $n+1$ also holds.
+
+    Consider $x_{n+1}=a+(b-a)\left(\frac{(-1)^{n+1}}{3\cdot2^{n+1-2}}+\frac23\right)$, then we can see that \begin{align*}
+        a+(b-a)\left(\frac{(-1)^{n+1}}{3\cdot2^{n+1-2}}+\frac23\right) &= \frac{2\left[a+(b-a)\left(\frac{(-1)^{n+1}}{3\cdot2^{n+1-2}}+\frac23\right)\right]}{2}\\
+        &= \frac{2a + 2(b-a)\left(\frac{-1}{2}\cdot\frac{(-1)^n}{3\cdot2^{n-2}}\right) + 2(b-a)(\frac23)}{2}\\
+        &= \frac{2a - (b-a)\left(\frac{(-1)^n}{3\cdot2^{n-2}}\right) + 2(b-a)(\frac23)}{2}\\
+        &= \frac{\left[a + (b-a)\left(\frac{(-1)^n}{3\cdot 2^{n-2}}\right)\right]+\left[a - 2(b-a)\left(\frac{(-1)^n}{2^{n-2}}\right)\right]}{2}\\
+        &= \frac{\left[a + (b-a)\left(\frac{(-1)^n}{3\cdot 2^{n-2}}\right)\right]+\left[a + \frac{-1}{2^{-1}}(b-a)\left(\frac{(-1)^n}{2^{n-2}}\right)\right]}{2}\\
+        &= \frac{x_n+\left[a + (b-a)\left(\frac{(-1)^{n+1}}{2^{n-1-2}}\right)\right]}{2}\\
+        &= \frac{x_n+\left[a + (b-a)\left(\frac{(-1)^{n-1}}{2^{n-1-2}}\right)\right]}{2}\\
+        &=\frac{x_n+x_{n-1}}{2}\\
+        &=\frac{x_{(n+1)-1}+x_{(n+1)-2}}{2}
+    \end{align*}
+    Showing $n+1$ is also true, therefore by strong induction we have for all $n\geq 3, n\in\N,$ $x_n=\frac{x_{n-1}+x_{n-2}}{2}=a+(b-a)\left(\frac{(-1)^n}{3\cdot2^{n-2}}+\frac23\right)$ as required.
+
+    Now with the closed-form formula we can find the limit of the sequence. For all $\ep>0$, choose $M>log_2(\frac1{3\frac{\ep}{(b-a)}})+2, M\in\N$ (here $a<b\implies b-a\neq0$, note that to avoid $\log$ we may equivalently choose $M>\frac{b-a}{3\ep}+2$ then this also gives $2^{M-2}\geq M-2>\frac{b-a}{3\ep}$ and $M>\log_2(\frac{b-a}{3\ep})+2$), then $\forall n>M,$ we have \begin{align*}
+        x_n=a+(b-a)\left(\frac{(-1)^n}{3\cdot2^{n-2}}+\frac23\right) &\leq  a+(b-a)\left(\frac{1}{3\cdot2^{log_2(\frac1{3\frac{\ep}{(b-a)}})+2-2}}+\frac23\right)\\
+        &= a+(b-a)\left(\frac{1}{3\cdot (\frac1{3\frac{\ep}{(b-a)}})}+\frac23\right)\\
+        &= a+(b-a)\left(\frac{\ep}{(b-a)}+\frac23\right)\\
+    \end{align*}
+    Then we have that \begin{align*}
+        |x_n-(\frac23b+\frac13a)| &\leq |a+(b-a)\frac{\ep}{(b-a)} + \frac23(b-a) - \frac23b - \frac13a|\\
+        &= |\ep|\\
+        &= \ep
+    \end{align*} 
+    Showing $\lim_{n\ra\infty}x_n=\frac23b+\frac13a$ as required.
+    \end{proof}
+
+
+\question[2] \[
+\begin{cases}
+    x_1=a, &a>0\\
+    x_{n+1}=\frac12\left(x_n+\frac1{x_n}\right), &n\in\N
+\end{cases}.
+\]
+
+\begin{claim}
+    For all $a>0,$ the sequence converges to 1. That is, \[\lim_{n\ra\infty}x_n=1.\]
+\end{claim}
+\begin{proof}
+    First, by AGM we can see that $\forall n\geq1, x_{n+1}=\frac{x_n+\frac{1}{x_n}}{2}\geq\sqrt{x_n\cdot \frac{1}{x_n}}=1$, showing all terms $x_n, n>1$ are at least 1. Second, \begin{align*}
+        \forall n>1, x_n&\geq 1\\
+        x_n^2\geq x_n&\geq 1\\
+        x_n&\geq\frac{1}{x_n}\\
+        2x_n=x_n+x_n&\geq x_n + \frac{1}{x_n}\\
+        x_n&\geq\frac{x_n+\frac{1}{x_n}}{2}=x_{n+1}
+    \end{align*}
+Showing the sequence $\{x_n\}_{n\in\N}$ is monotonically decreasing when $n>1$. 
+
+Since $\lim_{n\ra\infty}x_n=\lim_{n\ra\infty}x_{n+1}$, it is sufficient to show the limit of the sequence $\{x_{n+1}\}_{n\in\N}$. 
+
+Now, by the monotonic convergent theorem (MCT), the sequence $\{x_{n+1}\}_{n\in\N}$ is bounded below by $1$ and monotonically decreasing, showing the sequence $\{x_{n+1}\}_{n\in\N}$ converges. We denote  $\alpha:=\lim_{n\ra\infty}x_{n+1}$. 
+
+And so, we have two limits $\lim_{n\ra\infty}x_{n+2}=\lim_{n\ra\infty}x_{n+1}=\alpha$, and $\lim_{n\ra\infty}x_{n+2}=\lim_{n\ra\infty}\frac12(x_{n+1}+\frac{1}{x_{n+1}})=\frac12(\lim_{n\ra\infty}x_{n+1}+\frac{1}{\lim_{n\ra\infty}x_{n+1}})=\frac12(\alpha+\frac{1}{\alpha})$, however by the uniqueness of limit, we get $\alpha=\frac{1}{2}(\alpha+\frac{1}{\alpha})$, by rearrangement we get $\alpha^2=1$, thus it is only possible that the limit $\alpha=\lim_{n\ra\infty}x_n=1$ (suppose for contradiction that $\alpha=-1$ is the limit, however the open neighborhood $(-3, 1)$ does not have infinite terms of the sequence $\{x_n\}_{n\in\N}$ thus contradiction, not a limit point).   
+\end{proof}
+
+
+\newpage
+\section*{Exercise 3}
+
+Recall that we have proved in lecture that $$\lim_{n\ra\infty}(1+\frac1n)^n=e$$ Now assume that $$\lim_{n\ra\infty}p_n=\infty. \lim_{n\ra\infty}q_n=-\infty.$$ Moreover, assume that $\forall n\in\N, p_n,q_n\notin[-1,0]. $ Prove that $$\lim_{n\ra\infty}(1+\frac1{p_n})^{p_n}=e=\lim_{n\ra\infty}(1+\frac1{q_n})^{q_n}$$
+
+
+\end{document}
