@@ -1,0 +1,171 @@
+\documentclass{homework}
+\author{Joseph Siu}
+\class{MAT157: Analysis I}
+\date{\today}
+\title{Homework 8}
+
+\newcommand{\Set}[1]{\{#1\}}
+\newcommand{\T}[1]{\text{#1}}
+\newcommand{\Al}[3]{#1 &=#2 &\text{#3}&&\\}
+
+% Symbols
+\newcommand*{\eg}{\leavevmode\unskip , e. g., \ignorespaces} % for example
+\newcommand*{\ie}{\leavevmode\unskip, i. e., \ignorespaces} % that is
+\newcommand{\nil}{\varnothing}
+\AtBeginDocument{\def\O{\cal{O}}} % Big Oh
+\AtBeginDocument{\def\C{\bb{C}}} % Complex
+\newcommand{\R}{\bb{R}} % Reals
+\newcommand{\Q}{\bb{Q}} % Rationals
+\newcommand{\Z}{\bb{Z}} % Integers
+\newcommand{\N}{\bb{N}} % Naturals
+\renewcommand{\P}{\bb{P}} % Primes
+\newcommand{\Pset}[1]{\mathcal{P}(#1)} %power set
+\newcommand{\Relate}[2]{#1\mathcal{R}#2} %relation
+\newcommand{\relate}{\mathcal{R}}
+\newcommand{\F}{\bb{F}} 
+\newcommand{\GF}[1][2]{\bb{F}_{#1}} 
+\newcommand{\modulo}[1][n]{\Z/#1\Z} 
+\newcommand{\ra}{\rightarrow}
+\newcommand{\Ra}{\Rightarrow}
+\newcommand{\?}{\stackrel{?}{=}}
+\newcommand{\is}{\equiv}
+\newcommand{\al}{\alpha}
+\newcommand{\ep}{\varepsilon}
+\renewcommand{\phi}{\varphi}
+\newcommand{\p}{\partial}
+\newcommand{\injective}{\hookrightarrow}
+\newcommand{\surjective}{\twoheadrightarrow}
+\newcommand{\bijective}{\hookrightarrow\mathrel{\mspace{-15mu}}\rightarrow}
+\newcommand{\derivative}[2][x]{\frac{\D #2}{\D #1}}
+\newcommand{\ceil}[1]{\left\lceil#1\right\rceil}
+\newcommand{\floor}[1]{\left\lfloor#1\right\rfloor}
+\newcommand{\near}[1]{\left\lfloor#1\right\rceil}
+\newcommand{\arr}[1]{\left\langle#1\right\rangle}
+\newcommand{\paren}[1]{\left(#1\right)} %pair / ()
+\newcommand{\brk}[1]{\left[#1\right]} %[]
+\newcommand{\abs}[1]{\left|#1\right|}
+\newcommand{\curl}[1]{\left\{#1\right\}} %set {}
+\newcommand{\func}[3]{#1: #2 \rightarrow #3}
+
+
+\theoremstyle{definition}
+\newtheorem*{claim}{Claim}
+\newtheorem*{definition}{Definition}
+\newtheorem*{theorem}{Theorem}
+\newtheorem*{lemma}{Lemma}
+
+
+\begin{document} \maketitle
+
+In the study of sequences and their limits, we have introduced the Cauchy's completeness theorem. It has an analogue for the limit of a function, which we will study through the following exercise
+
+\section*{Exercise 1}
+\begin{definition}
+    Let $f(x)$ be a function whose domain includes a punctured open interval of $x_0$. The ocillation $V_\delta(x_0)$ of $f(x)$ in a punctured open interval \(I_\delta(x_0)=(x_0-\delta,x_0+\delta)\setminus\{x_0\}\) is defined as \[V_{\delta,f}(x_0)=\sup_{x_1,x_2\in I_\delta(x_0)}|f(x_1)-f(x_2)|\]
+\end{definition}
+
+\question[1] Show that $\forall 0<\delta_1<\delta_2, 0\leq V_{\delta_1}(x_0) \leq V_{\delta_2}(x_0)$.
+
+\begin{proof}
+    Assume \( \delta_1<\delta_2 \), by definition of the punctured open interval, we can see \(I_{\delta_1}(x_0)\subseteq I_{\delta_2}(x_0)\). As lecture / tutorial has proven, \(V_{\delta_1}(x_0)=\sup_{x_1,x_2\in I_{\delta_1}(x_0)}|f(x_1)-f(x_2)|\leq \sup_{x_1,x_2\in I_{\delta_2}(x_0)}|f(x_1)-f(x_2)|=V_{\delta_2}(x_0)\).
+\end{proof}
+
+\question[2] Show that \( \lim_{x\ra x_0} f(x)\) exists if and only if \(\forall \ep > 0, \exists \delta>0, \text{ s.t. } V_{\delta,f}(x_0)<\ep.\)
+
+\begin{proof}
+    We first show the forward direction. Assume the limit \(\lim_{x\ra x_0} f(x)\) exists, denote the limit by \(\lim_{x\ra x_0} f(x)=L\). then by definition, fix $\frac{\ep}{2}>0$, there exist some $\delta>0$ s.t. \[x\in I_\delta(x_0)\implies |f(x)-L|<\frac{\ep}{2}.\] Consider $x_1, x_2\in I_\delta(x_0)$, \begin{align*}
+        |f(x_1)-f(x_2)| &\leq |f(x_1)-L| + |f(x_2)-L|\\
+        &\leq \frac{\ep}{2} + \frac{\ep}{2} = \ep
+    \end{align*}
+
+    Thus, we have shown that $\forall x_1, x_2\in I_\delta(x_0), |f(x_1)-f(x_2)|<\ep$ where $\ep>0$, showing $\ep$ is an upper bound, by definition of least upper bound this gives $\forall\ep>0, \exists\delta>0$ s.t. $V_{\delta, f}(x_0)=\sup_{x_1,x_2\in I_\delta(x_0)}|f(x_1)-f(x_2)|<\ep$, completing our forward direction.
+
+    Now for the backward direction. We first construct a sequence $(y_n)$ defined as:
+    \begin{itemize}
+        \item Fix \(\ep_1=2^{-1}>0\), we know there exists some $\delta_1>0$ s.t. $V_{\delta_1, f}(x_0)<\ep_1$, choose $y_1\in I_{\delta_1}(x_0)$
+        \item Fix \(\ep_2=2^{-2}>0\), we know there exists some $\delta_2>0$ s.t. $V_{\delta_2, f}(x_0)<\ep_2$, choose $y_2\in I_{\delta_2}(x_0)$
+        \item \dots
+        \item Fix \(\ep_n=2^{-n}>0\), we know there exists some $\delta_n>0$ s.t. $V_{\delta_n, f}(x_0)<\ep_n$, choose $y_n\in I_{\delta_n}(x_0)$
+    \end{itemize} 
+
+    So, \(\forall x_1,x_2\in I_{\delta_n}(x_0), |f(x_1)-f(x_2)|\leq V_{\delta, f}(x_0)<\ep_n\)
+\end{proof}
+
+Using this tool, we reproduce the consequence of the examples discussed in lecture. 
+
+\question[3] Give a criterion of \(\lim_{x\ra x_0}f(x)\) does not exist, in terms of the oscillation.
+
+\begin{claim}
+    If \(\exists \ep >0, \forall\delta>0, V_{\delta, f}(x_0)\geq \ep\), then $\lim_{x\ra x_0}f(x)$ does not exist. 
+\end{claim}
+
+\question[4] Consider \[g(x)=\sin(\frac1x),x\neq0\] does not have a limit at \(x_0=0\), by study the oscillation \(V_{\delta,f}(0).\)
+
+
+
+\newpage
+\section*{Exercise 2}
+\begin{definition}
+    (Left limit) Let $f(x)$ be a function whose domian includes the open interval $(x_0-c, x_0)$ for some $c>0$. We say that $l\in\R$ is the left limit of $f(x)$ when $x$ tends to $x_0$, if \[\forall\ep>0,\exists\delta>0, \text{ s.t. } \forall x\in (x_0-\delta, x_0), |f(x)-l|<\ep.\] We denote it by $\lim_{x\ra x_0^-}f(x)=l.$
+\end{definition}
+
+\begin{definition}
+    (Right limit) Let $f(x)$ be a function whose domian includes the open interval $(x_0, x_0+c)$ for some $c>0$. We say that $r\in\R$ is the right limit of $f(x)$ when $x$ tends to $x_0$, if \[\forall\ep>0,\exists\delta>0, \text{ s.t. } \forall x\in (x_0, x_0+\delta), |f(x)-r|<\ep.\] We denote it by $\lim_{x\ra x_0^+}f(x)=r.$
+\end{definition}
+
+\question[1] Let $f(x)$ be defined in a punctured open interval of $x_0$. Prove that \[\lim_{x\ra x_0}f(x)=A\iff \lim_{x\ra x_0^-}f(x)=A=\lim_{x\ra x_0^+}f(x).\]
+
+\begin{proof}
+    We first show the forward implication. Assume \(\lim_{x\ra x_0}f(x)=A\), by definiton this means \(\forall\ep>0, \exists \delta>0, \forall x\in (x_0-\delta, x_0+\delta)\setminus\left\{ x_0 \right\}, |f(x)-A|<\ep\). That is, \(\forall\ep>0, \exists \delta>0, \forall x_1\in (x_0-\delta, x_0), \forall x_2\in (x_0, x_0+\delta), |f(x_1)-A|<\ep, |f(x_2)-A|<\ep\), by definition of left and right inverses this shows the existence of left and right inverses, moreover they are equal (both limits are A). Namely, showing \(\lim_{x\ra x_0^-}f(x)=A=\lim_{x\ra x_0^+}f(x)\) as needed.
+
+    Now we show the backward implication. Assume \(\lim_{x\ra x_0^-}f(x)=A=\lim_{x\ra x_0^+}f(x)\), that is, \(\forall\ep>0, \exists \delta_1, \delta_2>0, \forall x_1\in (x_0-\delta_1, x_0), \forall x_2\in (x_0, x_0+\delta_2), |f(x_1)-A|<\ep, |f(x_2)-A|<\ep\). However, if we set \(\delta:=\min(\delta_1,\delta_2)\), we have \(\forall\ep>0, \exists \delta>0, \forall x\in (x_0-\delta, x_0+\delta)\setminus\{x_0\}, |f(x)-A|<\ep\), which by definition gives \(\lim_{x\ra x_0}f(x)=A\) as required.
+
+    Thus as two implicatoins are shown, we can conclude that the equivalency holds, which completes our proof. 
+\end{proof}
+
+\question[2] Give a criterion of $\lim_{x\ra x_0}f(x)$ does not exist, in terms of the left limit and right limit.
+
+\begin{claim}
+    \(\lim_{x\ra x_0}f(x)\) does not exist if and only if \(\lim_{x\ra x_0^-}f(x)\) does not exist or \(\lim_{x\ra x_0^+}f(x)\) does not exist or \(\lim_{x\ra x_0^-}f(x)\neq \lim_{x\ra x_0^+}f(x)\)
+\end{claim}
+
+%\begin{proof}
+%    As the contrapositives of E2Q1 has shown, limit does not exist implies left limit does not exist or right limit does not exist or left limit is not equal to right limit. 
+%\end{proof}
+
+\question[3] Consider the function $f:\R^*\ra\R$, given by $$f(x) = \begin{cases}
+    1, & x>0, \\ 0, & x<0.
+\end{cases}$$
+
+Prove that $f(x)$ does not have a liimt at $x_0=x$, by studying $\lim_{x\ra 0^-}f(x)$ and \(\lim_{x\ra 0^+}f(x)\) respectively.
+
+\begin{proof}
+   $ \lim_{x\ra 0^-}f(x)=0$ as $\forall\ep>0$, choose $\delta=1$, then $\forall x\in(-1, 0), |f(x)-0|=0<\ep$, showing the left limit of $f(x)$ is 0 when x is approaching 0 (from negative). Also, $ \lim_{x\ra 0^+}f(x)=1$ as $\forall\ep>0$, choose $\delta=1$, then $\forall x\in(0,1), |f(x)-1|=|1-1|=0<\ep$, showing the right limit of $f(x)$ is 1 when x is approaching 0 (from positive). Thus, from E2Q2 we can see that $\lim_{x\ra0}f(x)$ does not exist as the left limit is not equal to the right limit when x is approaching 0.
+\end{proof}
+
+\question[4] Consider the function $f:\R^*\ra\R,$ given by \[f(x)=\frac{\sin x}{x}\] Prove that the limit exists, by studying \(\lim_{x\ra 0^-}f(x)\) and \(\lim_{x\ra 0^+}f(x)\) respectively.
+
+\begin{proof}
+    See pages below. (Also notice that here I used the unit circle definition of sin(x) with the assumption that if an area is contained in another shape's area, then the area cannot exceed that shape's)
+
+    I also claimed that:
+
+    $\lim_{x\ra0}\cos(x)=1$
+
+    Here is the proof:
+
+    By using the identity $1-\cos(x)=2\sin^2(\frac{x}2)$ and inequality $\sin(x)\leq x$ for all $x\in\R$, we can see that,
+
+    $\forall\ep>0$, choose $\delta=\sqrt{2\ep}>0$ then $0<|x|<\delta$ implies $\frac{1}{2}x^2<\ep$. So, \begin{align*}
+        |\cos(x)-1|&=|1-\cos(x)|\\
+        &=|2\sin^2(\frac{x}2)|\\
+        &\leq 2|\frac{x}2|^2\\
+        &=\frac12x^2\\
+        &<\ep
+    \end{align*}
+    Showing the limit is indeed 1.
+
+    
+\end{proof}
+
+\end{document}
