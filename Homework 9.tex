@@ -57,5 +57,151 @@
 
 \begin{document} \maketitle
 
+\section*{Exercise 1}
+
+Compute the following limits.
+
+\question[1] 
+
+\begin{claim}
+\[\lim_{x\to1}\frac{x+x^2+x^3+\ldots+x^n-n}{x-1}=\frac{n(n+1)}{2}\]
+\end{claim}
+
+\begin{proof}
+    Replace $x$ with $1+h$ where $h\to0$ as $x\to1$. Then by binomial thoerem we have \begin{align*}
+        \lim_{x\to1}\frac{x+x^2+x^3+\ldots+x^n-n}{x-1}&=\lim_{h\to0}\frac{(1+h)+(1+h)^2+\ldots+(1+h)^n-n}{h}\\
+        &=1+2+\ldots+n\\
+        &=\frac{n(n+1)}{2}
+    \end{align*} 
+    The constant terms of the binomial terms are cancelled with the $-n$, then we are able to factor out $h$ from all numerator terms, cancel it with the denomonator's $h$ we have many terms with $h$ left and $1+2+\ldots+n$, however as $h$ approaches $0$, all terms with $h$ will approach $0$ and we are left with $1+2+\ldots+n$, thus giving us $\frac{n(n+1)}{2}$ as needed.
+\end{proof}
+
+\question[2] 
+
+\begin{claim}
+    \[\lim_{x\ra1}\left( \frac{m}{1-x^m}-\frac{n}{1-x^n} \right)=\frac{m-n}{2}\]
+\end{claim}
+
+\begin{proof}
+    Using the identity $1-x^a=(1-x)(1+x+\cdots+x^{a-1})$ we have:
+    \begin{align*}
+        \lim_{x\ra1}\left( \frac{m}{1-x^m}-\frac{n}{1-x^n} \right) &= \lim_{x\ra1}\left( \frac{m(1-x^n)-n(1-x^m)}{(1-x^m)(1-x^n)} \right)\\
+        &=\lim_{x\ra1}\left( \frac{m(1-x)(1+x+\cdots+x^{n-1})-n(1-x)(1+x+\cdots+x^{m-1})}{(1-x)(1+x+\cdots+x^{m-1})(1-x)(1+x+\cdots+x^{n-1})} \right)\\
+        &=\lim_{x\ra1}\left( \frac{m(1-x)(1+x+\cdots+x^{n-1})-n(1-x)(1+x+\cdots+x^{m-1})}{(1-x)m(1-x)n} \right)\text{ since $x\ra1$}\\
+        &=\frac1{mn}\lim_{x\ra1}\left( \frac{m(1+x+\cdots+x^{n-1})-n(1+x+\cdots+x^{m-1})}{(1-x)} \right)\\
+        &=\frac1{mn}\lim_{x\ra1}\left( \frac{m(x+\cdots+x^{n-1})+m+mn-mn-n-n(x+\cdots+x^{m-1})}{(1-x)} \right)\\
+        &=\frac1{mn}\lim_{x\ra1}\left( \frac{m(x+\cdots+x^{n-1}-(n-1))-n(x+\cdots+x^{m-1}-(m-1))}{(1-x)} \right)\\
+        &=-\frac1{mn}\lim_{x\ra1}\left( m\frac{x+\cdots+x^{n-1}-(n-1)}{x-1}-n\frac{x+\cdots+x^{m-1}-(m-1)}{x-1} \right)\\
+        &=-\frac1{mn}\left( \frac{m(n-1)n}{2} - \frac{n(m-1)m}{2}\right) \text{ by E1Q1}\\
+        &=\frac{m-n}{2}
+    \end{align*}
+\end{proof}
+
+
+
+\question[3] 
+
+\begin{claim}
+    \[\lim_{x\ra4}\frac{\sqrt{1+2x}-3}{\sqrt{x}-2}=\frac43\]
+\end{claim}
+
+\begin{proof}
+    \begin{align*}
+        \lim_{x\ra4}\frac{\sqrt{1+2x}-3}{\sqrt{x}-2}&=\lim_{x\ra4}\frac{\sqrt{1+2x}-3}{\sqrt{x}-2}\cdot\frac{\sqrt{1+2x}+3}{\sqrt{1+2x}+3}\\
+        &=\lim_{x\ra4}\frac{1+2x-9}{(\sqrt{x}-2)(\sqrt{1+2x}+3)}\\
+        &=\lim_{x\ra4}\frac{2(x-4)}{(\sqrt{x}-2)(\sqrt{1+2x}+3)}\\
+        &=\lim_{x\ra4}\frac{2(x-4)}{(\sqrt{x}-2)(\sqrt{1+2x}+3)}\cdot\frac{\sqrt{x}+2}{\sqrt{x}+2}\\
+        &=\lim_{x\ra4}\frac{2(x-4)(\sqrt{x}+2)}{(x-4)(\sqrt{1+2x}+3)}\\
+        &=\lim_{x\ra4}\frac{2(\sqrt{x}+2)}{\sqrt{1+2x}+3}\\
+        &=\frac{2(\sqrt{4}+2)}{\sqrt{1+2\cdot4}+3}\\
+        &=\frac43
+    \end{align*}
+\end{proof}
+
+
+\question[4] \begin{claim}
+    \[\lim_{x\ra0}\frac{x^2}{\sqrt{1+5x}-(1+x)}=0\]
+\end{claim}
+
+\begin{proof}
+    \begin{align*}
+        \lim_{x\ra0}\frac{x^2}{\sqrt{1+5x}-(1+x)}&=\lim_{x\ra0}\frac{x^2}{\sqrt{1+5x}-(1+x)}\cdot\frac{\sqrt{1+5x}+(1+x)}{\sqrt{1+5x}+(1+x)}\\
+        &=\lim_{x\ra0}\frac{x^2(\sqrt{1+5x}+(1+x))}{(1+5x)-(1+x)^2}\\
+        &=\lim_{x\ra0}\frac{x^2(\sqrt{1+5x}+(1+x))}{1+5x-1-2x-x^2}\\
+        &=\lim_{x\ra0}\frac{x^2(\sqrt{1+5x}+(1+x))}{-x^2+3x}\\
+        &=\lim_{x\ra0}\frac{x(\sqrt{1+5x}+(1+x))}{-x+3}\\
+        &=0
+    \end{align*}
+\end{proof}
+
+\newpage
+\section*{Exercise 2}
+
+\begin{definition}
+    Let $f(x)$ be defined on $(a,+\infty)$ for some $a\in\R$. We say that $f(x)$ tends to $k\in\R$ when $x$ tends to $+\infty$, and denote it by \[\lim_{x\ra+\infty}f(x)=k,\] if \(\forall\ep>0, \exists A\in\R, \text{ s.t. } \forall x > A, |f(x)-k|<\ep.\)
+\end{definition}
+
+In this exercise, we study some limits of average of functions, that are of similar spirits to those of the sequences we encountered before. To this end, assume that 
+\begin{enumerate}
+    \item $f(x)$ is defined on some interval $(a,+\infty)$, where $a\in\R$ and 
+    \item $\forall b>a, f(x)$ is bounded on $(a,b)$ (be careful: this does not mean that $f(x)$ is bounded on $a,+\infty$)).
+\end{enumerate}
+
+\question[1] Prove that if $\displaystyle\lim_{x\ra+\infty}(f(x+1)-f(x))=k$, then \[\displaystyle\lim_{x\ra+\infty}\frac{f(x)}{x}=k.\]
+
+\begin{proof}
+    
+\end{proof}
+
+\question[2] Prove that if $\forall x\in (a,+\infty), f(x)\geq C > 0$ for some (fixed) positive $C$, and $\displaystyle\lim_{x\ra+\infty}\frac{f(x+1)}{f(x)}=k$, then \[\lim_{x\ra+\infty}(f(x))^{\frac1x}=k.\]
+
+
+\newpage
+\section*{Exercise 3}
+
+Consider the following Riemann function $f:\R\to\R$ defined
+
+\[f(x)=\begin{cases}
+    \frac1n, &x=\frac{m}n\in\Q\setminus\{0\}, \gcd(m,n)=1, n\in\N; \\ 0,& x\in\Q^c\cup\{0\}.
+\end{cases}\]a
+
+\question[1] Prove that $f(x)$ is not continuous at any $x\in\Q\setminus\{0\}$.
+
+\begin{proof}
+    We want to show that $\forall a\in\Q\setminus\{0\},\exists\ep>0,\forall\delta>0,\exists x\in\R, |x-a|<\delta\land|f(x)-f(a)|\geq\ep$. Fix $a=\frac{m}{n}\in\Q\setminus\{0\}$ where $\gcd(m,n)=1$, choose $\ep=\frac{f(a)}{2}=\frac1{2n}$, then $\forall\delta>0$, choose $x=\frac{m}{n}+\frac{\delta}{2}$ if $\delta$ is irrational otherwise $x=\frac{m}{n}+\frac{\delta}{\sqrt2}$ (to ensure $x$ is irrational). Then if $\delta$ is irrational, $|x-a|=\frac{\delta}{2}<\delta$ and $|f(x)-f(a)|=|0-\frac1n|=\frac1n\geq\frac1{2n}=\ep$; if $\delta$ is rational, $|x-a|=\frac{\delta}{\sqrt2}<\delta$ and $|f(x)-f(a)|=|0-\frac1n|=\frac1n\geq\frac1{2n}=\ep$. Thus by definition $f(x)$ is not continuous at all $a\in\Q\setminus\{0\}$.
+\end{proof}
+
+\question[2] Prove that $f(x)$ has left and right limit at any $x\in\Q$, i.e., \[\forall x\in\R, \displaystyle\lim_{y\ra x^+}f(y), \lim_{y\ra x^-}f(y)\text{ exist.}\]
+
+\begin{proof}
+    It suffices to show the limit exists, thus by HW8 we know this implies the existence of left and right limits. I claim that the limit of any $a\in\Q$ is $0$. Fix $a\in\Q$, fix $\ep>0$, then by Archimedean Property choose some $N\in\N$ s.t. $\frac1N<\ep$. 
+
+    Choose $\delta=\min(\{|\frac{p}{q}-a|:p\in\Z\cap[-(N-1), (N-1)], q\in\N, q\leq N\})$ (finite and non-empty thus is well-defined), then consider $x\in\R$ s.t. $0<|x-a|<\delta:$ if $x$ is irrational then we immediately get $|f(x)-0|=0<\ep$; if $x$ is rational then $x$ cannot be any of $\pm\frac11; \pm\frac12; \pm\frac13, \pm\frac23; \ldots; \pm\frac1N, \ldots, \pm\frac{N-1}{N}$ by our choose of $\delta$, so, $|f(x)-0|\leq\frac1{N}<\ep$.
+
+    Hence, as $\displaystyle\lim_{y\ra x}f(y)=0$ for all $x\in\Q$, this implies the existence of left and right limits, completing our proof.
+
+\end{proof}
+
+\question[3] Prove that $f(x)$ is continuous for all $x\in\Q^c\cup\{0\}$. Moreover, conclude the type of discountinuity for $x\in\Q\setminus\{0\}$.
+
+\begin{proof}
+    (Similar to E3Q2). We want to show that $\forall a\in\Q^c\cup\{0\},\forall\ep>0,\exists\delta>0,\forall x\in\R, |x-a|<\delta\Ra|f(x)-f(a)|<\ep$. Fix $a\in\Q^c\cup\{0\}$, fix $\ep>0$, then by Archimedean Property choose some $N\in\N$ s.t. $\frac1N<\ep$.
+
+    Choose $\delta=\min(\{|\frac{p}{q}-a|:p\in\Z\cap[-(N-1), (N-1)], q\in\N, q\leq N\})$ (finite and non-empty thus is well-defined), then consider $x\in\R$ s.t. $0<|x-a|<\delta:$ if $x$ is irrational then we immediately get $|f(x)-f(a)|=|0-0|=0<\ep$; if $x$ is rational then $x$ cannot be any of $\pm\frac11; \pm\frac12; \pm\frac13, \pm\frac23; \ldots; \pm\frac1N, \ldots, \pm\frac{N-1}{N}$ by our choose of $\delta$, so, $|f(x)-f(a)|=|f(x)-0|=f(x)\leq\frac1{N}<\ep$.
+
+    Thus, by definition $f(x)$ is continuous for all $x\in\Q^c\cup\{0\}$. Moreover, since $f(x)$ is not continuous at any $x\in\Q\setminus\{0\}$, and we have shown that $f(x)$ has left and right limits at any $x\in\Q$, thus $f(x)$ is removable discontinuous at all $x\in\Q\setminus\{0\}$.
+\end{proof}
+
+\question[4] Name two functions $f_1(x), f_2(x):\R\to\R$, satisfying the following conditions, respectively:
+\begin{itemize}
+    \item $f_1(x)$ is not continuous at uncountably many points, moreover all discontinuous points are of the second type of discontinuity.
+    \item $f_2(x)$ is not continuous at countably many points, moreover all discontinuous points are of the first type of discontinuity.
+\end{itemize}
+
+Hint: Name two great German mathematicians. 
+
+\begin{claim}
+    ...
+\end{claim}
 
 \end{document}
