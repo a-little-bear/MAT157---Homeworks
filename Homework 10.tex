@@ -1,0 +1,234 @@
+\documentclass{homework}
+\author{Joseph Siu}
+\class{MAT157: Analysis I}
+\date{\today}
+\title{Homework 10}
+
+\newcommand{\Set}[1]{\{#1\}}
+\newcommand{\T}[1]{\text{#1}}
+\newcommand{\Al}[3]{#1 &=#2 &\text{#3}&&\\}
+
+% Symbols
+\newcommand*{\eg}{\leavevmode\unskip , e. g., \ignorespaces} % for example
+\newcommand*{\ie}{\leavevmode\unskip, i. e., \ignorespaces} % that is
+\newcommand{\nil}{\varnothing}
+\AtBeginDocument{\def\O{\cal{O}}} % Big Oh
+\AtBeginDocument{\def\C{\bb{C}}} % Complex
+\newcommand{\R}{\bb{R}} % Reals
+\newcommand{\Q}{\bb{Q}} % Rationals
+\newcommand{\Z}{\bb{Z}} % Integers
+\newcommand{\N}{\bb{N}} % Naturals
+\renewcommand{\P}{\bb{P}} % Primes
+\newcommand{\Pset}[1]{\mathcal{P}(#1)} %power set
+\newcommand{\Relate}[2]{#1\mathcal{R}#2} %relation
+\newcommand{\relate}{\mathcal{R}}
+\newcommand{\F}{\bb{F}} 
+\newcommand{\GF}[1][2]{\bb{F}_{#1}} 
+\newcommand{\modulo}[1][n]{\Z/#1\Z} 
+\newcommand{\ra}{\rightarrow}
+\newcommand{\Ra}{\Rightarrow}
+\newcommand{\?}{\stackrel{?}{=}}
+\newcommand{\is}{\equiv}
+\newcommand{\al}{\alpha}
+\newcommand{\ep}{\varepsilon}
+\renewcommand{\phi}{\varphi}
+\newcommand{\p}{\partial}
+\newcommand{\injective}{\hookrightarrow}
+\newcommand{\surjective}{\twoheadrightarrow}
+\newcommand{\bijective}{\hookrightarrow\mathrel{\mspace{-15mu}}\rightarrow}
+\newcommand{\derivative}[2][x]{\frac{\D #2}{\D #1}}
+\newcommand{\ceil}[1]{\left\lceil#1\right\rceil}
+\newcommand{\floor}[1]{\left\lfloor#1\right\rfloor}
+\newcommand{\near}[1]{\left\lfloor#1\right\rceil}
+\newcommand{\arr}[1]{\left\langle#1\right\rangle}
+\newcommand{\paren}[1]{\left(#1\right)} %pair / ()
+\newcommand{\brk}[1]{\left[#1\right]} %[]
+\newcommand{\abs}[1]{\left|#1\right|}
+\newcommand{\curl}[1]{\left\{#1\right\}} %set {}
+\newcommand{\func}[3]{#1: #2 \rightarrow #3}
+
+
+\theoremstyle{definition}
+\newtheorem*{claim}{Claim}
+\newtheorem*{definition}{Definition}
+\newtheorem*{theorem}{Theorem}
+\newtheorem*{lemma}{Lemma}
+
+
+\begin{document} \maketitle
+
+
+\section*{Exercise 1}
+In this exercise, we aim at proving that each open set in $\R$ is the countable union of disjoint open intervals. To this end, assume that $U\subseteq\R$ is a non-empty open set.
+
+\question[1] Prove that in $\R$ each connected open set is an open interval.
+
+\question[2] Let $x\in U$. Introduce the relation on $U\times U$ as the following:\[x\sim y:=(x=y)\lor((x>y)\land((y,x)\subseteq U))\lor((y>x)\land((x,y)\subseteq U)).\] Prove that the relation is an equivalence relation.
+
+\question[3] Prove that $\forall x\in U$, $[x]$ (its equivalence class) is connected.
+
+\question[4] Based on all the previous sub-questions, conclude that each open set in $\R$ is the countable union of disjoint open intervals.
+
+
+\newpage
+\section*{Exercise 2}
+Let $I_0=[0,1]$ be the closed interval. Consider the following construction:
+\begin{itemize}
+    \item Take off the open interval of 1/3 length of $I_0$ in the middle, and let $I_1$ be the remaining set, which consists of 2 closed intervals.
+    \item Take off the open interval of 1/3 length in the middle of each component of $I_1$, and let $I_2$ be the remaining set, which consists of 4 closed intervals.
+    \item Take off the open interval of 1/3 length in the middle of each component of $I_2$, and let $I_3$ be the remaining set, which consists of 8 closed intervals.
+    \item \dots
+    \item Take off the open interval of 1/3 length in the middle of each component of $I_n$, and let $I_{n+1}$ be the remaining set, which consists of $2^{n+1}$ closed intervals.
+\end{itemize}
+
+Now let \[I^*=\bigcap_{i\in\N}I_n\]
+
+\question[1] Prove that $I^*$ is non-empty.
+
+\begin{proof}
+    To show $I^*$ is non-empty, it suffices to show that two end points of $[0,1]$ are contained in all $I_n,n\in\N\cup\{0\}$ and thus are in $I^*$.
+    
+    First $0,1\in[0,1]$ showing $0,1\in I_0$. Assume $0,1\in I_n$ for some $n\in\N\cup\{0\}$, we want to show $0,1\in I_n\implies 0,1\in I_{n+1}$. That is, first 0 in $I_n$ means 0 is in one of the closed intervals of $I_n$, and since $I_{n+1}$ is the remaining set after taking off the open interval of 1/3 length in the middle of each component of $I_n$, then 0 is still in one of the closed intervals of $I_{n+1}$, thus $0\in I_{n+1}$. Similarly, 1 in $I_n$ means 1 is in one of the closed intervals of $I_n$, and since $I_{n+1}$ is the remaining set after taking off the open interval of 1/3 length in the middle of each component of $I_n$, then 1 is still in one of the closed intervals of $I_{n+1}$, thus $1\in I_{n+1}$. Thus by induction $0,1\in I_n, \forall n\in\N\cup\{0\}$, thus $0,1\in I^*$. From these 2 cases, we can also generalize that all end points of $I_n,n\in\N\cup\{0\}$ are contained in $I^*$, thus $I^*$ is non-empty.
+\end{proof}
+
+\question[2] Prove that $I^*$ has length equal to 0. (Without introducing the measure, it is not clear what does length mean. However, in this question you can interpret the length in a naive way.)
+
+\begin{proof}
+    Denote the length of the interval $I$ using $\operatorname{len}(I)$. First since $I^*$ is the intersection of all $I_n$, we have $\operatorname{len}(I^*)\leq\operatorname{len}(I_n)$ for all $n\in\N$. We show that $\operatorname{len}(I_n)=(\frac{2}{3})^n$ by induction on $n$, then this implies $$\lim_{n\ra\infty}\operatorname{len}(I^*)\leq\lim_{n\ra\infty}\operatorname{len}(I_n)=\lim_{n\ra\infty}(\frac{2}{3})^n=0,$$ and since "length" cannot be negative, by squeeze theorem we have $\operatorname{len}(I^*)=0$.
+    
+    To this end, we show that $\operatorname{len}(I_n)=(\frac{2}{3})^n$ by induction on $n$. 
+
+    Base case: $n=0$, then $I_0=[0,1]$ which has length $\operatorname{len}(I_0)=1=(\frac{2}{3})^0=1$, the equality holds.
+
+    Inductive hypothesis: $\operatorname{len}(I_n)=(\frac{2}{3})^n$ for some $n\in\N\cup\{0\}$.
+
+    Inductive step: Suppose $\operatorname{len}(I_n)=(\frac{2}{3})^n$, then because $I_{n+1}$ is the remaining set after taking off the open interval of 1/3 length in the middle of each component of $I_n$, and $I_n$ consists of $2^n$ closed intervals, then $I_{n+1}$ consists of $2^{n+1}$ closed intervals, and so, $\operatorname{len}(I_{n+1})=\frac23\operatorname{len}(I_n)=\frac23(\frac{2}{3})^n=(\frac{2}{3})^{n+1}$.
+
+    By induction we have shown that $\operatorname{len}(I_n)=(\frac{2}{3})^n$ for all $n\in\N$, and thus $\operatorname{len}(I^*)\leq\operatorname{len}(I_n)=(\frac{2}{3})^n$ for all $n\in\N$.
+
+    As a consequence, we can see the length of $I^*$ is 0. 
+\end{proof}
+
+\question[3] Prove that $I^*$ is uncountable.
+
+\begin{proof}
+    Assuming the definition of base 2 and base 3 decimal expressions (base 10 is shown by tutorial, similarily we may see that these expressions are well covering all real numbers uniquely). To show $I^*$ is uncountable, we show the existence of a surjective function $f$ from $I^*$ to $[0,1]$. To this end, we first represent every $x\in[0,1]$ in base 3 notation (ternary). And so, since we take the middle 1/3 off to construct $I_{n+1}$ from $I_n$, the remaining elements need to be in the form 0.000xxx... or 0.22202xxx... where $x\in\{0,2\}$, in other words $x\neq1$ where $x$ is any digit of any element in $I^*$ otherwise contradicting the construction of $I^*$. Thus, we construct $f$ as a composition of $g$ and $h$ where $g$ is a function that maps every element in $I^*$ to a sequence of 0s and 2s, and $h$ is a function that maps every sequence of 0s and 2s to a real number in $[0,1]$ in base 2 notation, namely we define $h$ as the function that changes any occurence of 2s to 1s and remain the occurence of 0. To show $f$ is surjective, take any $y\in[0,1]$, then there exists a sequence of 0s and 1s that represents $y$ in base 2 notation, then we can change every occurence of 1s to 2s and remain the occurence of 0s, then we have a sequence of 0s and 2s, which is in the form of 0.000xxx... or 0.22202xxx... where $x\in\{0,2\}$, in other words $x\neq1$, thus it is in $I^*$ (otherwise it must be excluded by $I_n$ for all $n\geq N$ for some $N\in\N$, and however it cannot be excluded as end point cannot be excluded), and so, pick this sequence to be $a$ which $f(a)$ gives the $y$ as needed. Thus, $f$ is surjective, and so, $I^*$ is uncountable since the interval $[0,1]$ is uncountable. 
+\end{proof}
+
+
+\newpage
+\section*{Exercise 3}
+\begin{definition}
+    (Darboux function). A function $f:D\subseteq\R$ is called a Darboux function if 
+    
+    $\forall a,b\in D$ s.t. $f(b)>f(a), \forall y\in (f(a),f(b)), \exists c$ between $a$ and $b$ s.t. $f(c)=y$
+\end{definition}
+
+For example, by intermediate value theorem, any continuous function defined on a closed interval is a Darboux function. However, Darboux function can be more general.
+
+\question[1] Consider the function defined on closed interval $[-1,1]$.
+
+\[f(x)=\begin{cases}
+    \sin(\frac1x) & x\in[-1,1]\setminus\{0\}\\
+    0 & x=0
+\end{cases}.\]
+
+Prove that $f(x)$ is not continuous at $x=0$, but it is still a Darboux function.
+
+\begin{proof}
+    We first prove $f(x)$ is not continuous at $x=0$ by showing $\displaystyle\lim_{x\to0}\sin(1/x)$ does not exist. Consider $\displaystyle\lim_{x\to0^+}\sin(1/x)$, let $h=\frac1x$, then $h\to\infty$ as $x\to0^+$. Then we have $\displaystyle\lim_{x\to0^+}\sin(1/x)=\displaystyle\lim_{h\to\infty}\sin(h)$ which clearly does not exist. Thus, by HW8 $\displaystyle\lim_{x\to0}\sin(1/x)$ does not exist showing it is not continuous at $x=0$.
+
+    Now we show $f(x)$ is continuous at all $x\in[-1,1]\setminus\{0\}$. Let $x\in[-1,1]\setminus\{0\}$, then $f(x)=\sin(1/x)$ which is continuous at $x$ since $\sin(x)$ is continuous everywhere. Thus, $f(x)$ is continuous at all $x\in[-1,1]\setminus\{0\}$.
+
+    Since by IVT, every continuous function is a Darboux function, and $f(x)$ is continuous at all $x\in[-1,1]\setminus\{0\}$, then consider cases:
+
+    If $a,b\in[-1,0)$, then because $f(x)$ is continuous on $[-1,0)$, then by IVT, $\forall y\in(f(a),f(b)), \exists c$ between $a$ and $b$ s.t. $f(c)=y$. Thus, $f(x)$ is a Darboux function on $[-1,0)$.
+
+    If $a,b\in(0,1]$, then because $f(x)$ is continuous on $(0,1]$, then by IVT, $\forall y\in(f(a),f(b)), \exists c$ between $a$ and $b$ s.t. $f(c)=y$. Thus, $f(x)$ is a Darboux function on $(0,1]$.
+
+    If $a\in[-1,0), b\in(0, 1]$, choose some $c_1\in(a,0), c_2\in(0,b)$ such that $f(c_1)=\sin(1/c_1)=1, f(c_2)=\sin(1/c_2)=-1$, this is allowed as $\sin(x)$ is a continouus function on all $x\in\R$ and it is periodically oscillating between -1 nad 1 inclusively. Thus, by the first 2 cases $f$ is continouus on $(a,c_1)$ and $(c_2,b)$, also $f(c_1)\geq f(b)$ and $f(c_2)\leq f(a)$, giving $\forall y\in(f(a),f(b)),\exists c\in (a,b), f(c)=y$.
+
+    If $b\in[-1,0), a\in(0, 1]$, similar to the previous case, choose some $c_1\in(b,0), c_2\in(0,a)$ such that $f(c_1)=\sin(1/c_1)=-1, f(c_2)=\sin(1/c_2)=1$, this is allowed as $\sin(x)$ is a continuous function on all $x\in\R$ and it is periodically oscillating between -1 and 1 inclusively. Thus, by the first 2 cases $f$ is continuous on $(b,c_1)$ and $(c_2,a)$, also $f(c_1)\leq f(a)$ and $f(c_2)\geq f(b)$, giving $\forall y\in(f(a),f(b)),\exists c\in(a,b), f(c)=y$.
+
+    If $a = 0, b\in(0, 1]\cup[-1,0)$. If $b\in(0,1]$ we choose $c\in(a,b)$ such that $f(c)=\sin(1/c)=-1$, then by Case 2 we are done. If $b\in[-1,0)$ we choose $c\in(b,a)$ such that $f(c)=\sin(1/c)=-1$, then by Case 1 we are done.
+
+    If $b = 0, a\in(0, 1]\cup[-1,0)$. If $a\in(0,1]$ we choose $c\in(b,a)$ such that $f(c)=\sin(1/c)=1$, then by Case 2 we are done. If $a\in[-1,0)$ we choose $c\in(a,b)$ such that $f(c)=\sin(1/c)=1$, then by Case 1 we are done. 
+
+    Therefore for all cases we have shown that the function $f(x)$ is indeed a Darboux funciton.
+
+\end{proof}
+
+\question[2] Consider the function defined on closed interval $[-1,1]$.
+
+\[f(x)=\begin{cases}
+    x\sin(\frac1x) & x\in[-1,1]\setminus\{0\}\\
+    0 & x=0
+\end{cases}.\]
+
+Is the function continuous in $(-1,1)$? Is the function differentiable in $(-1,1)$? Explain your answer.
+
+\begin{proof}
+    The function is continous in $(-1,1)$. We show it by cases: when $x=0$, we have the inequality $-|x|\leq f(x)\leq |x|$ since $\forall x\in\R, \sin(x)\in[-1,1]$ and $-|x|\leq0\leq |x|, x=0$. By squeeze theorem we have $0=\displaystyle\lim_{x\ra0}-|x|\leq\displaystyle\lim_{x\ra0}f(x)\leq\displaystyle\lim_{x\ra0}|x|=0$, showing the $\displaystyle\lim_{x\ra0}f(x)=f(0)$, thus continuous at $x=0$. When $x\in(-1,1)\setminus\{0\}$, g(x)=x is continouus and h(x)=sin(1/x) is continuous (by E3Q1) give $f(x)=x\sin(1/x)$ is continuous too (product of continuous functions is also continuous).
+
+    We have shown that the function is continuous in $(-1,1)$, however, $f$ is not differentiable at $x=0$:
+
+    \begin{align*}
+        f'(0)&=\lim_{h\ra0}\frac{f(0+h)-f(0)}{h}\\
+        &=\lim_{h\ra0}\frac{f(h)-0}{h}\\
+        &=\lim_{h\ra0}\frac{h\sin(1/h)}{h}\\
+        &=\lim_{h\ra0}\sin(1/h)\\
+        &=\text{DNE by E3Q1}             
+    \end{align*}
+
+    But $f$ is actually differentiable at $x\in(-1,1)\setminus\{0\}$. When $x\in(-1,1)\setminus\{0\}$, define $g(x)=x, h(x)=\sin(x), k(x)=1/x$ where $f(x)=g(x)h(k(x))$ , by Product Rule and Chain Rule $f'(x)=(g(x)h(k(x)))'=g'(x)h(k(x))+g(x)h'(k(x))k'(x)$, that is, because all $g, h, k$ are differentiable on $(-1,1)\setminus\{0\}$ ($\sin(1/x)$ is differentiable when $x=\neq0$ since $sin(y)$ is differentiable everywhere where $y\in\R$; $k(x)=1/x$ is differentiable when $x\neq0$ since $a\in(-1,1)\setminus\{0\}, \lim_{h\to0}\frac{k(a+h)-k(a)}{h}=\lim_{h\to0}\frac{a - a - h}{ah(a+h)}=-\frac{1}{a^2}$), showing $f$ is also differentiable (derivative exists implies differentiability). 
+\end{proof}
+
+
+\question[3] Consider the function defined on closed interval $[-1,1]$.
+
+\[f(x)=\begin{cases}
+    x^2\sin(\frac1x) & x\in[-1,1]\setminus\{0\}\\
+    0 & x=0
+\end{cases}.\]
+
+Prove that the function is differentiable in $(-1,1)$. Is the derivative of the function $f'(x)$ continuous in $(-1,1)$? Is $f'(x)$ a Darboux function in $(-1,1)$? Explain your answer. 
+
+\begin{proof}
+    We first prove the function is differentiable. If $x=0$, 
+    \begin{align*}
+        f'(0)&=\lim_{h\ra0}\frac{f(0+h)-f(0)}{h}\\
+        &=\lim_{h\ra0}\frac{h^2\sin(1/h)}{h}\\
+        &=\lim_{h\ra0}h\sin(1/h)\\
+        &=0\text{ by E3Q2}
+    \end{align*}
+
+    If $x\in(-1,1)\setminus\{0\}$, by E3Q2, since $g(x)=x$ and $h(x)=x\sin(1/x)$ are differentiable thus by product rule their product $f(x)=g(x)h(x)$ must also be differentiable.
+
+    Now, to show $f'$ is not continuous on its domain, we just need to show that $\lim_{x\ra0}f'(x)=\text{DNE}$.
+
+    When $x\in(-1,1)\setminus\{0\}$, by product rule and chain rule we have $f'(x)=(x^2\sin(1/x))'=2x\sin(1/x)+x^2\cos(1/x)(-1/x^2)=2x\sin(1/x)-\cos(1/x)$.
+
+    So, \begin{align*}
+        \lim_{x\ra0}f'(x)&=\frac{f'(x)-f'(0)}{x-0}\\
+        &=\lim_{x\ra0}\frac{f'(x)}{x}\\
+        &=\lim_{x\ra0}\frac{f'(x)}{x}\\
+        &=\lim_{x\ra0}\frac{2x\sin(1/x)-\cos(1/x)}{x}\\
+        &=\lim_{x\ra0}\frac{2x\sin(1/x)}{x}-\frac{\cos(1/x)}{x}\\
+        &=\lim_{x\ra0}2\sin(1/x)-\frac{\cos(1/x)}{x}\\
+        &=\text{DNE by E3Q1}
+    \end{align*} 
+
+    Thus, $f'$ is not continuous at $x=0$ / in the domain $(-1,1)$. Nonetheless, we can still show that $f'(x)$ is continuous at all $x\in(-1,1)\setminus\{0\}$: 
+
+    When $x\in(-1,1)\setminus\{0\}$, by product rule and chain rule we have $f'(x)=(x^2\sin(1/x))'=2x\sin(1/x)+x^2\cos(1/x)(-1/x^2)=2x\sin(1/x)-\cos(1/x)$, and $f'(x)$ is continuous at $x\in(-1,1)\setminus\{0\}$ since $2x\sin(1/x)$ and $\cos(1/x)$ are continuous at $x\in(-1,1)\setminus\{0\}$ (by E3Q2 and the fact that $\cos(x)$ is also continuous at all $x\in\R$).
+
+    Also, by similar argument as E3Q1, we can see that $f'(x)=2x\sin(1/x)-\cos(1/x)$ is also a Darboux function since it is continous everywhere except $x=0$. 
+
+    That is, it is sufficient to show $f'(x)$ is an even function, then if $a,b$ are not both in $(-1,0)$ or $(0,1)$, w.l.o.g. if $a\in(-1,0)$ and $b\in(0,1)$, then $f'(a)=f'(-a)$, giving $-a\in(0,1)$ and $b\in(0,1)$ and $y\in(f'(a),f'(b))\iff y\in(f'(-a),f'(b))$, then because of the continuity of the function $f'(x)$ on the interval $(0,1)$, apply IVT we are able to conclude it is indeed a Darboux function. 
+
+    To this end, we show $f'(x)$ is an even function. Let $x\in(-1,1)\setminus\{0\}$, then $f'(-x)=2(-x)\sin(1/(-x))-\cos(1/(-x))=2x\sin(1/x)-\cos(1/x)=f'(x)$, thus $f'(x)$ is an even function.
+    
+    
+\end{proof}
+
+\end{document}

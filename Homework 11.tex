@@ -1,0 +1,93 @@
+\documentclass{homework}
+\author{Joseph Siu}
+\class{MAT157: Analysis I}
+\date{\today}
+\title{Homework 11}
+
+\newcommand{\Set}[1]{\{#1\}}
+\newcommand{\T}[1]{\text{#1}}
+\newcommand{\Al}[3]{#1 &=#2 &\text{#3}&&\\}
+
+% Symbols
+\newcommand*{\eg}{\leavevmode\unskip , e. g., \ignorespaces} % for example
+\newcommand*{\ie}{\leavevmode\unskip, i. e., \ignorespaces} % that is
+\newcommand{\nil}{\varnothing}
+\AtBeginDocument{\def\O{\cal{O}}} % Big Oh
+\AtBeginDocument{\def\C{\bb{C}}} % Complex
+\newcommand{\R}{\bb{R}} % Reals
+\newcommand{\Q}{\bb{Q}} % Rationals
+\newcommand{\Z}{\bb{Z}} % Integers
+\newcommand{\N}{\bb{N}} % Naturals
+\renewcommand{\P}{\bb{P}} % Primes
+\newcommand{\Pset}[1]{\mathcal{P}(#1)} %power set
+\newcommand{\Relate}[2]{#1\mathcal{R}#2} %relation
+\newcommand{\relate}{\mathcal{R}}
+\newcommand{\F}{\bb{F}} 
+\newcommand{\GF}[1][2]{\bb{F}_{#1}} 
+\newcommand{\modulo}[1][n]{\Z/#1\Z} 
+\newcommand{\ra}{\rightarrow}
+\newcommand{\Ra}{\Rightarrow}
+\newcommand{\?}{\stackrel{?}{=}}
+\newcommand{\is}{\equiv}
+\newcommand{\al}{\alpha}
+\newcommand{\ep}{\varepsilon}
+\renewcommand{\phi}{\varphi}
+\newcommand{\p}{\partial}
+\newcommand{\injective}{\hookrightarrow}
+\newcommand{\surjective}{\twoheadrightarrow}
+\newcommand{\bijective}{\hookrightarrow\mathrel{\mspace{-15mu}}\rightarrow}
+\newcommand{\derivative}[2][x]{\frac{\D #2}{\D #1}}
+\newcommand{\ceil}[1]{\left\lceil#1\right\rceil}
+\newcommand{\floor}[1]{\left\lfloor#1\right\rfloor}
+\newcommand{\near}[1]{\left\lfloor#1\right\rceil}
+\newcommand{\arr}[1]{\left\langle#1\right\rangle}
+\newcommand{\paren}[1]{\left(#1\right)} %pair / ()
+\newcommand{\brk}[1]{\left[#1\right]} %[]
+\newcommand{\abs}[1]{\left|#1\right|}
+\newcommand{\curl}[1]{\left\{#1\right\}} %set {}
+\newcommand{\func}[3]{#1: #2 \rightarrow #3}
+
+
+\theoremstyle{definition}
+\newtheorem*{claim}{Claim}
+\newtheorem*{definition}{Definition}
+\newtheorem*{theorem}{Theorem}
+\newtheorem*{lemma}{Lemma}
+
+
+\begin{document} \maketitle
+
+\section*{Exercise 1}
+
+Let $f(x)$ be a funciton defined near 0 and $\displaystyle\lim_{x\to0}f(x)=0$.
+
+\question[1] Prove that $\textup{if~}g(x)=o(\mathcal{O}(f(x))),\mathrm{~then~}g(x)=o(f(x))$. 
+
+\quesiton[2] Prove that $\textup{if~}g(x)=\mathcal{O}(o((f(x))),\mathrm{~then~}g(x)=o(f(x))$.
+
+\newpage
+\section*{Exercise 2}
+Let the angle $\angle AOB=x$. Find $n\in\N$ so that the following quantity $g(x)$ satisfies that $g(x)=\cal{O}(x^n)$ and $x^n=\cal{O}(g(x))$.
+
+
+
+\question[1] The chord length $|AB|$.
+
+\question[2] The arch height $|CD|$.
+
+\question[3] Area of the sector $AOB$.
+
+\question[4] Area of the triangle $\triangle ACB$.
+
+
+
+\newpage
+\section*{Exercise 3}
+
+Consider the function $f:\R\to\R$ given by \[f(x)=e^{x^2+\frac{\sin(x)}{1+x^2}}\]
+
+\question[1] Compute the approximation of the value $f(1.001)$ by using linear approximation.
+
+\question[2] Now suppose that you need to ensure the tolerance of error is less or equal to the scale of $10^{-17}$. Normally speaking, how many terms in the Taylor expansion approximation do you need, given that in our scenario $\Delta x=0.001?$
+
+\end{document}
