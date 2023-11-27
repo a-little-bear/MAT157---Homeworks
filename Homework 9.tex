@@ -68,12 +68,12 @@ Compute the following limits.
 \end{claim}
 
 \begin{proof}
-    Replace $x$ with $1+h$ where $h\to0$ as $x\to1$. Then by binomial thoerem we have \begin{align*}
+    Replace $x$ with $1+h$ where $h\to0$ as $x\to1$. Then by binomial theorem we have \begin{align*}
         \lim_{x\to1}\frac{x+x^2+x^3+\ldots+x^n-n}{x-1}&=\lim_{h\to0}\frac{(1+h)+(1+h)^2+\ldots+(1+h)^n-n}{h}\\
         &=1+2+\ldots+n\\
         &=\frac{n(n+1)}{2}
     \end{align*} 
-    The constant terms of the binomial terms are cancelled with the $-n$, then we are able to factor out $h$ from all numerator terms, cancel it with the denomonator's $h$ we have many terms with $h$ left and $1+2+\ldots+n$, however as $h$ approaches $0$, all terms with $h$ will approach $0$ and we are left with $1+2+\ldots+n$, thus giving us $\frac{n(n+1)}{2}$ as needed.
+    The constant terms of the binomial terms are cancelled with the $-n$, then we are able to factor out $h$ from all numerator terms, cancel it with the denominator's $h$ we have many terms with $h$ left and $1+2+\ldots+n$, however as $h$ approaches $0$, all terms with $h$ will approach $0$ and we are left with $1+2+\ldots+n$, thus giving us $\frac{n(n+1)}{2}$ as needed.
 \end{proof}
 
 \question[2] 
@@ -163,7 +163,7 @@ Consider the following Riemann function $f:\R\to\R$ defined
 
 \[f(x)=\begin{cases}
     \frac1n, &x=\frac{m}n\in\Q\setminus\{0\}, \gcd(m,n)=1, n\in\N; \\ 0,& x\in\Q^c\cup\{0\}.
-\end{cases}\]a
+\end{cases}\]
 
 \question[1] Prove that $f(x)$ is not continuous at any $x\in\Q\setminus\{0\}$.
 
@@ -171,7 +171,7 @@ Consider the following Riemann function $f:\R\to\R$ defined
     We want to show that $\forall a\in\Q\setminus\{0\},\exists\ep>0,\forall\delta>0,\exists x\in\R, |x-a|<\delta\land|f(x)-f(a)|\geq\ep$. Fix $a=\frac{m}{n}\in\Q\setminus\{0\}$ where $\gcd(m,n)=1$, choose $\ep=\frac{f(a)}{2}=\frac1{2n}$, then $\forall\delta>0$, choose $x=\frac{m}{n}+\frac{\delta}{2}$ if $\delta$ is irrational otherwise $x=\frac{m}{n}+\frac{\delta}{\sqrt2}$ (to ensure $x$ is irrational). Then if $\delta$ is irrational, $|x-a|=\frac{\delta}{2}<\delta$ and $|f(x)-f(a)|=|0-\frac1n|=\frac1n\geq\frac1{2n}=\ep$; if $\delta$ is rational, $|x-a|=\frac{\delta}{\sqrt2}<\delta$ and $|f(x)-f(a)|=|0-\frac1n|=\frac1n\geq\frac1{2n}=\ep$. Thus by definition $f(x)$ is not continuous at all $a\in\Q\setminus\{0\}$.
 \end{proof}
 
-\question[2] Prove that $f(x)$ has left and right limit at any $x\in\Q$, i.e., \[\forall x\in\R, \displaystyle\lim_{y\ra x^+}f(y), \lim_{y\ra x^-}f(y)\text{ exist.}\]
+\question[2] Prove that $f(x)$ has left and right limit at any $x\in\Q$, i.e., \[\forall x\in\Q, \displaystyle\lim_{y\ra x^+}f(y), \lim_{y\ra x^-}f(y)\text{ exist.}\]
 
 \begin{proof}
     It suffices to show the limit exists, thus by HW8 we know this implies the existence of left and right limits. I claim that the limit of any $a\in\Q$ is $0$. Fix $a\in\Q$, fix $\ep>0$, then by Archimedean Property choose some $N\in\N$ s.t. $\frac1N<\ep$. 
@@ -182,7 +182,7 @@ Consider the following Riemann function $f:\R\to\R$ defined
 
 \end{proof}
 
-\question[3] Prove that $f(x)$ is continuous for all $x\in\Q^c\cup\{0\}$. Moreover, conclude the type of discountinuity for $x\in\Q\setminus\{0\}$.
+\question[3] Prove that $f(x)$ is continuous for all $x\in\Q^c\cup\{0\}$. Moreover, conclude the type of discontinuity for $x\in\Q\setminus\{0\}$.
 
 \begin{proof}
     (Similar to E3Q2). We want to show that $\forall a\in\Q^c\cup\{0\},\forall\ep>0,\exists\delta>0,\forall x\in\R, |x-a|<\delta\Ra|f(x)-f(a)|<\ep$. Fix $a\in\Q^c\cup\{0\}$, fix $\ep>0$, then by Archimedean Property choose some $N\in\N$ s.t. $\frac1N<\ep$.
@@ -201,7 +201,29 @@ Consider the following Riemann function $f:\R\to\R$ defined
 Hint: Name two great German mathematicians. 
 
 \begin{claim}
-    ...
+    $f_1(x)$ can be the Dirichlet function: \[
+    f_1(x)=\begin{cases}
+        1 & x\in\Q \\ 
+        0 & x\notin\Q
+    \end{cases}
+    \]
+    $f_2(x)$ is just the Thomae's function defined for this exercise: \[f_2(x)=\begin{cases}
+    \frac1n, &x=\frac{m}n\in\Q\setminus\{0\}, \gcd(m,n)=1, n\in\N; \\ 0,& x\in\Q^c\cup\{0\}.
+\end{cases}\]
+
 \end{claim}
+\begin{proof}
+    For $f_1(x)$ it is sufficient to show for all $x\in\R$  the left limit does not exist, which implies the function is nowhere continuous and is essentially discontinuous everywhere (uncountably many points).  
+
+    Suppose ad absurdum left limit exists at point $a\in\R$, namely $\exists L\in\R, \forall\ep>0, \exists\delta>0, x\in(a-\delta,a)\implies |f(x)-L|<\ep$. However by the density of irrationals and rationals, we can choose $x_1\in\R\setminus\Q$ and $x_2\in\Q$ s.t. $x_1\in(a-\delta,a)\land |f(x_1)-L|=|L|<\ep$ and $x_2\in(a-\delta,a)\land|f(x_2)-L|=|1-L|<\ep$. However $|L|<\ep$ and $|1-L|<\ep$ imply $-\ep<\frac12<\ep$, contradicting the case when $\ep=\frac14$, thus left limit does not exist for all $x\in\R$. 
+
+    Hence by HW8 we have the limit does not exist at all $x\in\R$ and so the function $f_1$ is continuous nowhere (uncountably many), moreover by definition they are the second type of discontinuity. 
+    
+    % Suppose ad absurdum limit exists at point $a\in\R$, that is, $\forall\ep>0, \exists\delta>0$ s.t. $0<|x-a|<\delta\implies|f(x)-L|<\ep$ for some $L\in\R$. However, by the density of irrationals and rationals, we can choose $x_1\in\R\setminus\Q$ and $x_2\in\Q$ such that
+    % $0<|x_1-a|<\delta\land|f(x_1)-L|=|L|<\ep$ and $0<|x_2-a|<\delta\land |f(x_2)-L|=|1-L|<\ep$, however $|L|<\ep$ and $|1-L|<\ep$ implies $-\ep<\frac12<\ep$, contradicting the case when, e.g., $\ep=\frac14$, thus contradiction, showing there is no such point $a\in\R$ s.t. limit of $f_1$ exists at $a$.  
+\end{proof}
+\begin{proof}
+    For $f_2(x)$, from E3Q1, Q2, Q3 it is only not continuous for $x\in\Q\setminus\{0\}$ (which is countably many), moreover as their limits exist, they are the first type of discontinuity (removable). 
+\end{proof}
 
 \end{document}
