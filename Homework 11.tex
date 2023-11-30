@@ -59,17 +59,17 @@
 
 \section*{Exercise 1}
 
-Let $f(x)$ be a funciton defined near 0 and $\displaystyle\lim_{x\to0}f(x)=0$.
+Let $f(x)$ be a function defined near 0 and $\displaystyle\lim_{x\to0}f(x)=0$.
 
 \question[1] Prove that $\textup{if~}g(x)=o(\mathcal{O}(f(x))),\mathrm{~then~}g(x)=o(f(x))$. 
 
-\quesiton[2] Prove that $\textup{if~}g(x)=\mathcal{O}(o((f(x))),\mathrm{~then~}g(x)=o(f(x))$.
+\question[2] Prove that $\text{if~}g(x)=\mathcal{O}(o((f(x))),\text{~then~}g(x)=o(f(x))$.
 
 \newpage
 \section*{Exercise 2}
 Let the angle $\angle AOB=x$. Find $n\in\N$ so that the following quantity $g(x)$ satisfies that $g(x)=\cal{O}(x^n)$ and $x^n=\cal{O}(g(x))$.
 
-
+\fig{image.png}{Exercise 2}{}{}
 
 \question[1] The chord length $|AB|$.
 
@@ -87,6 +87,22 @@ Let the angle $\angle AOB=x$. Find $n\in\N$ so that the following quantity $g(x)
 Consider the function $f:\R\to\R$ given by \[f(x)=e^{x^2+\frac{\sin(x)}{1+x^2}}\]
 
 \question[1] Compute the approximation of the value $f(1.001)$ by using linear approximation.
+
+\begin{align*}
+    f'(x)&=(e^{x^2+\frac{\sin(x)}{1+x^2}})'\\
+    &=(x^2+\frac{\sin(x)}{1+x^2})'e^{x^2+\frac{\sin(x)}{1+x^2}}\\
+    &=((x^2)'+(\frac{\sin(x)}{1+x^2})')e^{x^2+\frac{\sin(x)}{1+x^2}}\\
+    &=(2x+(\frac{\sin(x)}{1+x^2})')e^{x^2+\frac{\sin(x)}{1+x^2}}\\
+    &=(2x+\frac{\cos(x)(1+x^2)-\sin(x)(2x)}{(1+x^2)^2})e^{x^2+\frac{\sin(x)}{1+x^2}}\\
+\end{align*}
+
+Using the formula $f(x+\Delta x)-f(x)=f'(x)\Delta x+o(\Delta x)$, where $x=1, \Delta x=0.001$, isolate $f(x+\Delta x)$ we have
+
+\begin{align*}
+    f(x+\Delta x) &= f(x) + f'(x)\Delta x + o(\Delta x)\\
+    &\approx f(1) + 0.001\cdot f'(1)\\
+    &\approx ...
+\end{align*}
 
 \question[2] Now suppose that you need to ensure the tolerance of error is less or equal to the scale of $10^{-17}$. Normally speaking, how many terms in the Taylor expansion approximation do you need, given that in our scenario $\Delta x=0.001?$
 
