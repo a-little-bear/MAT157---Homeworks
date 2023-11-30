@@ -73,12 +73,109 @@ Let the angle $\angle AOB=x$. Find $n\in\N$ so that the following quantity $g(x)
 
 \question[1] The chord length $|AB|$.
 
+\begin{definition}
+    We denote $f(x)\sim g(x)$ when $x\to0$ if $\lim_{x\to0}\frac{f(x)}{g(x)}=1$.
+\end{definition}
+
+\begin{lemma}
+    $2\sin(\frac{x}2)\sim x$ when $x\to0$.
+
+    \begin{proof}
+        As proven, we have $\lim_{x\to0}\frac{\sin(x)}{x}=1$, thus \begin{align*}
+            \lim_{x\to0}\frac{2\cdot\sin(\frac{x}2)}{x}&=\lim_{x\to0}2\cdot\frac{\sin(\frac{x}2)}{\frac{x}2}\cdot\frac{\frac{x}2}{x}\\
+            &=\lim_{x\to0}2\cdot\frac{\sin(\frac{x}2)}{\frac{x}2}\cdot\frac12\\
+            &=2\cdot\frac12\\
+            &=1
+        \end{align*}
+        by definition showing $2\sin(\frac{x}2)\sim x$ when $x\to0$.
+    \end{proof}
+\end{lemma}
+
+\begin{lemma}
+    If $f(x),g(x)$ are bounded and continuous functions when $x\in[-1,1]$, then \[\limsup_{x\to0}|f(x)g(x)|\leq\limsup_{x\to0}|f(x)|\cdot\limsup_{x\to0}|g(x)|\]
+
+    \begin{proof}
+        By Bolzano-Weierstrass Theorem, there must exist a convergent seqeunce $(x_n y_n)$ where $\forall n\in\N, x_n\in |f([-1,1])|, y_n\in |g([-1,1])|$ s.t. $\lim_{n\to\infty}(x_n y_n)=\limsup_{x\to0}|f(x)g(x)|\in\R$ (by lecture [-1,1] is closed and $f,g$ are continuous mean the supremum $|f(x)g(x)|$ must be achieved). 
+        
+        Thus, $0\leq\lim_{n\ra\infty}x_n\leq\limsup_{n\ra\infty}x_n\leq\limsup_{x\ra0}|f(x)|$ and $0\leq\lim_{n\ra\infty}y_n\leq\limsup_{n\ra\infty}y_n\leq\limsup_{x\ra0}|g(x)|$ give $$\limsup_{x\ra0}|f(x)g(x)|=\lim_{n\ra\infty}(x_n y_n)\leq\limsup_{n\ra\infty}x_n\cdot\limsup_{n\ra\infty}y_n\leq \limsup_{x\to0}|f(x)|\cdot\limsup_{x\to0}|g(x)|,$$ as required. 
+    \end{proof}
+\end{lemma}
+
+\begin{lemma}
+    Assume $f,g$ are continuous functions. If $x\to0, f(x)\sim g(x), f(x), g(x)\neq0$, then when $x\to0$, $f(x)=\cal{O}(x^n)\iff g(x)=\cal{O}(x^n)$ for some fixed $n\in\N$.
+
+    \begin{proof}
+        Since $f(x)\sim g(x)\iff g(x)\sim f(x)$, w.l.o.g. we just need to show $f(x)=\cal{O}(x^n)\implies g(x)=\cal{O}(x^n)$. By definition, we have \[\lim_{x\to0}\sup|\frac{f(x)}{x^n}|\leq M, M\geq0,\] and $f$ is bounded since $x^n$ is bounded on $[-1,1]$, which also implies $g$ is bounded as $f$ is bounded and $f(x)\sim g(x)$ when $x\to0$. Then, by the previous lemma \begin{align*}
+            \lim_{x\to0}\sup|\frac{f(x)}{x^n}|&=\lim_{x\to0}\sup|\frac{f(x)}{x^n}|\cdot\lim_{x\to0}\sup|1|\\
+            &=\lim_{x\to0}\sup|\frac{f(x)}{x^n}|\cdot\lim_{x\to0}\sup|\frac{g(x)}{f(x)}|\\
+            &\geq \lim_{x\to0}\sup|\frac{f(x)}{x^n}\cdot\frac{g(x)}{f(x)}|\\
+            &=\lim_{x\to0}\sup|\frac{g(x)}{x^n}|\\
+        \end{align*}
+        showing \[\lim_{x\to0}\sup|\frac{g(x)}{x^n}|\leq\lim_{x\to0}\sup|\frac{f(x)}{x^n}|\leq M\], which means $g(x)=\cal{O}(x^n)$, as required.
+    \end{proof}
+\end{lemma}
+
+\begin{lemma}
+    When $x\to0$, $Cx^n=\cal{O}(x^n)$ for all $C\in\R$, for all $n\in\N$. 
+
+    \begin{proof}
+        $\limsup_{x\to0}|\frac{Cx^n}{x^n}|=|C|\leq |C|$ where $|C|\geq0$, by definition showing $Cx^n=\cal{O}(x^n)$ for any $n\in\N$ and any $C\in\R$.
+    \end{proof}
+\end{lemma}
+
+\begin{proof}
+    Assume $x\to0$. Denote the radius $R=AO=CO=BO>0$, then by lemmas and formula of triangle we have:
+
+    \(g(x)=|AB|=2R\sin(\frac{x}2)\sim Rx\), since $R\in\R$, choose $n=1$ we have \(g(x)\sim Rx=\cal{O}(x)\) and $x=\cal{O}(Rx)\implies x=\cal{O}(g(x))$ since \begin{align*}
+        \limsup_{x\to0}\frac{x}{Rx}&=\limsup_{x\to0}\frac{x}{Rx}\cdot\limsup_{x\to0}1\\
+        &=\limsup_{x\to0}\frac{x}{Rx}\cdot\limsup_{x\to0}\frac{Rx}{g(x)}\\
+        &\geq\limsup_{x\to0}\frac{x}{Rx}\cdot\frac{Rx}{g(x)}\\
+        &=\limsup_{x\to0}\frac{x}{g(x)}\\
+    \end{align*} which gives $x=\cal{O}(g(x))$.
+\end{proof}
+
 \question[2] The arch height $|CD|$.
+
+\begin{lemma}
+    $1-\cos(\frac{x}2)\sim \frac{x^2}8$ when $x\to0$.
+
+    \begin{proof}
+        By l'hopital's rule we have \begin{align*}
+            \lim_{x\to0}\frac{1-\cos(\frac{x}2)}{\frac{x^2}8}&=\lim_{x\to0}\frac{8-8\cos(\frac{x}2)}{x^2}\\
+            &=\lim_{x\to0}\frac{4\sin(\frac{x}2)}{2x}\\
+            &=\lim_{x\to0}\cos(\frac{x}2)\\
+            &=1
+        \end{align*}
+    \end{proof}
+\end{lemma}
+
+\begin{proof}
+    Assume $n\to0$ and D is the mid point of line $AB$. Then, $g(x)=|CD|=R-R\cos(\frac{x}2)\sim \frac{Rx^2}{8},$ choose $n=2$, then similar to E2Q1 we have $g(x)=\cal{O}(x^2)$ and $x^2=\cal{O}(g(x))$. 
+\end{proof}
 
 \question[3] Area of the sector $AOB$.
 
+\begin{proof}
+    Denote A as the area of the sector $AOB$. Then, $g(x)=A=\frac12R^2x$, choose $n=1$, similar to E2Q1 we have $g(x)=\cal{O}(x)$ and $x=\cal{O}(g(x))$. 
+\end{proof}
+
 \question[4] Area of the triangle $\triangle ACB$.
 
+\begin{lemma}
+    $\sin(\frac{x}2)(1-\cos(\frac{x}2))\sim \frac{x^3}{16}$ when $x\to0$.
+
+    \begin{proof}
+        By the previous lemmas we have \begin{align*}
+            \lim_{x\to0}\frac{\sin(\frac{x}2)(1-\cos(\frac{x}2))}{\frac{x^3}{16}}&=\lim_{x\to0}\frac{\sin(\frac{x}2)}{\frac{x}{2}}\cdot\lim_{x\to0}\frac{1-\cos(\frac{x}2)}{\frac{x^2}{8}}\\
+            &=1\cdot1\\
+            &=1
+        \end{align*}
+    \end{proof}
+\end{lemma}
+
+\begin{proof}
+    Assume $x\to0$ and $D$ is the mid point of line $AB$. Denote $A$ as the function returning the area of a triangle. Then, $A(\triangle ACB)=A(\triangle ACO)+A(\triangle BCO)-A(\triangle ABO)$. That is, $g(x)=A(\triangle ACB)=2\cdot\frac12R^2\sin(\frac{x}2)-\frac12R^2\sin(x)=R^2\sin(\frac{x}2)-R^2\sin(\frac{x}2)\cos(\frac{x}{2})=R^2\sin(\frac{x}2)(1-\cos(\frac{x}{2}))\sim \frac{R^2x^3}{16}$, choose $n=3$, then similar to E2Q1 we have $g(x)=\cal{O}(x^3)$ and $x^3=\cal{O}(g(x))$.
+\end{proof}
 
 
 \newpage
@@ -105,5 +202,9 @@ Using the formula $f(x+\Delta x)-f(x)=f'(x)\Delta x+o(\Delta x)$, where $x=1, \D
 \end{align*}
 
 \question[2] Now suppose that you need to ensure the tolerance of error is less or equal to the scale of $10^{-17}$. Normally speaking, how many terms in the Taylor expansion approximation do you need, given that in our scenario $\Delta x=0.001?$
+
+\begin{proof}
+    Since $\Delta x$ is the differences of $e^x$ and the Taylor expansion approximation of $e^x$ $\Delta x=e^x$.
+\end{proof}
 
 \end{document}
