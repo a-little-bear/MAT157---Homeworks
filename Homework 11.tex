@@ -63,14 +63,24 @@ Let $f(x)$ be a function defined near 0 and $\displaystyle\lim_{x\to0}f(x)=0$.
 
 \question[1] Prove that $\textup{if~}g(x)=o(\mathcal{O}(f(x))),\mathrm{~then~}g(x)=o(f(x))$. 
 
+\begin{lemma}
+    If $f(x),g(x)$ are bounded and continuous functions when $x\in[-1,1]$, then \[\limsup_{x\to0}|f(x)g(x)|\leq\limsup_{x\to0}|f(x)|\cdot\limsup_{x\to0}|g(x)|\]
+
+    \begin{proof}
+        By Bolzano-Weierstrass Theorem, there must exist a convergent sequence $(x_n y_n)$ where $\forall n\in\N, x_n\in |f([-1,1])|, y_n\in |g([-1,1])|$ s.t. $\lim_{n\to\infty}(x_n y_n)=\limsup_{x\to0}|f(x)g(x)|\in\R$ (by lecture [-1,1] is closed and $f,g$ are continuous mean the supremum $|f(x)g(x)|$ must be achieved). 
+        
+        Thus, $0\leq\lim_{n\ra\infty}x_n\leq\limsup_{n\ra\infty}x_n\leq\limsup_{x\ra0}|f(x)|$ and $0\leq\lim_{n\ra\infty}y_n\leq\limsup_{n\ra\infty}y_n\leq\limsup_{x\ra0}|g(x)|$ give $$\limsup_{x\ra0}|f(x)g(x)|=\lim_{n\ra\infty}(x_n y_n)\leq\limsup_{n\ra\infty}x_n\cdot\limsup_{n\ra\infty}y_n\leq \limsup_{x\to0}|f(x)|\cdot\limsup_{x\to0}|g(x)|,$$ as required. 
+    \end{proof}
+\end{lemma}
+
 \begin{proof}
-    
+    Let $g(x)=o(h(x))$ where $h(x)=\cal{O}(f(x))$, then by definition we have $\limsup_{x\to0}|\frac{g(x)}{h(x)}|=0$ and $\limsup_{x\to0}|\frac{h(x)}{f(x)}|\leq M$ for some $M\geq0$. By lemma we have $0\leq\limsup_{x\ra0}|\frac{g(x)}{h(x)}\cdot\frac{h(x)}{f(x)}|\leq\limsup_{x\ra0}|\frac{g(x)}{h(x)}|\cdot\limsup_{x\ra0}|\frac{h(x)}{f(x)}|=0$, by definition this gives $\limsup_{x\ra0}|\frac{g(x)}{f(x)}|=0$, that is, $g(x)=o(f(x)$, as required. 
 \end{proof}
 
 \question[2] Prove that $\text{if~}g(x)=\mathcal{O}(o(f(x))),\text{~then~}g(x)=o(f(x))$.
 
 \begin{proof}
-    Let $g(x)=\cal{O}(h(x))$ where $h(x)=o(f(x))$. By definition we have 
+    Let $g(x)=\cal{O}(h(x))$ where $h(x)=o(f(x))$. By definition we have $\limsup_{x\ra0}|\frac{g(x)}{h(x)}|\leq M, M\geq0$ and $\limsup_{x\ra0}|\frac{h(x)}{f(x)}|=0$. By lemma we have $0\leq\limsup_{x\ra0}|\frac{g(x)}{h(x)}\cdot\frac{h(x)}{f(x)}|\leq\limsup_{x\ra0}|\frac{g(x)}{h(x)}|\cdot\limsup_{x\ra0}|\frac{h(x)}{f(x)}|=0$, by definition giving $\limsup_{x\ra0}|\frac{g(x)}{f(x)}|=0$, that is, $g(x)=o(f(x))$, as required.
 \end{proof}
 
 \newpage
@@ -99,21 +109,13 @@ Let the angle $\angle AOB=x$. Find $n\in\N$ so that the following quantity $g(x)
     \end{proof}
 \end{lemma}
 
-\begin{lemma}
-    If $f(x),g(x)$ are bounded and continuous functions when $x\in[-1,1]$, then \[\limsup_{x\to0}|f(x)g(x)|\leq\limsup_{x\to0}|f(x)|\cdot\limsup_{x\to0}|g(x)|\]
 
-    \begin{proof}
-        By Bolzano-Weierstrass Theorem, there must exist a convergent seqeunce $(x_n y_n)$ where $\forall n\in\N, x_n\in |f([-1,1])|, y_n\in |g([-1,1])|$ s.t. $\lim_{n\to\infty}(x_n y_n)=\limsup_{x\to0}|f(x)g(x)|\in\R$ (by lecture [-1,1] is closed and $f,g$ are continuous mean the supremum $|f(x)g(x)|$ must be achieved). 
-        
-        Thus, $0\leq\lim_{n\ra\infty}x_n\leq\limsup_{n\ra\infty}x_n\leq\limsup_{x\ra0}|f(x)|$ and $0\leq\lim_{n\ra\infty}y_n\leq\limsup_{n\ra\infty}y_n\leq\limsup_{x\ra0}|g(x)|$ give $$\limsup_{x\ra0}|f(x)g(x)|=\lim_{n\ra\infty}(x_n y_n)\leq\limsup_{n\ra\infty}x_n\cdot\limsup_{n\ra\infty}y_n\leq \limsup_{x\to0}|f(x)|\cdot\limsup_{x\to0}|g(x)|,$$ as required. 
-    \end{proof}
-\end{lemma}
 
 \begin{lemma}
     Assume $f,g$ are continuous functions. If $x\to0, f(x)\sim g(x), f(x), g(x)\neq0$, then when $x\to0$, $f(x)=\cal{O}(x^n)\iff g(x)=\cal{O}(x^n)$ for some fixed $n\in\N$.
 
     \begin{proof}
-        Since $f(x)\sim g(x)\iff g(x)\sim f(x)$, w.l.o.g. we just need to show $f(x)=\cal{O}(x^n)\implies g(x)=\cal{O}(x^n)$. By definition, we have \[\lim_{x\to0}\sup|\frac{f(x)}{x^n}|\leq M, M\geq0,\] and $f$ is bounded since $x^n$ is bounded on $[-1,1]$, which also implies $g$ is bounded as $f$ is bounded and $f(x)\sim g(x)$ when $x\to0$. Then, by the previous lemma \begin{align*}
+        Since $f(x)\sim g(x)\iff g(x)\sim f(x)$, w.l.o.g. we just need to show $f(x)=\cal{O}(x^n)\implies g(x)=\cal{O}(x^n)$. By definition, we have \[\lim_{x\to0}\sup|\frac{f(x)}{x^n}|\leq M, M\geq0,\] and $f$ is bounded since $x^n$ is bounded on $[-1,1]$, which also implies $g$ is bounded as $f$ is bounded and $f(x)\sim g(x)$ when $x\to0$. Then, by the lemma from E1  \begin{align*}
             \lim_{x\to0}\sup|\frac{f(x)}{x^n}|&=\lim_{x\to0}\sup|\frac{f(x)}{x^n}|\cdot\lim_{x\to0}\sup|1|\\
             &=\lim_{x\to0}\sup|\frac{f(x)}{x^n}|\cdot\lim_{x\to0}\sup|\frac{g(x)}{f(x)}|\\
             &\geq \lim_{x\to0}\sup|\frac{f(x)}{x^n}\cdot\frac{g(x)}{f(x)}|\\
