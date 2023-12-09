@@ -1,0 +1,176 @@
+
+\documentclass{homework}
+\author{Joseph Siu}
+\class{MAT157: Analysis I}
+\date{\today}
+\title{Homework 12}
+
+\newcommand{\Set}[1]{\{#1\}}
+\newcommand{\T}[1]{\text{#1}}
+\newcommand{\Al}[3]{#1 &=#2 &\text{#3}&&\\}
+
+% Symbols
+\newcommand*{\eg}{\leavevmode\unskip , e. g., \ignorespaces} % for example
+\newcommand*{\ie}{\leavevmode\unskip, i. e., \ignorespaces} % that is
+\newcommand{\nil}{\varnothing}
+\AtBeginDocument{\def\O{\cal{O}}} % Big Oh
+\AtBeginDocument{\def\C{\bb{C}}} % Complex
+\newcommand{\R}{\bb{R}} % Reals
+\newcommand{\Q}{\bb{Q}} % Rationals
+\newcommand{\Z}{\bb{Z}} % Integers
+\newcommand{\N}{\bb{N}} % Naturals
+\renewcommand{\P}{\bb{P}} % Primes
+\newcommand{\Pset}[1]{\mathcal{P}(#1)} %power set
+\newcommand{\Relate}[2]{#1\mathcal{R}#2} %relation
+\newcommand{\relate}{\mathcal{R}}
+\newcommand{\F}{\bb{F}} 
+\newcommand{\GF}[1][2]{\bb{F}_{#1}} 
+\newcommand{\modulo}[1][n]{\Z/#1\Z} 
+\newcommand{\ra}{\rightarrow}
+\newcommand{\Ra}{\Rightarrow}
+\newcommand{\?}{\stackrel{?}{=}}
+\newcommand{\is}{\equiv}
+\newcommand{\al}{\alpha}
+\newcommand{\ep}{\varepsilon}
+\newcommand{\p}{\partial}
+\newcommand{\injective}{\hookrightarrow}
+\newcommand{\surjective}{\twoheadrightarrow}
+\newcommand{\bijective}{\hookrightarrow\mathrel{\mspace{-15mu}}\rightarrow}
+\newcommand{\derivative}[2][x]{\frac{\D #2}{\D #1}}
+\newcommand{\ceil}[1]{\left\lceil#1\right\rceil}
+\newcommand{\floor}[1]{\left\lfloor#1\right\rfloor}
+\newcommand{\near}[1]{\left\lfloor#1\right\rceil}
+\newcommand{\arr}[1]{\left\langle#1\right\rangle}
+\newcommand{\paren}[1]{\left(#1\right)} %pair / ()
+\newcommand{\brk}[1]{\left[#1\right]} %[]
+\newcommand{\abs}[1]{\left|#1\right|}
+\newcommand{\curl}[1]{\left\{#1\right\}} %set {}
+\newcommand{\func}[3]{#1: #2 \rightarrow #3}
+
+
+\theoremstyle{definition}
+\newtheorem*{claim}{Claim}
+\newtheorem*{definition}{Definition}
+\newtheorem*{theorem}{Theorem}
+\newtheorem*{lemma}{Lemma}
+
+
+\begin{document} \maketitle
+
+\section*{Exercise 1}
+This exercise aims at derive the Taylor formula with the Roche-Schlomilch Remainder. To this end, assume that for some $H>0$ fixed, the continuous function \[f(x):[x_0-H,x_0+H]\subseteq\R\to\R\] satisfy that 
+\begin{itemize}
+    \item $\forall 1\leq k\leq n, f^{(k)}(x)$ exists and is continuous $\forall x\in I_H(x_0)$.
+    \item $f^{(n+1)}(x)$ exists $\forall x\in \mathring{I}_H(x_0)$.
+\end{itemize}
+As usual denote the remainder $r_n(x)$ for $x\in\mathring{I}_H(x_0)$ by \[r_n(x)=f(x)-\sum_{k=0}^{n}\frac{f^{(k)}(x_0)(x-x_0)^k}{k!}\] Now, fix some $x\in(x_0,x_0+H)$, define for $z\in[x_0,x]$ the auxiliary function \[\phi(z)=f(x)-\sum_{k=0}^{n}\frac{f^{(k)}(z)(x-z)^k}{k!}\]
+
+\question[1]{Show that $\phi(x_0)=r_n(x)$ and $\phi(x)=0$.}
+
+\begin{proof}
+    By definition, we have
+    \begin{align*}
+        \phi(x_0)&=f(x)-\sum_{k=0}^{n}\frac{f^{(k)}(x_0)(x-x_0)^k}{k!}\\
+        r_n(x)&=f(x)-\sum_{k=0}^{n}\frac{f^{(k)}(x_0)(x-x_0)^k}{k!}\\
+        &=\phi(x_0)
+    \end{align*}
+    also, as we define $0^k=\begin{cases}
+        1 & k=0\\
+        0 & k>0
+    \end{cases}$, and $0!=1$, then, we have
+    \begin{align*}
+        \phi(x)&=f(x)-\sum_{k=0}^{n}\frac{f^{(k)}(x)(x-x)^n}{k!}\\
+        \phi(x)&=f(x)-\sum_{k=0}^{n}\frac{f^{(k)}(x)0^k}{k!}\\
+        \phi(x)&=f(x)-\frac{f^{(0)}(x)0^0}{0!}\\
+        \phi(x)&=f(x)-f(x)\\
+        \phi(x)&=0
+    \end{align*}
+\end{proof}
+
+\question[2]{Prove that $$\phi'(z)=-\frac{f^{(n+1)}(z)}{n!}(x-z)^n$$.}
+
+\begin{proof}
+    By definition and derivative rules, we have
+    \begin{align*}
+        \phi(z)&=f(x)-\sum_{k=0}^{n}\frac{f^{(k)}(z)(x-z)^k}{k!}\\
+        &=f(x)-\frac{f^{(0)}(z)(x-z)^0}{0!}-\sum_{k=1}^{n}\frac{f^{(k)}(z)(x-z)^k}{k!}\\
+        &=f(x)-f(z)-\sum_{k=1}^{n}\frac{f^{(k)}(z)(x-z)^k}{k!}\\
+        \phi'(z)&=-f'(z)-\sum_{k=1}^{n}\frac{d}{dz}\left[ \frac{f^{(k)}(z)(x-z)^k}{k!} \right]\\
+        &=-f'(z)-\sum_{k=1}^{n}\left[ \frac{f^{(k+1)}(z)(x-z)^k}{k!}-\frac{f^{(k)}(z)k(x-z)^{k-1}}{k!} \right]\\
+        &=-f'(z)+\sum_{k=1}^{n}\left[\frac{f^{(k)}(z)(x-z)^{k-1}}{(k-1)!}-\frac{f^{(k+1)}(z)(x-z)^k}{k!} \right]\\
+        &=-f'(z)+\sum_{k=1}^{n}\frac{f^{(k)}(z)(x-z)^{k-1}}{(k-1)!}-\sum_{k=1}^{n}\frac{f^{(k+1)}(z)(x-z)^k}{k!}\\
+        &=\sum_{k=2}^{n}\frac{f^{(k)}(z)(x-z)^{k-1}}{(k-1)!}-\sum_{k=1}^{n}\frac{f^{(k+1)}(z)(x-z)^k}{k!}\\
+        &=\sum_{k=1}^{n-1}\frac{f^{(k+1)}(z)(x-z)^{k}}{k!}-\sum_{k=1}^{n}\frac{f^{(k+1)}(z)(x-z)^k}{k!}\\
+        &=-\frac{f^{(n+1)}(z)(x-z)^n}{n!}
+    \end{align*}
+\end{proof}
+
+Now consider a function $\psi:[x_0,x]\to\R$, s.t.
+\begin{itemize}
+    \item $\psi(z)$ is continuous in $[x_0,x]$.
+    \item $\psi'(z)\neq0$ in $(x_0,x)$.
+\end{itemize}
+
+\question[3]{Verify that the function $\psi:[x_0,x]\to\R$ given by \[\psi(z)=(x-z)^{p}\]satisfies the conditions above.}
+
+\begin{proof}
+    Fix $p>0$ and given $\psi(z)=(x-z)^p$. Then, it is clear that $\psi(z)$ is continuous  (can be shown using the fact that $\exp$ function is continuous). And when $z\in(x_0,x)$, $x\neq z\implies (x-z)^{p-1}\neq 0$, so combining $p>0$ we have $\psi'(z)=p(x-z)^{p-1}\neq0$, satisfying the 2 conditions, as required.
+\end{proof}
+
+\question[4]{Prove that $\exists c\in(x_0,x)$ s.t. \[r_n(x)=\frac{\psi(x)-\psi(x_0)}{\psi'(c)}\frac{f^{(n+1)}(c)}{n!}(x-c)^n.\]}
+
+Hint: Apply the Cauchy theorem to the pair $\phi,\psi$.
+
+\begin{proof}
+    By Cauchy MVT, we have $\exists c\in(x_0,x)$ s.t. \[[\phi(x)-\phi(x_0)]\psi'(c)=[\psi(x)-\psi(x_0)]\phi'(c)\] As proven in E1Q1, we have \[[0-r_n(x)]\psi'(c)=[\psi(x)-\psi(x_0)]\phi'(c)\] Rearrange and isolate $r_n(x)$ we have \begin{align*}
+        r_n(x)&=\frac{\psi(x_0)-\psi(x)}{\psi'(c)}\phi'(c)\\
+        &=\frac{\psi(x_0)-\psi(x)}{\psi'(c)}\cdot\left( -\frac{f^{(n+1)}(c)}{n!}(x-c)^n \right)\\
+        &=\frac{\psi(x)-\psi(x_0)}{\psi'(c)}\frac{f^{(n+1)}(c)}{n!}(x-c)^n
+    \end{align*}
+\end{proof}
+
+\question[5]{Plug in $\psi(z)=(x-z)^{p}$ in the result above, and derive that \[r_n(x)=\frac{f^{(n+1)}(c)}{n!p}(x-c)^{n+1-p}(x-x_0)^p.\]}
+
+\begin{proof}
+    From E1Q4 and by definition we get 
+    \begin{align*}
+        r_n(x)&=\frac{\psi(x)-\psi(x_0)}{\psi'(c)}\frac{f^{(n+1)}(c)}{n!}(x-c)^n\\
+        \psi'(c)&=-p(x-c)^{p-1}\\
+        \psi(x)&=(x-x)^p=0\\
+        \psi(x_0)&=(x-x_0)^p
+    \end{align*}
+    So,
+    \begin{align*}
+        r_n(x)&=\frac{\psi(x)-\psi(x_0)}{\psi'(c)}\frac{f^{(n+1)}(c)}{n!}(x-c)^n\\
+        &=\frac{0-((x-x_0)^p)}{-p(x-c)^{p-1}}\frac{f^{(n+1)}(c)}{n!}(x-c)^n\\
+        &=\frac{f^{(n+1)}(c)}{n!p}(x-c)^{n+1-p}(x-x_0)^p
+    \end{align*}
+    as required.
+\end{proof}
+
+\question[6]{Now let $c=x_0+\theta(x-x_0)$, with $\theta\in(0,1)$, prove that $\exists 0<\theta<1$ s.t. \[r_n(x)=\frac{f^{(n+1)}(x_0+\theta(x-x_0))}{n!p}(1-\theta)^{n+1-p}(x-x_0)^{n+1}, \text{\quad (Roche-Scholomilch Remainder)}\]}
+
+\begin{proof}
+    Isolate $\theta=\frac{c-x_0}{x-x_0}$, we have that $1-\theta=\frac{x-x_0}{x-x_0}+\frac{x_0-c}{x-x_0}=\frac{x-c}{x-x_0}$. Then, by E1Q5, we have \begin{align*}
+        r_n(x)&=\frac{f^{(n+1)}(c)}{n!p}(x-c)^{n+1-p}(x-x_0)^p\\
+        &=\frac{f^{(n+1)}(c)}{n!p}\left( \frac{x-c}{x-x_0} \right)^{n+1-p}(x-x_0)^{n+1-p}(x-x_0)^p\\
+        &=\frac{f^{(n+1)}(c)}{n!p}(1-\theta)^{n+1-p}(x-x_0)^{n+1}\\
+        &=\frac{f^{(n+1)}(x_0+\theta(x-x_0))}{n!p}(1-\theta)^{n+1-p}(x-x_0)^{n+1}
+    \end{align*}
+    as needed.
+\end{proof}
+
+
+\question[7]{Choose distinct value of $p$, so that the Roche-Scholomilch Remainder becomes}
+\begin{itemize}
+    \item The Lagrange remainder.
+    \item The Cauchy remainder.
+\end{itemize}
+
+\begin{proof}
+    Choose $p=1$, then we have \[r_n(x)=\frac{f^{(n+1)}(c)}{n!}(x-c)^n(x-x_0)\] By definition, this is the cauchy remainder.
+
+    Choose $p=n+1$, then we have \[r_n(x)=\frac{f^{(n+1)}(c)}{(n+1)!}(x-x_0)^{n+1}\] By definition, this is the Lagrange remainder.
+\end{proof}
+
+\end{document}
